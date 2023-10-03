@@ -8,7 +8,7 @@ SRCS = main.c ./srcs/map_check/file_type.c
 
 OBJS = $(SRCS:.c=.o)
 
-all: MLX42 $(NAME)
+all: $(NAME)
 
 $(NAME): $(OBJS)
 	@cd libft && make

@@ -1,25 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/03 15:24:52 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/03 16:24:54 by skunert          ###   ########.fr       */
+/*   Created: 2023/10/03 18:27:36 by skunert           #+#    #+#             */
+/*   Updated: 2023/10/03 21:23:41 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-t_map	strct_init(char *file_path)
+bool	is_whitespace(char c)
 {
-	t_map	init;
+	if ((c >= 9 && c <= 13) || c == 32)
+		return (true);
+	return (false);
+}
 
-	init.map_fd = open(file_path, O_RDONLY);
-	if (!init.map_fd)
-		return (init);
-	init.map = get_map(file_path);
-	init.texture_path_no = get_texture_path("NO");
-	return (init);
+int	ft_matrixlen(char **matrix)
+{
+	int	i;
+
+	i = 0;
+	while (matrix[i])
+		i++;
+	return (i);
+}
+
+bool	is_component(char c)
+{
+	if (c == '0' || c == '1')
+		return (true);
+	return (false);
+}
+
+bool	is_valid_border(char c)
+{
+	if (!is_whitespace(c))
+		if (c != '1')
+			return (false);
+	return (true);
 }

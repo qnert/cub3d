@@ -1,14 +1,119 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   map_parser.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 15:18:20 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/03 15:19:01 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/10/03 21:26:58 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
+bool	check_side_line(char **map, int index)
+{
+	int	i;
+
+	i = 0;
+	while(map[index][i])
+	{
+		if (!is_whitespace(map[index][i]))
+			if (map[index][i] != '1')
+				return (false);
+		i++;
+	}
+	return (true);
+}
+
+bool	check_middle_lines(char **map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while(map[i])
+	{
+		j = 0;
+		while (is_whitespace(map[i][j]))
+			j++;
+		if (map[i][j] != '1')
+			return (false);
+		if (map[i][ft_strlen(map[i]) - 1] != '1')
+			return (false);
+		i++;
+	}
+	return (true);
+}
+
+bool	check_whitespace_border(char **map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (is_whitespace(map[i][j]))
+			{
+				if (!check_valid_border(map[i - 1][j]))
+					return (false);
+				if (!check_valid_border(map[i + 1][j]))
+					return (false);
+				if (!check_valid_border(map[i][j - 1]))
+					return (false);
+				if (!check_valid_border(map[i][j + 1]))
+					return (false);
+			}
+			j++;
+		}
+		i++;
+	}
+	return (true);
+}
+
+bool	check_map(char **map)
+{
+	if (check_side_line(map, 0) == false)
+		return (false);
+	if (check_side_line(map, ft_matrixlen(map) - 1) == false)
+		return (false);
+	if (check_middle_lines(map) == false)
+		return (false);
+	if (check_whitespace_border(map) == false)
+		return (false);
+	return (true);
+}
+
+char	**get_map(int map_fd)
+{
+	char	*line;
+	char	*buff;
+	char	**map;
+
+	buff = ft_strdup("");
+	line = get_next_line(map_fd);
+	while (!ft_strncmp(buff, "\n", 1) && ft_strlen(buff) == 1)
+	{
+		free(line);
+		line = get_next_line(map_fd);
+	}
+	while (buff != NULL)
+	{
+		buff = ft_strjoin_free(buff, line);
+		if (buff == NULL
+			|| (!ft_strncmp(buff, "\n", 1) && ft_strlen(buff) == 1))
+			return (free(line), NULL);
+		free(line);
+		line = get_next_line(map_fd);
+	}
+	map = ft_split(buff, "\n");
+	if (map == NULL)
+		return (free(buff), NULL);
+	return (free(buff), map);
+}
