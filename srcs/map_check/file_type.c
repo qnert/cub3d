@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   file_type.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 13:23:13 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/02 13:29:19 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/03 15:16:21 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../cub3d.h"
+#include "../../includes/cub3d.h"
 
 void	free_arr(char **arr)
 {
