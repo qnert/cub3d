@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   init->c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 15:24:52 by njantsch          #+#    #+#             */
 /*   Updated: 2023/10/03 21:32:30 by njantsch         ###   ########.fr       */
