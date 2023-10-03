@@ -1,23 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/01 19:19:00 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/02 13:25:05 by skunert          ###   ########.fr       */
+/*   Created: 2023/10/03 15:18:20 by njantsch          #+#    #+#             */
+/*   Updated: 2023/10/03 15:19:01 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#include "../../includes/cub3d.h"
 
-#include "./libft/libs.h"
-#include "./MLX42/include/MLX42/MLX42.h"
-#include <stdio.h>
-#include <math.h>
-
-int	ft_check_file_type(char *str);
-
-#endif

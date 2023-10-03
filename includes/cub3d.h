@@ -1,28 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/01 19:17:12 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/03 16:11:18 by njantsch         ###   ########.fr       */
+/*   Created: 2023/10/01 19:19:00 by skunert           #+#    #+#             */
+/*   Updated: 2023/10/03 16:07:42 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/cub3d.h"
+#ifndef CUB3D_H
+# define CUB3D_H
 
-int	main(int argc, char **argv)
+#include "./libft/libs.h"
+#include "./MLX42/include/MLX42/MLX42.h"
+#include <stdio.h>
+#include <math.h>
+#include <fcntl.h>
+
+typedef struct map
 {
-	int		check;
-	t_map	map;
+	int		map_fd;
+	char	**map;
+	char	*texture_path_no;
+	char	*texture_path_ea;
+	char	*texture_path_so;
+	char	*texture_path_we;
+}	t_map;
 
-	if (argc == 2)
-	{
-		check = ft_check_file_type(argv[1]);
-		if (check == 0)
-			printf("Error\n");
-	}
-	map = strct_init(argv[1]);
-	return (0);
-}
+int	ft_check_file_type(char *str);
+
+#endif
