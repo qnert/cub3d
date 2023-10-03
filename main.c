@@ -3,18 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:17:12 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/02 13:27:56 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/03 16:11:18 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "includes/cub3d.h"
 
 int	main(int argc, char **argv)
 {
-	int	check;
+	int		check;
+	t_map	map;
 
 	if (argc == 2)
 	{
@@ -22,5 +23,6 @@ int	main(int argc, char **argv)
 		if (check == 0)
 			printf("Error\n");
 	}
+	map = strct_init(argv[1]);
 	return (0);
 }

@@ -6,11 +6,11 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 13:23:13 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/02 13:29:19 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/03 18:07:59 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../cub3d.h"
+#include "../../includes/cub3d.h"
 
 void	free_arr(char **arr)
 {
