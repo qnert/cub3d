@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:19:00 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/03 21:23:46 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/03 21:35:38 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,6 @@ bool	is_whitespace(char c);
 int		ft_matrixlen(char **matrix);
 bool	is_component(char c);
 bool	is_valid_border(char c);
+void	ft_error_msg(char *str);
 
 #endif

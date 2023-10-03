@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 15:18:20 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/03 21:26:58 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/03 21:40:27 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ bool	check_side_line(char **map, int index)
 	int	i;
 
 	i = 0;
-	while(map[index][i])
+	while (map[index][i])
 	{
 		if (!is_whitespace(map[index][i]))
 			if (map[index][i] != '1')
@@ -34,7 +34,7 @@ bool	check_middle_lines(char **map)
 
 	i = 0;
 	j = 0;
-	while(map[i])
+	while (map[i])
 	{
 		j = 0;
 		while (is_whitespace(map[i][j]))
@@ -80,13 +80,13 @@ bool	check_whitespace_border(char **map)
 bool	check_map(char **map)
 {
 	if (check_side_line(map, 0) == false)
-		return (false);
+		return (ft_error_msg("First line of the map is wrong\n"), false);
 	if (check_side_line(map, ft_matrixlen(map) - 1) == false)
-		return (false);
+		return (ft_error_msg("Last line of the map is wrong\n"), false);
 	if (check_middle_lines(map) == false)
-		return (false);
+		return (ft_error_msg("One middle line of the map is wrong\n"), false);
 	if (check_whitespace_border(map) == false)
-		return (false);
+		return (ft_error_msg("The map isn't surrounded by '1's\n"), false);
 	return (true);
 }
 
@@ -108,7 +108,7 @@ char	**get_map(int map_fd)
 		buff = ft_strjoin_free(buff, line);
 		if (buff == NULL
 			|| (!ft_strncmp(buff, "\n", 1) && ft_strlen(buff) == 1))
-			return (free(line), NULL);
+			return (ft_error_msg("New line inside the map\n"), (line), NULL);
 		free(line);
 		line = get_next_line(map_fd);
 	}
