@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:19:00 by skunert           #+#    #+#             */
 /*   Updated: 2023/10/04 16:13:30 by skunert          ###   ########.fr       */
@@ -28,6 +28,8 @@ typedef struct map
 	char	*texture_path_ea;
 	char	*texture_path_so;
 	char	*texture_path_we;
+	int		floor_rgb[3];
+	int		ceiling_rgb[3];
 	int		error;
 }	t_map;
 
@@ -52,6 +54,10 @@ int		get_texture_path(t_map *init, char *trmd_line);
 int		check_line(t_map *init, char *line);
 int		get_input(t_map *init);
 t_map	*strct_init(char *file_path);
+int		check_rgb(t_map *init, char *trmd_line);
+int		get_rgb(t_map *init, char *id, char **rgb);
+int		check_rgb_validity(t_map *init);
+
 
 //parsing_utils.c
 bool	is_whitespace(char c);
