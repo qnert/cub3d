@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file_type.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 13:23:13 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/03 18:07:59 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/04 12:22:02 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	free_arr(char **arr)
 	unsigned int	i;
 
 	i = 0;
-	while (arr[i] != NULL)
+	while (arr && arr[i] != NULL)
 	{
 		free(arr[i]);
 		i++;
