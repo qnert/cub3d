@@ -6,7 +6,7 @@
 /*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:19:00 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/04 15:54:20 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/10/04 16:13:30 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,20 @@ typedef struct map
 }	t_map;
 
 //parsing
-int		ft_check_file_type(char *str);
-char	**get_map(int map_fd);
+
+//check_components.c
+char	complete_component_check(char **map);
+
+//check_file_type.c
 void	free_arr(char **arr);
+int		ft_check_file_type(char *str);
+
+//map_parser_helper.c
+bool	check_end_walls(char **map);
+
+//map_parser.c
+char	**get_map(int map_fd);
+bool	check_map(char **map);
 
 //utils
 int		get_texture_path(t_map *init, char *trmd_line);

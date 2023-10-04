@@ -31,7 +31,7 @@ int	ft_matrixlen(char **matrix)
 
 bool	is_component(char c)
 {
-	if (c == '0' || c == '1')
+	if (ft_strchr("01NSWE", c))
 		return (true);
 	return (false);
 }

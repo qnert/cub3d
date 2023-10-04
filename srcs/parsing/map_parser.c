@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 15:18:20 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/03 21:40:27 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/04 16:24:15 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,11 @@ bool	check_whitespace_border(char **map)
 			{
 				if (!check_valid_border(map[i - 1][j]))
 					return (false);
-				if (!check_valid_border(map[i + 1][j]))
+				if (map[i + 1] && !check_valid_border(map[i + 1][j]))
 					return (false);
 				if (!check_valid_border(map[i][j - 1]))
 					return (false);
-				if (!check_valid_border(map[i][j + 1]))
+				if (map[i][j + 1] && !check_valid_border(map[i][j + 1]))
 					return (false);
 			}
 			j++;
@@ -87,6 +87,8 @@ bool	check_map(char **map)
 		return (ft_error_msg("One middle line of the map is wrong\n"), false);
 	if (check_whitespace_border(map) == false)
 		return (ft_error_msg("The map isn't surrounded by '1's\n"), false);
+	if (check_end_walls(map) == false)
+		return (ft_error_msg("The map is not surrounded by '1's\n"), false);
 	return (true);
 }
 
