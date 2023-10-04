@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 15:18:20 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/04 16:24:15 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/04 17:09:20 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ bool	check_whitespace_border(char **map)
 	int	j;
 
 	i = 0;
+
 	while (map[i])
 	{
 		j = 0;
@@ -61,13 +62,13 @@ bool	check_whitespace_border(char **map)
 		{
 			if (is_whitespace(map[i][j]))
 			{
-				if (!check_valid_border(map[i - 1][j]))
+				if (i > 0 && !is_valid_border(map[i - 1][j]))
 					return (false);
-				if (map[i + 1] && !check_valid_border(map[i + 1][j]))
+				if (map[i + 1] && !is_valid_border(map[i + 1][j]))
 					return (false);
-				if (!check_valid_border(map[i][j - 1]))
+				if (j > 0 && !is_valid_border(map[i][j - 1]))
 					return (false);
-				if (map[i][j + 1] && !check_valid_border(map[i][j + 1]))
+				if (!is_valid_border(map[i][j + 1]))
 					return (false);
 			}
 			j++;
@@ -87,8 +88,8 @@ bool	check_map(char **map)
 		return (ft_error_msg("One middle line of the map is wrong\n"), false);
 	if (check_whitespace_border(map) == false)
 		return (ft_error_msg("The map isn't surrounded by '1's\n"), false);
-	if (check_end_walls(map) == false)
-		return (ft_error_msg("The map is not surrounded by '1's\n"), false);
+	// if (check_end_walls(map) == false)
+	// 	return (ft_error_msg("The map is not surrounded by '1's\n"), false);
 	return (true);
 }
 
@@ -100,21 +101,21 @@ char	**get_map(int map_fd)
 
 	buff = ft_strdup("");
 	line = get_next_line(map_fd);
-	while (!ft_strncmp(buff, "\n", 1) && ft_strlen(buff) == 1)
+	while (line[0] == '\n')
 	{
 		free(line);
 		line = get_next_line(map_fd);
 	}
-	while (buff != NULL)
+	while (line != NULL)
 	{
 		buff = ft_strjoin_free(buff, line);
 		if (buff == NULL
-			|| (!ft_strncmp(buff, "\n", 1) && ft_strlen(buff) == 1))
-			return (ft_error_msg("New line inside the map\n"), (line), NULL);
+			|| line[0] == '\n')
+			return (ft_error_msg("New line inside the map\n"), NULL);
 		free(line);
 		line = get_next_line(map_fd);
 	}
-	map = ft_split(buff, "\n");
+	map = ft_split(buff, '\n');
 	if (map == NULL)
 		return (free(buff), NULL);
 	return (free(buff), map);

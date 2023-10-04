@@ -6,29 +6,11 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 12:21:20 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/04 12:45:08 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/04 16:54:34 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-
-char	check_player_pos(char **map)
-{
-	if (check_component('N', map) == 1 && check_component('S', map) == 0
-		&&check_component('E', map) == 0 && check_component('W', map) == 0)
-		return ('N');
-	else if (check_component('S', map) == 1 && check_component('N', map) == 0
-		&&check_component('E', map) == 0 && check_component('W', map) == 0)
-		return ('S');
-	else if (check_component('E', map) == 1 && check_component('S', map) == 0
-		&&check_component('N', map) == 0 && check_component('W', map) == 0)
-		return ('E');
-	else if (check_component('W', map) == 1 && check_component('S', map) == 0
-		&&check_component('E', map) == 0 && check_component('N', map) == 0)
-		return ('W');
-	else
-		return ('F');
-}
 
 int	check_component(char c, char **map)
 {
@@ -49,6 +31,25 @@ int	check_component(char c, char **map)
 		}
 		i++;
 	}
+	return (count);
+}
+
+char	check_player_pos(char **map)
+{
+	if (check_component('N', map) == 1 && check_component('S', map) == 0
+		&&check_component('E', map) == 0 && check_component('W', map) == 0)
+		return ('N');
+	else if (check_component('S', map) == 1 && check_component('N', map) == 0
+		&&check_component('E', map) == 0 && check_component('W', map) == 0)
+		return ('S');
+	else if (check_component('E', map) == 1 && check_component('S', map) == 0
+		&&check_component('N', map) == 0 && check_component('W', map) == 0)
+		return ('E');
+	else if (check_component('W', map) == 1 && check_component('S', map) == 0
+		&&check_component('E', map) == 0 && check_component('N', map) == 0)
+		return ('W');
+	else
+		return ('F');
 }
 
 bool	check_invalid_component(char **map)
