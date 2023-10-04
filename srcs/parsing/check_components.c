@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 12:21:20 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/04 16:54:34 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/04 17:48:42 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,7 @@ char	check_player_pos(char **map)
 	else if (check_component('W', map) == 1 && check_component('S', map) == 0
 		&&check_component('E', map) == 0 && check_component('N', map) == 0)
 		return ('W');
-	else
-		return ('F');
+	return ('F');
 }
 
 bool	check_invalid_component(char **map)
@@ -63,7 +62,7 @@ bool	check_invalid_component(char **map)
 		j = 0;
 		while (map[i][j])
 		{
-			if (!is_component(map[i][j]))
+			if (!is_component(map[i][j]) && !is_whitespace(map[i][j]))
 				return (false);
 			j++;
 		}
@@ -72,7 +71,7 @@ bool	check_invalid_component(char **map)
 	return (true);
 }
 
-char	complete_component_check(char **map)
+bool	complete_component_check(char **map)
 {
 	if (!check_map(map))
 		return (false);
