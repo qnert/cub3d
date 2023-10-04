@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:19:00 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/04 16:52:23 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/04 17:42:32 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ typedef struct map
 //parsing
 
 //check_components.c
-char	complete_component_check(char **map);
+bool	complete_component_check(char **map);
 
 //check_file_type.c
 void	free_arr(char **arr);

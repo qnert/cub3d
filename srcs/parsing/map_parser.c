@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 15:18:20 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/04 17:25:45 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/04 17:44:39 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ bool	check_whitespace_border(char **map)
 	int	j;
 
 	i = 0;
-
 	while (map[i])
 	{
 		j = 0;

@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 15:44:05 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/04 17:21:42 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/04 17:44:47 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	**get_and_check_map(int fd)
 	map = get_map(fd);
 	if (map == NULL)
 		return (NULL);
-	if (check_map(map) == false)
+	if (complete_component_check(map) == false)
 		return (free_arr(map), NULL);
 	return (map);
 }
