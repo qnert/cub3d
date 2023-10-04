@@ -1,51 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_utils.c                                    :+:      :+:    :+:   */
+/*   map_parser_helper.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/03 18:27:36 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/04 12:33:31 by skunert          ###   ########.fr       */
+/*   Created: 2023/10/04 15:44:05 by skunert           #+#    #+#             */
+/*   Updated: 2023/10/04 16:45:49 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-bool	is_whitespace(char c)
+char	**get_and_check_map(int fd)
 {
-	if ((c >= 9 && c <= 13) || c == 32)
-		return (true);
-	return (false);
+	char	**map;
+
+	map = get_map(fd);
+	if (check_map(map) == false)
+		return (free_arr(map), NULL);
+	return (map);
 }
 
-int	ft_matrixlen(char **matrix)
+bool	check_end_walls(char **map)
 {
 	int	i;
+	int	tmp;
 
 	i = 0;
-	while (matrix[i])
+	tmp = 0;
+	while (map[i])
+	{
+		if (map[i + 1] && ft_strlen(map[i]) > ft_strlen(map[i + 1]))
+		{
+			tmp = ft_strlen(map[i]) - ft_strlen(map[i + 1]) - 1;
+			while (map[tmp])
+			{
+				if (map[tmp] != '1' || is_whitespace(map[i]))
+					return (false);
+				tmp++;
+			}
+		}
 		i++;
-	return (i);
-}
-
-bool	is_component(char c)
-{
-	if (ft_strchr("01NSWE", c))
-		return (true);
-	return (false);
-}
-
-bool	is_valid_border(char c)
-{
-	if (!is_whitespace(c))
-		if (c != '1')
-			return (false);
+	}
 	return (true);
-}
-
-void	ft_error_msg(char *str)
-{
-	write(2, "Error\n", 6);
-	write(2, str, ft_strlen(str));
 }
