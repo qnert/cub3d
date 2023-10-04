@@ -34,7 +34,9 @@ t_map	*strct_init(char *file_path)
 	}
 	if (get_input(init) == 1)
 		return (init->error = 1, init);
-	init->map = NULL;
+	init->map = get_and_check_map(init->map_fd);
+	if (!init->map)
+		return (init->error = 1, init);
 	return (init);
 }
 

@@ -4,7 +4,8 @@ USER = $(shell whoami)
 MLXFLAGS = -framework Cocoa -framework OpenGL -framework IOKit -Iinclude -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/"
 NAME = cub3d
 
-SRCS = main.c ./srcs/parsing/file_type.c ./srcs/utils/init.c ./srcs/utils/parsing_utils.c
+SRCS = main.c ./srcs/parsing/file_type.c ./srcs/utils/init.c ./srcs/utils/parsing_utils.c ./srcs/parsing/check_components.c \
+		./srcs/parsing/map_parser.c ./srcs/parsing/map_parser_helper.c
 
 OBJS = $(SRCS:.c=.o)
 
