@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:19:00 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/04 17:42:32 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/05 12:01:29 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ int		ft_check_file_type(char *str);
 
 //map_parser_helper.c
 char	**get_and_check_map(int fd);
-bool	check_end_walls(char **map);
+bool	check_end_walls_curr(char **map);
+bool	check_end_walls_next(char **map);
 
 //map_parser.c
 char	**get_map(int map_fd);
@@ -58,7 +59,6 @@ t_map	*strct_init(char *file_path);
 int		check_rgb(t_map *init, char *trmd_line);
 int		get_rgb(t_map *init, char *id, char **rgb);
 int		check_rgb_validity(t_map *init);
-
 
 //parsing_utils.c
 bool	is_whitespace(char c);
