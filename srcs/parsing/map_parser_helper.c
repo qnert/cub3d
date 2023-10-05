@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 15:44:05 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/05 11:58:49 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/05 12:21:26 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ char	**get_and_check_map(int fd)
 	map = get_map(fd);
 	if (map == NULL)
 		return (NULL);
+	if (ft_matrixlen(map) == 0)
+		return (free_arr(map), ft_error_msg("No map was found!\n"), NULL);
 	if (complete_component_check(map) == false)
 		return (free_arr(map), NULL);
 	return (map);
