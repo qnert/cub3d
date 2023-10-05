@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 15:44:05 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/05 11:54:54 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/05 11:58:49 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	**get_and_check_map(int fd)
 	return (map);
 }
 
-bool	check_end_walls_a(char **map)
+bool	check_end_walls_curr(char **map)
 {
 	int	i;
 	int	tmp;
@@ -49,7 +49,7 @@ bool	check_end_walls_a(char **map)
 	return (true);
 }
 
-bool	check_end_walls_b(char **map)
+bool	check_end_walls_next(char **map)
 {
 	int	i;
 	int	tmp;
