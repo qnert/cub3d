@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 15:18:20 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/05 12:01:09 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/05 12:20:32 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ char	**get_map(int map_fd)
 
 	buff = ft_strdup("");
 	line = get_next_line(map_fd);
-	while (line[0] == '\n')
+	while (line && line[0] == '\n')
 	{
 		free(line);
 		line = get_next_line(map_fd);
