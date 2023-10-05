@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:19:00 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/04 17:42:32 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/05 11:50:28 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ int		ft_check_file_type(char *str);
 
 //map_parser_helper.c
 char	**get_and_check_map(int fd);
-bool	check_end_walls(char **map);
+bool	check_end_walls_a(char **map);
+bool	check_end_walls_b(char **map);
 
 //map_parser.c
 char	**get_map(int map_fd);

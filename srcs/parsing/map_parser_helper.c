@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 15:44:05 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/04 17:44:47 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/05 11:54:54 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	**get_and_check_map(int fd)
 	return (map);
 }
 
-bool	check_end_walls(char **map)
+bool	check_end_walls_a(char **map)
 {
 	int	i;
 	int	tmp;
@@ -40,6 +40,31 @@ bool	check_end_walls(char **map)
 			while (map[i][tmp])
 			{
 				if (map[i][tmp] != '1')
+					return (false);
+				tmp++;
+			}
+		}
+		i++;
+	}
+	return (true);
+}
+
+bool	check_end_walls_b(char **map)
+{
+	int	i;
+	int	tmp;
+
+	i = 0;
+	tmp = 0;
+	while (map[i])
+	{
+		if (map[i + 1] && ft_strlen(map[i]) < ft_strlen(map[i + 1]))
+		{
+			tmp = ft_strlen(map[i + 1]) - ft_strlen(map[i]);
+			tmp = ft_strlen(map[i + 1]) - tmp;
+			while (map[i + 1][tmp])
+			{
+				if (map[i + 1][tmp] != '1')
 					return (false);
 				tmp++;
 			}
