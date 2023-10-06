@@ -136,7 +136,7 @@ int	check_rgb(t_map *init, char *trmd_line)
 	while (rgb[++i])
 	{
 		while (rgb[i][++j])
-			if (ft_isdigit(rgb[i][j]) == 0)
+			if (ft_isdigit(rgb[i][j]) == 0 && rgb[i][j] != '\n')
 				return (free_arr(rgb), printf("Error\nno valid rgb nbr\n"), 1);
 		if (ft_strlen(rgb[i]) > 3)
 		{
