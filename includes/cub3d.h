@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:19:00 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/06 14:18:49 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/06 14:57:14 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ typedef struct game
 {
 	mlx_t		*mlx;
 	mlx_image_t	*player;
+	mlx_image_t	*wall;
+	mlx_image_t	*space;
 	int			height;
 	int			width;
 }	t_game;
@@ -44,11 +46,16 @@ typedef struct map
 
 //game_funcs
 
+//fill_map.c
+void	ft_fill_map(t_game *game, char **map);
+
 //game_init.c
+int		get_longest_line(char **matrix);
 void	game_init(t_map *map);
 
 //get_texture.c
 void	get_player_img(t_game *game);
+void	get_images(t_game *game);
 
 //game_hooks.c
 void	ft_move(void *param);

@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:17:12 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/06 13:22:27 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/06 15:19:09 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ int	main(int argc, char **argv)
 	map = strct_init(argv[1]);
 	if (map->error == 1 || map->error == 2)
 		return (ft_terminate_struct(map), 1);
-	ft_terminate_struct(map);
 	map->error = 0;
 	game_init(map);
+	ft_terminate_struct(map);
 	return (0);
 }
