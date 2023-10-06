@@ -5,15 +5,16 @@ MLXFLAGS = -framework Cocoa -framework OpenGL -framework IOKit -Iinclude -lglfw 
 NAME = cub3D
 
 SRCS = main.c ./srcs/parsing/file_type.c ./srcs/utils/init.c ./srcs/utils/parsing_utils.c ./srcs/parsing/check_components.c \
-		./srcs/parsing/map_parser.c ./srcs/parsing/map_parser_helper.c
+		./srcs/parsing/map_parser.c ./srcs/parsing/map_parser_helper.c ./srcs/game_funcs/game_init.c ./srcs/game_funcs/game_hooks.c \
+		./srcs/game_funcs/get_texture.c
 
 OBJS = $(SRCS:.c=.o)
 
-all: $(NAME)
+all: MLX42 $(NAME)
 
 $(NAME): $(OBJS)
 	@cd libft && make
-	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) ./libft/libs.a
+	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) ./libft/libs.a ./MLX42/build/libmlx42.a $(MLXFLAGS)
 
 MLX42:
 	@if [ ! -d "MLX42" ]; then git clone https://github.com/codam-coding-college/MLX42.git; fi

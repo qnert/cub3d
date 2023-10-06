@@ -23,6 +23,7 @@ t_map	*strct_init(char *file_path)
 	init->map_fd = open(file_path, O_RDONLY);
 	if (!init->map_fd)
 		return (init->error = 2, init);
+	init->map = NULL;
 	init->texture_path_no = NULL;
 	init->texture_path_so = NULL;
 	init->texture_path_we = NULL;
@@ -37,6 +38,7 @@ t_map	*strct_init(char *file_path)
 	init->map = get_and_check_map(init->map_fd);
 	if (!init->map)
 		return (init->error = 1, init);
+	init->game = malloc(sizeof(t_game));
 	return (init);
 }
 

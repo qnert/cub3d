@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:19:00 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/05 12:01:29 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/06 14:18:49 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,19 @@
 # define CUB3D_H
 
 # include "../libft/libs.h"
-// #include "./MLX42/include/MLX42/MLX42.h"
+# include "../MLX42/include/MLX42/MLX42.h"
 # include <stdio.h>
 # include <math.h>
 # include <fcntl.h>
 # include <stdbool.h>
+
+typedef struct game
+{
+	mlx_t		*mlx;
+	mlx_image_t	*player;
+	int			height;
+	int			width;
+}	t_game;
 
 typedef struct map
 {
@@ -31,7 +39,19 @@ typedef struct map
 	int		floor_rgb[3];
 	int		ceiling_rgb[3];
 	int		error;
+	t_game	*game;
 }	t_map;
+
+//game_funcs
+
+//game_init.c
+void	game_init(t_map *map);
+
+//get_texture.c
+void	get_player_img(t_game *game);
+
+//game_hooks.c
+void	ft_move(void *param);
 
 //parsing
 
