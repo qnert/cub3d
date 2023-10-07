@@ -6,7 +6,7 @@
 /*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 14:38:02 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/06 17:21:42 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/10/07 13:30:40 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ void	ft_fill_wall_and_space(t_game *game, char **map)
 		{
 			if (map[i][j] == '1')
 				mlx_image_to_window(game->mlx, game->wall, j * DIMENS, i * DIMENS);
+			else if (map[i][j] == '0')
+				mlx_image_to_window(game->mlx, game->space, j * DIMENS, i * DIMENS);
 			else if (map[i][j] == 'E' || map[i][j] == 'W'
 				|| map[i][j] == 'S' || map[i][j] == 'N')
 				mlx_image_to_window(game->mlx, game->player,

@@ -6,7 +6,7 @@
 /*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:19:00 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/07 12:59:20 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/10/07 13:26:04 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,11 @@ bool	is_component(char c);
 bool	is_valid_border(char c);
 void	ft_error_msg(char *str);
 
+//texture_utils.c
+void	set_pixels_img(mlx_image_t *img, int max_x, int max_y, u_int32_t c);
+
 //casting_utils.c
 t_cast	*caster_init(t_map *init);
+
 
 #endif
