@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 14:16:44 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/07 13:29:57 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/07 15:00:37 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,28 @@ void	get_player_img(t_game *game)
 	set_pixels_img(game->player, 10, 10, 0x0000FF);
 }
 
+void	get_line_img(t_game *game)
+{
+	int	x;
+	int	y;
+
+	x = 0;
+	game->line = mlx_new_image(game->mlx, 2, 20);
+	while (x < 2)
+	{
+		y = 0;
+		while (y < 20)
+		{
+			mlx_put_pixel(game->line, x, y, 0xFFF00FFF);
+			y++;
+		}
+		x++;
+	}
+}
+
 void	get_images(t_game *game)
 {
 	get_player_img(game);
 	get_map_img(game);
+	get_line_img(game);
 }

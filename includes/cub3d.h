@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:19:00 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/07 13:26:04 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/07 15:11:04 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,9 @@ typedef struct rc_distances
 
 typedef struct raycaster
 {
-	double		pos_x;
-	double		pos_y;
-	double		plane_x;
-	double		plane_y;
-	double		camera_x;
+	double		pd_x;
+	double		pd_y;
+	double		pa;
 	int			map_x;
 	int			map_y;
 	char		**map;
@@ -58,6 +56,7 @@ typedef struct game
 	mlx_image_t	*player;
 	mlx_image_t	*wall;
 	mlx_image_t	*space;
+	mlx_image_t	*line;
 	int			height;
 	int			width;
 	t_cast		*caster;
