@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:19:00 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/06 14:57:14 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/07 12:59:20 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
+
+# define DIMENS 50
 
 # include "../libft/libs.h"
 # include "../MLX42/include/MLX42/MLX42.h"
@@ -19,6 +21,36 @@
 # include <math.h>
 # include <fcntl.h>
 # include <stdbool.h>
+
+typedef struct rc_cast_directions
+{
+	double	dir_x;
+	double	dir_y;
+	double	raydir_x;
+	double	raydir_y;
+}	t_cast_dir;
+
+typedef struct rc_distances
+{
+	double	side_dist_x;
+	double	side_dist_y;
+	double	delta_dist_x;
+	double	delta_dist_y;
+}	t_cast_dist;
+
+typedef struct raycaster
+{
+	double		pos_x;
+	double		pos_y;
+	double		plane_x;
+	double		plane_y;
+	double		camera_x;
+	int			map_x;
+	int			map_y;
+	char		**map;
+	t_cast_dir	*dir;
+	t_cast_dist	*dist;
+}	t_cast;
 
 typedef struct game
 {
@@ -28,6 +60,7 @@ typedef struct game
 	mlx_image_t	*space;
 	int			height;
 	int			width;
+	t_cast		*caster;
 }	t_game;
 
 typedef struct map
@@ -58,7 +91,10 @@ void	get_player_img(t_game *game);
 void	get_images(t_game *game);
 
 //game_hooks.c
-void	ft_move(void *param);
+void	ft_move(t_game *game);
+void	ft_hooks(void *param);
+void	ft_raycasting_loop(t_cast *caster, int width);
+void	raycaster(t_game *game);
 
 //parsing
 
@@ -86,6 +122,7 @@ t_map	*strct_init(char *file_path);
 int		check_rgb(t_map *init, char *trmd_line);
 int		get_rgb(t_map *init, char *id, char **rgb);
 int		check_rgb_validity(t_map *init);
+void	initialize_vars_to_null(t_map *init);
 
 //parsing_utils.c
 bool	is_whitespace(char c);
@@ -93,5 +130,8 @@ int		ft_matrixlen(char **matrix);
 bool	is_component(char c);
 bool	is_valid_border(char c);
 void	ft_error_msg(char *str);
+
+//casting_utils.c
+t_cast	*caster_init(t_map *init);
 
 #endif
