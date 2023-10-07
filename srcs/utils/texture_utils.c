@@ -1,33 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_texture.c                                      :+:      :+:    :+:   */
+/*   texture_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/06 14:16:44 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/07 13:29:57 by skunert          ###   ########.fr       */
+/*   Created: 2023/10/07 13:07:50 by skunert           #+#    #+#             */
+/*   Updated: 2023/10/07 13:26:39 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void	get_map_img(t_game *game)
+void	set_pixels_img(mlx_image_t *img, int max_x, int max_y, u_int32_t c)
 {
-	game->wall = mlx_new_image(game->mlx, 50, 50);
-	set_pixels_img(game->wall, 50, 50, 0x0000FF);
-	game->space = mlx_new_image(game->mlx, 50 ,50);
-	set_pixels_img(game->space, 50, 50, 0x00FF00);
-}
+	int	x;
+	int	y;
 
-void	get_player_img(t_game *game)
-{
-	game->player = mlx_new_image(game->mlx, 10, 10);
-	set_pixels_img(game->player, 10, 10, 0x0000FF);
-}
-
-void	get_images(t_game *game)
-{
-	get_player_img(game);
-	get_map_img(game);
+	x = 0;
+	while (x < max_x)
+	{
+		y = 0;
+		while (y < max_y)
+		{
+			if (x == 0 || x == max_x - 1)
+				mlx_put_pixel(img, x, y, 0xFFFFFFFF);
+			else if (y == 0 || y == max_y - 1)
+				mlx_put_pixel(img, x, y, 0xFFFFFFFF);
+			else
+				mlx_put_pixel(img, x, y, c);
+			y++;
+		}
+		x++;
+	}
 }

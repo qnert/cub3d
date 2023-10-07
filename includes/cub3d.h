@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:19:00 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/06 14:57:14 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/07 13:26:04 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,5 +93,8 @@ int		ft_matrixlen(char **matrix);
 bool	is_component(char c);
 bool	is_valid_border(char c);
 void	ft_error_msg(char *str);
+
+//texture_utils.c
+void	set_pixels_img(mlx_image_t *img, int max_x, int max_y, u_int32_t c);
 
 #endif
