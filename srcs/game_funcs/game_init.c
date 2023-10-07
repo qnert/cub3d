@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 13:22:45 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/06 15:27:40 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/06 19:15:12 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ int	get_longest_line(char **matrix)
 
 int	ft_game_begin(t_game *game, char **map)
 {
-	game->mlx = mlx_init(game->width * 50, game->height * 50, "Raycast", true);
+	game->mlx = mlx_init(game->width * DIMENS, game->height * DIMENS, "Raycast", true);
 	get_images(game);
 	ft_fill_map(game, map);
-	mlx_loop_hook(game->mlx, ft_move, game);
+	mlx_loop_hook(game->mlx, ft_hooks, game);
 	mlx_loop(game->mlx);
 	mlx_terminate(game->mlx);
 	return (0);

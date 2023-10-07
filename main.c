@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:17:12 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/06 15:19:09 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/07 12:19:54 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,10 @@ void	ft_terminate_struct(t_map *map)
 		close(map->map_fd);
 	if (map->map)
 		free_arr(map->map);
+	free(map->game->caster->dir);
+	free(map->game->caster->dist);
+	free(map->game->caster);
+	free(map->game);
 	free(map);
 }
 

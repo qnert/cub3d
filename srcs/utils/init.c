@@ -15,30 +15,20 @@
 t_map	*strct_init(char *file_path)
 {
 	t_map	*init;
-	int	i;
 
-	i = -1;
 	init = malloc(sizeof(t_map));
 	init->error = 0;
 	init->map_fd = open(file_path, O_RDONLY);
 	if (!init->map_fd)
 		return (init->error = 2, init);
-	init->map = NULL;
-	init->texture_path_no = NULL;
-	init->texture_path_so = NULL;
-	init->texture_path_we = NULL;
-	init->texture_path_ea = NULL;
-	while (++i < 3)
-	{
-		init->floor_rgb[i] = -1;
-		init->ceiling_rgb[i] = -1;
-	}
+	initialize_vars_to_null(init);
 	if (get_input(init) == 1)
 		return (init->error = 1, init);
 	init->map = get_and_check_map(init->map_fd);
 	if (!init->map)
 		return (init->error = 1, init);
 	init->game = malloc(sizeof(t_game));
+	init->game->caster = caster_init(init);
 	return (init);
 }
 
@@ -190,4 +180,20 @@ int	check_rgb_validity(t_map *init)
 		i++;
 	}
 	return (0);
+}
+
+void	initialize_vars_to_null(t_map *init)
+{
+	int	i;
+
+	i = -1;
+	init->texture_path_no = NULL;
+	init->texture_path_so = NULL;
+	init->texture_path_we = NULL;
+	init->texture_path_ea = NULL;
+	while (++i < 3)
+	{
+		init->floor_rgb[i] = -1;
+		init->ceiling_rgb[i] = -1;
+	}
 }
