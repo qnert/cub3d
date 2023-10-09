@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:19:00 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/07 15:11:04 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/09 16:03:19 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,20 @@
 # include <math.h>
 # include <fcntl.h>
 # include <stdbool.h>
+
+typedef struct draw_line
+{
+	int	delta_x;
+	int	delta_y;
+	int direction_x;
+    int direction_y;
+	int	error;
+	int two_times_error;
+	int begin_x;
+	int begin_y;
+	int end_x;
+	int end_y;
+}	t_draw_line;
 
 typedef struct rc_cast_directions
 {
@@ -60,6 +74,7 @@ typedef struct game
 	int			height;
 	int			width;
 	t_cast		*caster;
+	t_draw_line	*dl;
 }	t_game;
 
 typedef struct map
@@ -134,7 +149,9 @@ void	ft_error_msg(char *str);
 void	set_pixels_img(mlx_image_t *img, int max_x, int max_y, u_int32_t c);
 
 //casting_utils.c
-t_cast	*caster_init(t_map *init);
+t_cast		*caster_init(t_map *init);
+int			ft_abs(int num);
+t_draw_line	*draw_line_init(void);
 
 
 #endif
