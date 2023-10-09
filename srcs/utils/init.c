@@ -29,6 +29,7 @@ t_map	*strct_init(char *file_path)
 		return (init->error = 1, init);
 	init->game = malloc(sizeof(t_game));
 	init->game->caster = caster_init(init);
+	init->game->dl = draw_line_init();
 	return (init);
 }
 
