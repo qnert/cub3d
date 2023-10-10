@@ -6,7 +6,7 @@
 /*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:19:00 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/09 16:03:19 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/10/10 23:10:56 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define CUB3D_H
 
 # define DIMENS 50
+# define DGREE 0.0174533
 
 # include "../libft/libs.h"
 # include "../MLX42/include/MLX42/MLX42.h"
@@ -36,32 +37,36 @@ typedef struct draw_line
 	int end_y;
 }	t_draw_line;
 
-typedef struct rc_cast_directions
+typedef struct ray
 {
-	double	dir_x;
-	double	dir_y;
-	double	raydir_x;
-	double	raydir_y;
-}	t_cast_dir;
+	int		rays;
+	int		depoffield;
+	int		player_x;
+	int		player_y;
+	double	ray_x;
+	double	ray_y;
+	double	ray_a;
+	double	x_o;
+	double	y_o;
+	double	dist_h;
+	double	dist_v;
+	double	ver_x;
+	double	ver_y;
+	double	hor_x;
+	double	hor_y;
+	double	a_tan;
+	double	n_tan;
+}	t_ray;
 
-typedef struct rc_distances
-{
-	double	side_dist_x;
-	double	side_dist_y;
-	double	delta_dist_x;
-	double	delta_dist_y;
-}	t_cast_dist;
-
-typedef struct raycaster
+typedef struct caster
 {
 	double		pd_x;
 	double		pd_y;
 	double		pa;
 	int			map_x;
 	int			map_y;
+	int			map_p;
 	char		**map;
-	t_cast_dir	*dir;
-	t_cast_dist	*dist;
 }	t_cast;
 
 typedef struct game
@@ -75,6 +80,7 @@ typedef struct game
 	int			width;
 	t_cast		*caster;
 	t_draw_line	*dl;
+	t_ray		*ray;
 }	t_game;
 
 typedef struct map
@@ -107,8 +113,9 @@ void	get_images(t_game *game);
 //game_hooks.c
 void	ft_move(t_game *game);
 void	ft_hooks(void *param);
-void	ft_raycasting_loop(t_cast *caster, int width);
 void	raycaster(t_game *game);
+void	ft_rotate_left(t_game *game);
+void	ft_rotate_right(t_game *game);
 
 //parsing
 
@@ -146,12 +153,24 @@ bool	is_valid_border(char c);
 void	ft_error_msg(char *str);
 
 //texture_utils.c
-void	set_pixels_img(mlx_image_t *img, int max_x, int max_y, u_int32_t c);
+void		set_pixels_img(mlx_image_t *img, int max_x, int max_y, u_int32_t c);
 
 //casting_utils.c
 t_cast		*caster_init(t_map *init);
 int			ft_abs(int num);
 t_draw_line	*draw_line_init(void);
+t_ray		*ray_init(void);
 
+//draw_line.c
+void		ft_draw_line(t_game *game);
+
+//caster.c
+double		ft_distance(t_game *g, double bx, double by);
+
+// horizontal.c
+void		check_horizontal_line(t_game *g);
+
+// vertical.c
+void		check_vertical_line(t_game *g);
 
 #endif

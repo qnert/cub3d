@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_texture.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 14:16:44 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/07 15:00:37 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/09 17:08:02 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ void	get_line_img(t_game *game)
 	int	y;
 
 	x = 0;
-	game->line = mlx_new_image(game->mlx, 2, 20);
-	while (x < 2)
+	game->line = mlx_new_image(game->mlx, 1, 20);
+	while (x < 1)
 	{
 		y = 0;
 		while (y < 20)

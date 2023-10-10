@@ -7,7 +7,8 @@ NAME = cub3D
 SRCS = main.c ./srcs/parsing/file_type.c ./srcs/utils/init.c ./srcs/utils/parsing_utils.c ./srcs/parsing/check_components.c \
 		./srcs/parsing/map_parser.c ./srcs/parsing/map_parser_helper.c ./srcs/game_funcs/game_init.c ./srcs/game_funcs/game_hooks.c \
 		./srcs/game_funcs/get_texture.c ./srcs/game_funcs/fill_map.c ./srcs/utils/casting_utils.c \
-    ./srcs/utils/texture_utils.c
+		./srcs/utils/texture_utils.c ./srcs/game_funcs/draw_line.c ./srcs/raycaster/caster.c ./srcs/raycaster/horizontal.c \
+		./srcs/raycaster/vertical.c
 
 OBJS = $(SRCS:.c=.o)
 
