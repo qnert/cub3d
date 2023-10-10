@@ -6,7 +6,7 @@
 /*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 19:18:20 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/10 21:22:51 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/10/10 23:51:11 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_ray	*ray_init(void)
 	t_ray	*ray;
 
 	ray = malloc(sizeof(t_ray));
-	ray->ray = 0;
+	ray->rays = 0;
 	ray->depoffield = 0;
 	ray->ray_a = 0;
 	ray->ray_x = 0;
