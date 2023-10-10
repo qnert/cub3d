@@ -30,6 +30,7 @@ t_map	*strct_init(char *file_path)
 	init->game = malloc(sizeof(t_game));
 	init->game->caster = caster_init(init);
 	init->game->dl = draw_line_init();
+	init->game->ray = ray_init();
 	return (init);
 }
 
