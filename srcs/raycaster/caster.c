@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   caster.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 17:08:51 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/10 23:42:34 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/10/11 12:25:18 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,17 +55,23 @@ void	raycaster(t_game *g)
 		check_vertical_line(g);
 		if (g->ray->dist_v < g->ray->dist_h)
 		{
-			g->dl->end_x = g->ray->ver_x;
-			g->dl->end_y = g->ray->ver_y;
+			g->ray->final_d = g->ray->dist_v;
+			g->dl->color = 0x00F0FF;
 		}
 		if (g->ray->dist_h < g->ray->dist_v)
 		{
-			g->dl->end_x = g->ray->hor_x;
-			g->dl->end_y = g->ray->hor_y;
+			g->ray->final_d = g->ray->dist_h;
+			g->dl->color = 0x00FFFF;
 		}
-		g->dl->begin_x = g->player->instances[0].x + 5;
-		g->dl->begin_y = g->player->instances[0].y + 5;
-		ft_draw_line(g);
+		g->caster->line_hight = DIMENS * 640 / g->ray->final_d;
+		if (g->caster->line_hight > 640)
+			g->caster->line_hight = 640;
+		g->caster->line_offset = 320 - g->caster->line_hight / 2;
+		g->dl->begin_x = g->ray->rays * 16;
+		g->dl->begin_y = g->caster->line_offset;
+		g->dl->end_x = g->ray->rays * 16;
+		g->dl->end_y = g->caster->line_hight + g->caster->line_offset;
+		ft_draw_line_3D(g);
 		g->ray->ray_a += DGREE;
 		set_limit(g);
 		g->ray->rays++;
