@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:19:00 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/11 12:38:20 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/11 20:37:31 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,10 @@ typedef struct game
 	mlx_image_t	*line;
 	int			height;
 	int			width;
+	int			dis_w;
+	int			dis_h;
+	double		pl_x;
+	double		pl_y;
 	t_cast		*caster;
 	t_draw_line	*dl;
 	t_ray		*ray;
@@ -177,5 +181,5 @@ void		check_horizontal_line(t_game *g);
 
 // vertical.c
 void		check_vertical_line(t_game *g);
-
+void		replace_img(t_game *g);
 #endif
