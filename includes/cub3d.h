@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:19:00 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/10 23:10:56 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/10/11 12:38:20 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,17 @@
 
 typedef struct draw_line
 {
-	int	delta_x;
-	int	delta_y;
-	int direction_x;
-    int direction_y;
-	int	error;
-	int two_times_error;
-	int begin_x;
-	int begin_y;
-	int end_x;
-	int end_y;
+	int			delta_x;
+	int			delta_y;
+	int			direction_x;
+    int			direction_y;
+	int			error;
+	int			two_times_error;
+	int			begin_x;
+	int			begin_y;
+	int			end_x;
+	int			end_y;
+	uint32_t	color;
 }	t_draw_line;
 
 typedef struct ray
@@ -54,6 +55,7 @@ typedef struct ray
 	double	ver_y;
 	double	hor_x;
 	double	hor_y;
+	double	final_d;
 	double	a_tan;
 	double	n_tan;
 }	t_ray;
@@ -63,6 +65,9 @@ typedef struct caster
 	double		pd_x;
 	double		pd_y;
 	double		pa;
+	double		ca;
+	int			line_hight;
+	int			line_offset;
 	int			map_x;
 	int			map_y;
 	int			map_p;
@@ -162,7 +167,7 @@ t_draw_line	*draw_line_init(void);
 t_ray		*ray_init(void);
 
 //draw_line.c
-void		ft_draw_line(t_game *game);
+void		ft_draw_line_3D(t_game *game);
 
 //caster.c
 double		ft_distance(t_game *g, double bx, double by);
