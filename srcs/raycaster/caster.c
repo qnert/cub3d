@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 17:08:51 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/11 13:48:47 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/11 13:59:59 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,12 @@ double	ft_distance(t_game *g, double bx, double by)
 
 void	set_cosine_and_values(t_game *g)
 {
+	g->caster->ca = g->caster->pa - g->ray->ray_a;
+	if (g->caster->ca < 0)
+		g->caster->ca += 2 * M_PI;
+	if (g->caster->ca > 2 * M_PI)
+		g->caster->ca -= 2 * M_PI;
+	g->ray->final_d *= cos(g->caster->pa - g->ray->ray_a);
 	g->caster->line_hight = DIMENS * 640 / g->ray->final_d;
 	if (g->caster->line_hight > 640)
 		g->caster->line_hight = 640;
@@ -73,12 +79,6 @@ void	raycaster(t_game *g)
 		}
 		if (g->ray->dist_h < g->ray->dist_v)
 		{
-			g->caster->ca = g->caster->pa - g->ray->ray_a;
-			if (g->caster->ca < 0)
-				g->caster->ca += 2 * M_PI;
-			if (g->caster->ca > 2 * M_PI)
-				g->caster->ca -= 2 * M_PI;
-			g->ray->dist_h *= cos(g->caster->pa - g->ray->ray_a);
 			g->ray->final_d = g->ray->dist_h;
 			g->dl->color = 0x00FFFF;
 		}
