@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   caster.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 17:08:51 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/10 23:42:34 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/10/11 13:48:47 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,19 @@ double	ft_distance(t_game *g, double bx, double by)
 	return (sqrt((bx - ax) * (bx - ax) + (by - ay) * (by - ay)));
 }
 
+void	set_cosine_and_values(t_game *g)
+{
+	g->caster->line_hight = DIMENS * 640 / g->ray->final_d;
+	if (g->caster->line_hight > 640)
+		g->caster->line_hight = 640;
+	g->caster->line_offset = 320 - g->caster->line_hight / 2;
+	g->dl->begin_x = g->ray->rays * 16;
+	g->dl->begin_y = g->caster->line_offset;
+	g->dl->end_x = g->ray->rays * 16;
+	g->dl->end_y = g->caster->line_hight + g->caster->line_offset;
+	g->ray->final_d *= cos(g->caster->ca);
+}
+
 // calls the functions above to get the horizontal ray
 // and vertical ray and displays the one that is shorter
 // for a smooth visualization
@@ -55,17 +68,22 @@ void	raycaster(t_game *g)
 		check_vertical_line(g);
 		if (g->ray->dist_v < g->ray->dist_h)
 		{
-			g->dl->end_x = g->ray->ver_x;
-			g->dl->end_y = g->ray->ver_y;
+			g->ray->final_d = g->ray->dist_v;
+			g->dl->color = 0x00F0FF;
 		}
 		if (g->ray->dist_h < g->ray->dist_v)
 		{
-			g->dl->end_x = g->ray->hor_x;
-			g->dl->end_y = g->ray->hor_y;
+			g->caster->ca = g->caster->pa - g->ray->ray_a;
+			if (g->caster->ca < 0)
+				g->caster->ca += 2 * M_PI;
+			if (g->caster->ca > 2 * M_PI)
+				g->caster->ca -= 2 * M_PI;
+			g->ray->dist_h *= cos(g->caster->pa - g->ray->ray_a);
+			g->ray->final_d = g->ray->dist_h;
+			g->dl->color = 0x00FFFF;
 		}
-		g->dl->begin_x = g->player->instances[0].x + 5;
-		g->dl->begin_y = g->player->instances[0].y + 5;
-		ft_draw_line(g);
+		set_cosine_and_values(g);
+		ft_draw_line_3D(g);
 		g->ray->ray_a += DGREE;
 		set_limit(g);
 		g->ray->rays++;

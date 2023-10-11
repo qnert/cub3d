@@ -6,7 +6,7 @@
 /*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 19:18:20 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/10 23:51:11 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/10/11 13:55:30 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ t_ray	*ray_init(void)
 	ray->hor_y = 0;
 	ray->ver_x = 0;
 	ray->ver_y = 0;
+	ray->final_d = 0;
 	return (ray);
 }
 
@@ -70,6 +71,8 @@ t_cast	*caster_init(t_map *init)
 	caster->map_y = 0;
 	caster->pd_x = 0;
 	caster->pd_y = 0;
+	caster->line_hight = 0;
+	caster->line_offset = 0;
 	caster->map = init->map;
 	return (caster);
 }

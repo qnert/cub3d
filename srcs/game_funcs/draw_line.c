@@ -6,7 +6,7 @@
 /*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 17:22:42 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/10 23:21:07 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/10/11 13:56:34 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,13 @@ void	ft_dl_assign_values(t_game *game)
 	game->dl->error = game->dl->delta_x - game->dl->delta_y;
 }
 
-void	ft_draw_line(t_game *game)
+void	ft_draw_line_3D(t_game *game)
 {
 	ft_dl_assign_values(game);
 	while (1)
 	{
-		mlx_put_pixel(game->line, game->dl->begin_x, game->dl->begin_y, 0xFFF00FFF);
+		for (int i = 0; i < 16; i++)
+			mlx_put_pixel(game->line, game->dl->begin_x + i, game->dl->begin_y, game->dl->color);
 		if (game->dl->begin_x == game->dl->end_x && game->dl->begin_y == game->dl->end_y)
 			break;
 		game->dl->two_times_error = 2 * game->dl->error;
