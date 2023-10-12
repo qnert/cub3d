@@ -6,7 +6,7 @@
 /*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 17:08:51 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/12 14:45:32 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/10/12 15:07:22 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 void	replace_img(t_game *g)
 {
 	mlx_delete_image(g->mlx, g->line);
-	g->line = mlx_new_image(g->mlx, g->dis_w + 20, g->dis_h);
+	g->line = mlx_new_image(g->mlx, g->dis_w + 20, g->dis_h + 20);
 	mlx_image_to_window(g->mlx, g->line, 0, 0);
 }
 
