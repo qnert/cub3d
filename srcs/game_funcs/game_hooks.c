@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 13:48:12 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/12 10:06:12 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/12 11:06:21 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,21 +32,38 @@ void	ft_rotate_right(t_game *game)
 	}
 }
 
+void	ft_wall_offset_set(t_game *g)
+{
+	if (g->caster->pd_x < 0)
+		g->caster->x_off = -20;
+	else
+		g->caster->x_off = 20;
+	if (g->caster->pd_y < 0)
+		g->caster->y_off = -20;
+	else
+		g->caster->y_off = 20;
+}
+
 void	ft_move(t_game *game)
 {
 	game->caster->pd_x = cos(game->caster->pa) * 3;
 	game->caster->pd_y = sin(game->caster->pa) * 3;
 	if (mlx_is_key_down(game->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(game->mlx);
+	ft_wall_offset_set(game);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_W))
 	{
-		game->pl_x += cos(game->caster->pa) * 3;
-		game->pl_y += sin(game->caster->pa) * 3;
+		if (game->caster->map[(int)game->pl_y / 50][(int)(game->pl_x + game->caster->x_off) / 50] != '1')
+			game->pl_x += cos(game->caster->pa) * 3;
+		if (game->caster->map[(int)(game->pl_y + game->caster->y_off) / 50][(int)game->pl_x / 50] != '1')
+			game->pl_y += sin(game->caster->pa) * 3;
 	}
 	if (mlx_is_key_down(game->mlx, MLX_KEY_S))
 	{
-		game->pl_x -= cos(game->caster->pa) * 3;
-		game->pl_y -= sin(game->caster->pa) * 3;
+		if (game->caster->map[(int)game->pl_y / 50][(int)(game->pl_x - game->caster->x_off) / 50] != '1')
+			game->pl_x -= cos(game->caster->pa) * 3;
+		if (game->caster->map[(int)(game->pl_y - game->caster->y_off) / 50][(int)game->pl_x / 50] != '1')
+			game->pl_y -= sin(game->caster->pa) * 3;
 	}
 	if (mlx_is_key_down(game->mlx, MLX_KEY_D))
 	{

@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:19:00 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/12 10:10:53 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/12 10:54:23 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ typedef struct caster
 	double		ca;
 	int			line_hight;
 	int			line_offset;
+	int			x_off;
+	int			y_off;
 	int			map_x;
 	int			map_y;
 	int			map_p;

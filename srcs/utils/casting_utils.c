@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 19:18:20 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/12 10:12:37 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/12 10:54:55 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ t_cast	*caster_init(t_map *init)
 	caster->pd_y = 0;
 	caster->line_hight = 0;
 	caster->line_offset = 0;
+	caster->x_off = 0;
+	caster->y_off = 0;
 	caster->map = init->map;
 	return (caster);
 }
