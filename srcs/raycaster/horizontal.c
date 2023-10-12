@@ -6,7 +6,7 @@
 /*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 21:26:51 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/10 23:28:52 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/10/11 20:00:03 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 void	assign_variables_horizontal(t_game *g)
 {
 	g->ray->dist_h = 100000;
-	g->ray->player_x = g->player->instances[0].x;
-	g->ray->player_y = g->player->instances[0].y;
+	g->ray->player_x = g->pl_x;
+	g->ray->player_y = g->pl_y;
 	g->ray->hor_x = g->ray->player_x;
 	g->ray->hor_y = g->ray->player_y;
 	g->ray->depoffield = 0;

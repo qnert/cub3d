@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 19:18:20 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/11 12:01:53 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/12 11:19:27 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,13 +66,26 @@ t_cast	*caster_init(t_map *init)
 	t_cast	*caster;
 
 	caster = malloc(sizeof(t_cast));
-	caster->pa = 3 * M_PI_2;
+	if (check_component('N', init->map))
+		caster->pa = 3 * M_PI_2;
+	else if(check_component('W', init->map))
+		caster->pa = 2 * M_PI_2;
+	else if(check_component('S', init->map))
+		caster->pa = M_PI_2;
+	else
+		caster->pa = 0;
 	caster->map_x = 0;
 	caster->map_y = 0;
 	caster->pd_x = 0;
 	caster->pd_y = 0;
+	caster->pd_x_strafe = 0;
+	caster->pd_y_strafe = 0;
 	caster->line_hight = 0;
 	caster->line_offset = 0;
+	caster->x_off = 0;
+	caster->y_off = 0;
+	caster->x_off_strafe = 0;
+	caster->y_off_strafe = 0;
 	caster->map = init->map;
 	return (caster);
 }

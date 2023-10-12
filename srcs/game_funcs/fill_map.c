@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 14:38:02 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/11 13:49:28 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/12 09:27:15 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,11 @@ void	ft_fill_player(t_game *game, char **map)
 
 void	ft_fill_map(t_game *game, char **map)
 {
+	mlx_image_t	*cover;
+
+	cover = mlx_new_image(game->mlx, game->width * DIMENS, game->height * DIMENS);
 	ft_fill_wall_and_space(game, map);
 	ft_fill_player(game, map);
+	set_pixels_img(cover, game->width * DIMENS, game->height * DIMENS, 0x000000FF);
+	mlx_image_to_window(game->mlx, cover, 0, 0);
 }

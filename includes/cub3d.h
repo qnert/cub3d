@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:19:00 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/11 12:38:20 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/12 11:18:45 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,16 @@ typedef struct caster
 {
 	double		pd_x;
 	double		pd_y;
+	double		pd_x_strafe;
+	double		pd_y_strafe;
 	double		pa;
 	double		ca;
 	int			line_hight;
 	int			line_offset;
+	int			x_off;
+	int			y_off;
+	int			x_off_strafe;
+	int			y_off_strafe;
 	int			map_x;
 	int			map_y;
 	int			map_p;
@@ -83,6 +89,10 @@ typedef struct game
 	mlx_image_t	*line;
 	int			height;
 	int			width;
+	int			dis_w;
+	int			dis_h;
+	double		pl_x;
+	double		pl_y;
 	t_cast		*caster;
 	t_draw_line	*dl;
 	t_ray		*ray;
@@ -125,6 +135,7 @@ void	ft_rotate_right(t_game *game);
 //parsing
 
 //check_components.c
+int		check_component(char c, char **map);
 bool	complete_component_check(char **map);
 
 //check_file_type.c
@@ -177,5 +188,5 @@ void		check_horizontal_line(t_game *g);
 
 // vertical.c
 void		check_vertical_line(t_game *g);
-
+void		replace_img(t_game *g);
 #endif
