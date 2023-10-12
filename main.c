@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:17:12 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/10 15:10:10 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/10/12 10:33:30 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,14 @@ void	ft_terminate_struct(t_map *map)
 		free(map->texture_path_so);
 	if (map->error != 2)
 		close(map->map_fd);
-	if (map->map)
-		free_arr(map->map);
-	free(map->game->ray);
-	free(map->game->caster);
-	free(map->game->dl);
-	free(map->game);
+	free_arr(map->map);
+	if (map->error == 0)
+	{
+		free(map->game->ray);
+		free(map->game->caster);
+		free(map->game->dl);
+		free(map->game);
+	}
 	free(map);
 }
 
