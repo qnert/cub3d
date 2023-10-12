@@ -6,7 +6,7 @@
 /*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 14:16:44 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/11 20:17:33 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/10/12 14:03:36 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ void	get_map_img(t_game *game)
 	set_pixels_img(game->wall, 50, 50, 0x000000);
 	game->space = mlx_new_image(game->mlx, 50 ,50);
 	set_pixels_img(game->space, 50, 50, 0x000000);
-	background = mlx_new_image(game->mlx, game->width * DIMENS, game->height * DIMENS);
+	background = mlx_new_image(game->mlx, game->dis_w, game->dis_h);
 	mlx_image_to_window(game->mlx, background, 0, 0);
-	set_pixels_img(background, game->width, game->height, 0x000000);
+	set_pixels_img(background, game->dis_w, game->dis_h, 0x0000FF);
 }
 
 void	get_player_img(t_game *game)
