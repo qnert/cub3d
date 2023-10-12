@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   caster.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 17:08:51 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/12 12:28:31 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/12 14:45:32 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 void	replace_img(t_game *g)
 {
 	mlx_delete_image(g->mlx, g->line);
-	g->line = mlx_new_image(g->mlx, g->width * DIMENS, g->height * DIMENS);
+	g->line = mlx_new_image(g->mlx, g->dis_w + 20, g->dis_h);
 	mlx_image_to_window(g->mlx, g->line, 0, 0);
 }
 
@@ -48,13 +48,13 @@ void	set_cosine_and_values(t_game *g)
 	if (g->caster->ca > 2 * M_PI)
 		g->caster->ca -= 2 * M_PI;
 	g->ray->final_d *= cos(g->caster->pa - g->ray->ray_a);
-	g->caster->line_hight = DIMENS * 640 / g->ray->final_d;
-	if (g->caster->line_hight > 640)
-		g->caster->line_hight = 640;
-	g->caster->line_offset = 320 - g->caster->line_hight / 2;
-	g->dl->begin_x = g->ray->rays * 9; // if lower then end_x equals drunk.. maybe feature ?
+	g->caster->line_hight = DIMENS * g->dis_h / g->ray->final_d;
+	if (g->caster->line_hight > g->dis_h)
+		g->caster->line_hight = g->dis_h;
+	g->caster->line_offset = (g->dis_h / 2) - g->caster->line_hight / 2;
+	g->dl->begin_x = g->ray->rays * (g->dis_w / g->ray->n_of_rays); // if lower then end_x equals drunk.. maybe feature ?
 	g->dl->begin_y = g->caster->line_offset;
-	g->dl->end_x = g->ray->rays * 9;
+	g->dl->end_x = g->ray->rays * (g->dis_w / g->ray->n_of_rays);
 	g->dl->end_y = g->caster->line_hight + g->caster->line_offset;
 	g->ray->final_d *= cos(g->caster->ca);
 }

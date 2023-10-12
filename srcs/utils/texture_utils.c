@@ -6,7 +6,7 @@
 /*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 13:07:50 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/11 20:16:40 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/10/12 14:03:46 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ void	set_pixels_img(mlx_image_t *img, int max_x, int max_y, u_int32_t c)
 		while (y < max_y)
 		{
 			if (x == 0 || x == max_x - 1)
-				mlx_put_pixel(img, x, y, 0x000000);
+				mlx_put_pixel(img, x, y, 0x0000FF);
 			else if (y == 0 || y == max_y - 1)
-				mlx_put_pixel(img, x, y, 0x000000);
+				mlx_put_pixel(img, x, y, 0x0000FF);
 			else
 				mlx_put_pixel(img, x, y, c);
 			y++;
