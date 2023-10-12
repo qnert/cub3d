@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:19:00 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/12 10:54:23 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/12 11:18:45 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,16 @@ typedef struct caster
 {
 	double		pd_x;
 	double		pd_y;
+	double		pd_x_strafe;
+	double		pd_y_strafe;
 	double		pa;
 	double		ca;
 	int			line_hight;
 	int			line_offset;
 	int			x_off;
 	int			y_off;
+	int			x_off_strafe;
+	int			y_off_strafe;
 	int			map_x;
 	int			map_y;
 	int			map_p;
