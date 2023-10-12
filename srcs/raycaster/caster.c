@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   caster.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 17:08:51 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/11 13:59:59 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/11 22:35:06 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ double	ft_distance(t_game *g, double bx, double by)
 	double	ax;
 	double	ay;
 
-	ax = g->player->instances[0].x;
-	ay = g->player->instances[0].y;
+	ax = g->pl_x;
+	ay = g->pl_y;
 	return (sqrt((bx - ax) * (bx - ax) + (by - ay) * (by - ay)));
 }
 
@@ -52,9 +52,9 @@ void	set_cosine_and_values(t_game *g)
 	if (g->caster->line_hight > 640)
 		g->caster->line_hight = 640;
 	g->caster->line_offset = 320 - g->caster->line_hight / 2;
-	g->dl->begin_x = g->ray->rays * 16;
+	g->dl->begin_x = g->ray->rays * 17; // if lower then end_x equals drunk.. maybe feature ?
 	g->dl->begin_y = g->caster->line_offset;
-	g->dl->end_x = g->ray->rays * 16;
+	g->dl->end_x = g->ray->rays * 17;
 	g->dl->end_y = g->caster->line_hight + g->caster->line_offset;
 	g->ray->final_d *= cos(g->caster->ca);
 }
