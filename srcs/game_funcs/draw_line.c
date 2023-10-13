@@ -6,7 +6,7 @@
 /*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 17:22:42 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/12 14:17:01 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/10/13 14:41:46 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ void	ft_draw_line_3D(t_game *game)
 	while (1)
 	{
 		i = -1;
-		while (++i < 17)
-			mlx_put_pixel(game->line, game->dl->begin_x + i, game->dl->begin_y, game->dl->color);
+		while (++i < 12)
+			mlx_put_pixel(game->line, game->dl->begin_x, game->dl->begin_y, game->dl->color);
 		if (game->dl->begin_x == game->dl->end_x && game->dl->begin_y == game->dl->end_y)
 			break;
 		game->dl->two_times_error = 2 * game->dl->error;

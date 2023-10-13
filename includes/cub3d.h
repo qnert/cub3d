@@ -6,7 +6,7 @@
 /*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:19:00 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/12 14:26:34 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/10/13 15:18:22 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ typedef struct draw_line
 	int			delta_x;
 	int			delta_y;
 	int			direction_x;
-    int			direction_y;
+	int			direction_y;
 	int			error;
 	int			two_times_error;
 	int			begin_x;
@@ -59,6 +59,11 @@ typedef struct ray
 	double	final_d;
 	double	a_tan;
 	double	n_tan;
+	double	shade;
+	double	tex_x;
+	double	tex_y;
+	double	ty_step;
+	double	ty_off;
 }	t_ray;
 
 typedef struct caster
@@ -88,6 +93,7 @@ typedef struct game
 	mlx_image_t	*wall;
 	mlx_image_t	*space;
 	mlx_image_t	*line;
+	mlx_texture_t	*wall_text;
 	int			height;
 	int			width;
 	int			dis_w;
@@ -116,58 +122,58 @@ typedef struct map
 //game_funcs
 
 //fill_map.c
-void	ft_fill_map(t_game *game, char **map);
+void		ft_fill_map(t_game *game, char **map);
 
 //game_init.c
-int		get_longest_line(char **matrix);
-void	game_init(t_map *map);
+int			get_longest_line(char **matrix);
+void		game_init(t_map *map);
 
 //get_texture.c
-void	get_player_img(t_game *game);
-void	get_images(t_game *game);
+void		get_player_img(t_game *game);
+void		get_images(t_game *game);
 
 //game_hooks.c
-void	ft_move(t_game *game);
-void	ft_hooks(void *param);
-void	raycaster(t_game *game);
-void	ft_rotate_left(t_game *game);
-void	ft_rotate_right(t_game *game);
+void		ft_move(t_game *game);
+void		ft_hooks(void *param);
+void		raycaster(t_game *game);
+void		ft_rotate_left(t_game *game);
+void		ft_rotate_right(t_game *game);
 
 //parsing
 
 //check_components.c
-int		check_component(char c, char **map);
-bool	complete_component_check(char **map);
+int			check_component(char c, char **map);
+bool		complete_component_check(char **map);
 
 //check_file_type.c
-void	free_arr(char **arr);
-int		ft_check_file_type(char *str);
+void		free_arr(char **arr);
+int			ft_check_file_type(char *str);
 
 //map_parser_helper.c
-char	**get_and_check_map(int fd);
-bool	check_end_walls_curr(char **map);
-bool	check_end_walls_next(char **map);
+char		**get_and_check_map(int fd);
+bool		check_end_walls_curr(char **map);
+bool		check_end_walls_next(char **map);
 
 //map_parser.c
-char	**get_map(int map_fd);
-bool	check_map(char **map);
+char		**get_map(int map_fd);
+bool		check_map(char **map);
 
 //utils
-int		get_texture_path(t_map *init, char *trmd_line);
-int		check_line(t_map *init, char *line);
-int		get_input(t_map *init);
-t_map	*strct_init(char *file_path);
-int		check_rgb(t_map *init, char *trmd_line);
-int		get_rgb(t_map *init, char *id, char **rgb);
-int		check_rgb_validity(t_map *init);
-void	initialize_vars_to_null(t_map *init);
+int			get_texture_path(t_map *init, char *trmd_line);
+int			check_line(t_map *init, char *line);
+int			get_input(t_map *init);
+t_map		*strct_init(char *file_path);
+int			check_rgb(t_map *init, char *trmd_line);
+int			get_rgb(t_map *init, char *id, char **rgb);
+int			check_rgb_validity(t_map *init);
+void		initialize_vars_to_null(t_map *init);
 
 //parsing_utils.c
-bool	is_whitespace(char c);
-int		ft_matrixlen(char **matrix);
-bool	is_component(char c);
-bool	is_valid_border(char c);
-void	ft_error_msg(char *str);
+bool		is_whitespace(char c);
+int			ft_matrixlen(char **matrix);
+bool		is_component(char c);
+bool		is_valid_border(char c);
+void		ft_error_msg(char *str);
 
 //texture_utils.c
 void		set_pixels_img(mlx_image_t *img, int max_x, int max_y, u_int32_t c);
