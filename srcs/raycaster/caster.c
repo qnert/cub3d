@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   caster.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 17:08:51 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/13 20:52:45 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/10/13 22:50:54 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,26 +81,38 @@ void	raycaster(t_game *g)
 		}
 		if (g->ray->dist_h < g->ray->dist_v)
 		{
-			g->ray->shade = 1;
+			g->ray->shade = 1.0;
 			g->ray->ray_x = g->ray->hor_x;
 			g->ray->ray_y = g->ray->hor_y;
 			g->ray->final_d = g->ray->dist_h;
 		}
 		set_cosine_and_values(g);
-		double	tx = (int)(g->ray->ray_x / 2.0) % 64;
+		double	tx;
 		double	ty = g->ray->ty_off * g->ray->ty_step;
 		g->dl->begin_x = g->ray->rays * (g->dis_w / g->ray->n_of_rays);
+		if (g->ray->shade == 1)
+		{
+			tx = (int)(g->ray->ray_x / 2.0) % 64;
+			if (g->ray->ray_a < M_PI)
+				tx = 63 - tx;
+		}
+		else
+		{
+			tx = (int)(g->ray->ray_y / 2.0) % 64;
+			if (g->ray->ray_a > M_PI_2 && g->ray->ray_a < (3 * M_PI_2))
+				tx = 63 - tx;
+		}
 		for (int y = 0; y < g->caster->line_hight; y++) {
 			int pixel = ((int)ty * g->wall_text->width + (int)tx) * g->wall_text->bytes_per_pixel;
-			int color = (int)g->wall_text->pixels[pixel] << 24
-			| (int)g->wall_text->pixels[pixel + 1] << 16
-			| (int)g->wall_text->pixels[pixel + 2] << 8
-			| (int)g->wall_text->pixels[pixel + 3];
+			int color = (int)(g->wall_text->pixels[pixel]) << 24
+			| (int)(g->wall_text->pixels[pixel + 1]) << 16
+			| (int)(g->wall_text->pixels[pixel + 2]) << 8
+			| (int)(g->wall_text->pixels[pixel + 3]);
 			for (int i = 0; i < 12; i++)
 				mlx_put_pixel(g->line, i + g->dl->begin_x, y + g->caster->line_offset, color);
 			ty += g->ray->ty_step;
 		}
-		g->ray->ray_a += (DGREE / 2);
+		g->ray->ray_a += DGREE / 8;
 		set_limit(g);
 		g->ray->rays++;
 	}

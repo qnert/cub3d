@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   casting_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 19:18:20 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/12 14:27:40 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/10/13 21:22:59 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ t_ray	*ray_init(void)
 	ray->ver_x = 0;
 	ray->ver_y = 0;
 	ray->final_d = 0;
-	ray->n_of_rays = 120;
+	ray->n_of_rays = 480;
 	return (ray);
 }
 
