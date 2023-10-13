@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 14:38:02 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/13 22:21:29 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/14 01:09:23 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,22 +60,23 @@ void	ft_fill_player(t_game *game, char **map)
 
 void	ft_fill_map(t_game *game, char **map)
 {
-	mlx_image_t	*cover;
-	mlx_image_t	*floor;
+	// mlx_image_t	*cover;
+	// mlx_image_t	*floor;
 	mlx_image_t	*ceiling;
 
-	cover = mlx_new_image(game->mlx, game->width * DIMENS, game->height * DIMENS);
+	// cover = mlx_new_image(game->mlx, game->width * DIMENS, game->height * DIMENS);
 	ft_fill_wall_and_space(game, map);
 	ft_fill_player(game, map);
-	set_pixels_img(cover, game->width * DIMENS, game->height * DIMENS, 0x000000FF);
-	mlx_image_to_window(game->mlx, cover, 0, 0);
-	floor = mlx_new_image(game->mlx, game->dis_w, game->dis_h / 2);
-	mlx_image_to_window(game->mlx, floor, 0, game->dis_h / 2);
-	set_pixels_img(floor, game->dis_w, game->dis_h / 2, 0xFFF0FF);
+	// set_pixels_img(cover, game->width * DIMENS, game->height * DIMENS, 0x000000FF);
+	// mlx_image_to_window(game->mlx, cover, 0, 0);
+	// floor = mlx_new_image(game->mlx, game->dis_w, game->dis_h / 2);
+	// mlx_image_to_window(game->mlx, floor, 0, game->dis_h / 2);
+	// set_pixels_img(floor, game->dis_w, game->dis_h / 2, 0xFFF0FF);
 	ceiling = mlx_new_image(game->mlx, game->dis_w, game->dis_h / 2);
 	mlx_image_to_window(game->mlx, ceiling, 0, 0);
 	set_pixels_img(ceiling, game->dis_w, game->dis_h / 2, 0xFFFFFFFF);
-	game->wall_text = mlx_load_png("./textures/mario.png");
+	game->wall_tex = mlx_load_png("./textures/trump.png");
+	game->floor_tex = mlx_load_png("./textures/metal.png");
 	game->wall = mlx_new_image(game->mlx, game->dis_w, game->dis_h);
 	mlx_image_to_window(game->mlx, game->wall, 0, 0);
 // 	for (int y = 0; y < 64 * 8; y++)

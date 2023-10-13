@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:19:00 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/13 21:18:54 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/14 01:08:50 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,8 @@ typedef struct game
 	mlx_image_t	*wall;
 	mlx_image_t	*space;
 	mlx_image_t	*line;
-	mlx_texture_t	*wall_text;
+	mlx_texture_t	*wall_tex;
+	mlx_texture_t	*floor_tex;
 	int			height;
 	int			width;
 	int			dis_w;
