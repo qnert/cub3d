@@ -6,14 +6,14 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:19:00 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/12 15:49:36 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/14 19:46:42 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# define DIMENS 50
+# define DIMENS 128
 # define DGREE 0.0174533
 
 # include "../libft/libs.h"
@@ -25,12 +25,11 @@
 
 typedef struct draw_line
 {
-	int			delta_x;
-	int			delta_y;
-	int			direction_x;
-	int			direction_y;
-	int			error;
-	int			two_times_error;
+	double		tx;
+	double		ty;
+	double		dy;
+	double		fix_ra;
+	int			pixel;
 	int			begin_x;
 	int			begin_y;
 	int			end_x;
@@ -59,6 +58,11 @@ typedef struct ray
 	double	final_d;
 	double	a_tan;
 	double	n_tan;
+	double	shade;
+	double	tex_x;
+	double	tex_y;
+	double	ty_step;
+	double	ty_off;
 }	t_ray;
 
 typedef struct caster
@@ -83,20 +87,22 @@ typedef struct caster
 
 typedef struct game
 {
-	mlx_t		*mlx;
-	mlx_image_t	*player;
-	mlx_image_t	*wall;
-	mlx_image_t	*space;
-	mlx_image_t	*line;
-	int			height;
-	int			width;
-	int			dis_w;
-	int			dis_h;
-	double		pl_x;
-	double		pl_y;
-	t_cast		*caster;
-	t_draw_line	*dl;
-	t_ray		*ray;
+	mlx_t			*mlx;
+	mlx_image_t		*player;
+	mlx_image_t		*line;
+	mlx_texture_t	*wall_tex;
+	mlx_texture_t	*door_tex;
+	mlx_texture_t	*floor_tex;
+	mlx_texture_t	*ceiling_tex;
+	int				height;
+	int				width;
+	int				dis_w;
+	int				dis_h;
+	double			pl_x;
+	double			pl_y;
+	t_cast			*caster;
+	t_draw_line		*dl;
+	t_ray			*ray;
 }	t_game;
 
 typedef struct map
@@ -153,14 +159,17 @@ char		**get_map(int map_fd);
 bool		check_map(char **map);
 
 //utils
+//init.c
 int			get_texture_path(t_map *init, char *trmd_line);
 int			check_line(t_map *init, char *line);
 int			get_input(t_map *init);
 t_map		*strct_init(char *file_path);
 int			check_rgb(t_map *init, char *trmd_line);
-int			get_rgb(t_map *init, char *id, char **rgb);
-int			check_rgb_validity(t_map *init);
+
+//init_utils.c
 void		initialize_vars_to_null(t_map *init);
+int			check_rgb_validity(t_map *init);
+int			get_rgb(t_map *init, char *id, char **rgb);
 
 //parsing_utils.c
 bool		is_whitespace(char c);
@@ -168,6 +177,12 @@ int			ft_matrixlen(char **matrix);
 bool		is_component(char c);
 bool		is_valid_border(char c);
 void		ft_error_msg(char *str);
+
+//render_utils.c
+void		ft_draw_walls(t_game *g);
+void		ft_set_values_floor_ceiling(t_game *g);
+void		ft_set_values_for_rendering(t_game *g);
+void		ft_set_values_and_render_funcs(t_game *g);
 
 //texture_utils.c
 void		set_pixels_img(mlx_image_t *img, int max_x, int max_y, u_int32_t c);
@@ -178,11 +193,18 @@ int			ft_abs(int num);
 t_draw_line	*draw_line_init(void);
 t_ray		*ray_init(void);
 
+//hook_utils.c
+void		ft_move_up_down(t_game *g);
+void		ft_move_left_right(t_game *g);
+void		ft_check_door(t_game *g);
+
 //draw_line.c
 void		ft_draw_line_3D(t_game *game);
 
 //caster.c
+void		set_limit(t_game *g);
 double		ft_distance(t_game *g, double bx, double by);
+void		set_cosine_and_values(t_game *g);
 
 // horizontal.c
 void		check_horizontal_line(t_game *g);

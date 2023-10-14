@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 17:08:51 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/12 15:05:26 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/14 18:08:16 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,45 +47,45 @@ void	set_cosine_and_values(t_game *g)
 		g->caster->ca += 2 * M_PI;
 	if (g->caster->ca > 2 * M_PI)
 		g->caster->ca -= 2 * M_PI;
-	g->ray->final_d *= cos(g->caster->pa - g->ray->ray_a);
-	g->caster->line_hight = DIMENS * g->dis_h / g->ray->final_d;
-	if (g->caster->line_hight > g->dis_h)
-		g->caster->line_hight = g->dis_h;
-	g->caster->line_offset = (g->dis_h / 2) - g->caster->line_hight / 2;
-	g->dl->begin_x = g->ray->rays * (g->dis_w / g->ray->n_of_rays); // if lower then end_x equals drunk.. maybe feature ?
-	g->dl->begin_y = g->caster->line_offset;
-	g->dl->end_x = g->ray->rays * (g->dis_w / g->ray->n_of_rays);
-	g->dl->end_y = g->caster->line_hight + g->caster->line_offset;
 	g->ray->final_d *= cos(g->caster->ca);
+	g->caster->line_hight = DIMENS * g->dis_h / g->ray->final_d;
+	g->ray->ty_step = 64.0 / (double)g->caster->line_hight;
+	g->ray->ty_off = 0;
+	if (g->caster->line_hight > g->dis_h)
+	{
+		g->ray->ty_off = (g->caster->line_hight - g->dis_h) / 2.0;
+		g->caster->line_hight = g->dis_h;
+	}
+	g->caster->line_offset = (g->dis_h / 2) - g->caster->line_hight / 2;
+	g->ray->final_d *= cos(g->caster->ca);
+	ft_set_values_for_rendering(g);
 }
 
-// calls the functions above to get the horizontal ray
-// and vertical ray and displays the one that is shorter
-// for a smooth visualization
 void	raycaster(t_game *g)
 {
 	g->ray->rays = 0;
 	g->ray->ray_a = g->caster->pa - DGREE * 30;
 	set_limit(g);
 	replace_img(g);
-	while (g->ray->rays < 120)
+	while (g->ray->rays < g->ray->n_of_rays)
 	{
 		check_horizontal_line(g);
 		check_vertical_line(g);
 		if (g->ray->dist_v < g->ray->dist_h)
 		{
+			g->ray->shade = 0.5;
+			g->ray->ray_x = g->ray->ver_x;
+			g->ray->ray_y = g->ray->ver_y;
 			g->ray->final_d = g->ray->dist_v;
-			g->dl->color = 0x00F0FF;
 		}
 		if (g->ray->dist_h < g->ray->dist_v)
 		{
+			g->ray->shade = 1.0;
+			g->ray->ray_x = g->ray->hor_x;
+			g->ray->ray_y = g->ray->hor_y;
 			g->ray->final_d = g->ray->dist_h;
-			g->dl->color = 0x00FFFF;
 		}
-		set_cosine_and_values(g);
-		ft_draw_line_3D(g);
-		g->ray->ray_a += (DGREE / 2);
-		set_limit(g);
+		ft_set_values_and_render_funcs(g);
 		g->ray->rays++;
 	}
 }

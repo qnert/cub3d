@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   casting_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 19:18:20 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/12 14:27:40 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/10/14 17:42:30 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,21 +40,21 @@ t_ray	*ray_init(void)
 	ray->ver_x = 0;
 	ray->ver_y = 0;
 	ray->final_d = 0;
-	ray->n_of_rays = 120;
+	ray->n_of_rays = 480;
 	return (ray);
 }
 
 t_draw_line	*draw_line_init(void)
 {
-	t_draw_line *dl;
+	t_draw_line	*dl;
 
 	dl = malloc(sizeof(t_draw_line));
-	dl->delta_x = 0;
-	dl->delta_y = 0;
-	dl->direction_x = 0;
-	dl->direction_y = 0;
-	dl->error = 0;
-	dl->two_times_error = 0;
+	dl->tx = 0;
+	dl->ty = 0;
+	dl->dy = 0;
+	dl->fix_ra = 0;
+	dl->pixel = 0;
+	dl->color = 0;
 	dl->begin_x = 0;
 	dl->begin_y = 0;
 	dl->end_x = 0;
@@ -69,9 +69,9 @@ t_cast	*caster_init(t_map *init)
 	caster = malloc(sizeof(t_cast));
 	if (check_component('N', init->map))
 		caster->pa = 3 * M_PI_2;
-	else if(check_component('W', init->map))
+	else if (check_component('W', init->map))
 		caster->pa = 2 * M_PI_2;
-	else if(check_component('S', init->map))
+	else if (check_component('S', init->map))
 		caster->pa = M_PI_2;
 	else
 		caster->pa = 0;
