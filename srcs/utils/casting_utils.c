@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 19:18:20 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/14 16:32:34 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/14 17:42:30 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,12 @@ t_draw_line	*draw_line_init(void)
 	t_draw_line	*dl;
 
 	dl = malloc(sizeof(t_draw_line));
-	dl->delta_x = 0;
-	dl->delta_y = 0;
-	dl->direction_x = 0;
-	dl->direction_y = 0;
-	dl->error = 0;
-	dl->two_times_error = 0;
+	dl->tx = 0;
+	dl->ty = 0;
+	dl->dy = 0;
+	dl->fix_ra = 0;
+	dl->pixel = 0;
+	dl->color = 0;
 	dl->begin_x = 0;
 	dl->begin_y = 0;
 	dl->end_x = 0;

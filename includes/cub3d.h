@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:19:00 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/14 16:48:48 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/14 18:09:59 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,11 @@
 
 typedef struct draw_line
 {
-	int			delta_x;
-	int			delta_y;
-	int			direction_x;
-	int			direction_y;
-	int			error;
-	int			two_times_error;
+	double		tx;
+	double		ty;
+	double		dy;
+	double		fix_ra;
+	int			pixel;
 	int			begin_x;
 	int			begin_y;
 	int			end_x;
@@ -180,6 +179,12 @@ bool		is_component(char c);
 bool		is_valid_border(char c);
 void		ft_error_msg(char *str);
 
+//render_utils.c
+void		ft_draw_walls(t_game *g);
+void		ft_set_values_floor_ceiling(t_game *g);
+void		ft_set_values_for_rendering(t_game *g);
+void		ft_set_values_and_render_funcs(t_game *g);
+
 //texture_utils.c
 void		set_pixels_img(mlx_image_t *img, int max_x, int max_y, u_int32_t c);
 
@@ -197,7 +202,9 @@ void		ft_move_left_right(t_game *g);
 void		ft_draw_line_3D(t_game *game);
 
 //caster.c
+void		set_limit(t_game *g);
 double		ft_distance(t_game *g, double bx, double by);
+void		set_cosine_and_values(t_game *g);
 
 // horizontal.c
 void		check_horizontal_line(t_game *g);

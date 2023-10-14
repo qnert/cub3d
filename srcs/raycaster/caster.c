@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 17:08:51 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/14 02:28:24 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/14 18:08:16 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,17 +51,16 @@ void	set_cosine_and_values(t_game *g)
 	g->caster->line_hight = DIMENS * g->dis_h / g->ray->final_d;
 	g->ray->ty_step = 64.0 / (double)g->caster->line_hight;
 	g->ray->ty_off = 0;
-	if (g->caster->line_hight > g->dis_h) {
+	if (g->caster->line_hight > g->dis_h)
+	{
 		g->ray->ty_off = (g->caster->line_hight - g->dis_h) / 2.0;
 		g->caster->line_hight = g->dis_h;
 	}
 	g->caster->line_offset = (g->dis_h / 2) - g->caster->line_hight / 2;
 	g->ray->final_d *= cos(g->caster->ca);
+	ft_set_values_for_rendering(g);
 }
 
-// calls the functions above to get the horizontal ray
-// and vertical ray and displays the one that is shorter
-// for a smooth visualization
 void	raycaster(t_game *g)
 {
 	g->ray->rays = 0;
@@ -86,60 +85,7 @@ void	raycaster(t_game *g)
 			g->ray->ray_y = g->ray->hor_y;
 			g->ray->final_d = g->ray->dist_h;
 		}
-		set_cosine_and_values(g);
-		double	tx;
-		double	ty = g->ray->ty_off * g->ray->ty_step;
-		g->dl->begin_x = g->ray->rays * (g->dis_w / g->ray->n_of_rays);
-		if (g->ray->shade == 1)
-		{
-			tx = (int)(g->ray->ray_x / 2.0) % 64;
-			if (g->ray->ray_a < M_PI)
-				tx = 63 - tx;
-		}
-		else
-		{
-			tx = (int)(g->ray->ray_y / 2.0) % 64;
-			if (g->ray->ray_a > M_PI_2 && g->ray->ray_a < (3 * M_PI_2))
-				tx = 63 - tx;
-		}
-		for (int y = 0; y < g->caster->line_hight; y++) {
-			int pixel = ((int)ty * g->wall_tex->width + (int)tx) * g->wall_tex->bytes_per_pixel;
-			int color = (int)(g->wall_tex->pixels[pixel]) << 24
-			| (int)(g->wall_tex->pixels[pixel + 1]) << 16
-			| (int)(g->wall_tex->pixels[pixel + 2]) << 8
-			| (int)(g->wall_tex->pixels[pixel + 3]);
-			for (int i = 0; i < 4; i++)
-				mlx_put_pixel(g->line, i + g->dl->begin_x, y + g->caster->line_offset, color);
-			ty += g->ray->ty_step;
-		}
-		for (int y = g->caster->line_hight + g->caster->line_offset; y < g->dis_h; y++)
-		{
-			float	dy = y - (g->dis_h / 2.0);
-			float	fix_ra = g->caster->ca;
-			if (fix_ra < 0)
-				fix_ra += 2 * M_PI;
-			if (fix_ra > 2 * M_PI)
-				fix_ra -= 2 * M_PI;
-			fix_ra = cos(fix_ra);
-			tx = g->pl_x / 2 + cos(g->ray->ray_a) * 158 * 3 * g->floor_tex->width / dy / fix_ra;
-			ty = g->pl_y / 2 + sin(g->ray->ray_a) * 158 * 3 * g->floor_tex->width/dy/fix_ra;
-			int pixel = (((int)ty & (g->floor_tex ->width/ 2 - 1)) * g->floor_tex->width + ((int)tx & (g->floor_tex->width / 2 - 1))) * g->floor_tex->bytes_per_pixel;
-			int color = (int)(g->floor_tex->pixels[pixel]) << 24
-			| (int)(g->floor_tex->pixels[pixel + 1]) << 16
-			| (int)(g->floor_tex->pixels[pixel + 2]) << 8
-			| (int)(g->floor_tex->pixels[pixel + 3]);
-			for (int i = 0; i < 8; i++)
-				mlx_put_pixel(g->line, i + g->dl->begin_x, y, color);
-			pixel = (((int)ty & (g->ceiling_tex ->width/ 2 - 1)) * g->ceiling_tex->width + ((int)tx & (g->ceiling_tex->width / 2 - 1))) * g->floor_tex->bytes_per_pixel;
-			color = (int)(g->ceiling_tex->pixels[pixel]) << 24
-			| (int)(g->ceiling_tex->pixels[pixel + 1]) << 16
-			| (int)(g->ceiling_tex->pixels[pixel + 2]) << 8
-			| (int)(g->ceiling_tex->pixels[pixel + 3]);
-			for (int i = 0; i < 8; i++)
-				mlx_put_pixel(g->line, i + g->dl->begin_x, g->dis_h - y, color);
-		}
-		g->ray->ray_a += DGREE / 8;
-		set_limit(g);
+		ft_set_values_and_render_funcs(g);
 		g->ray->rays++;
 	}
 }
