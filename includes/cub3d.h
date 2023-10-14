@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:19:00 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/14 18:35:28 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/14 19:46:42 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,6 +196,7 @@ t_ray		*ray_init(void);
 //hook_utils.c
 void		ft_move_up_down(t_game *g);
 void		ft_move_left_right(t_game *g);
+void		ft_check_door(t_game *g);
 
 //draw_line.c
 void		ft_draw_line_3D(t_game *game);

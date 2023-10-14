@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 13:48:12 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/14 16:47:25 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/14 19:44:16 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,6 @@ void	ft_hooks(void *param)
 	ft_rotate_left(game);
 	ft_rotate_right(game);
 	ft_move(game);
+	ft_check_door(game);
 	raycaster(game);
 }
