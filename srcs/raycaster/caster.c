@@ -6,7 +6,7 @@
 /*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 17:08:51 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/13 20:52:45 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/10/14 02:34:16 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ void	set_cosine_and_values(t_game *g)
 		g->caster->line_hight = g->dis_h;
 	}
 	g->caster->line_offset = (g->dis_h / 2) - g->caster->line_hight / 2;
-	g->ray->final_d *= cos(g->caster->ca);
 }
 
 // calls the functions above to get the horizontal ray
@@ -74,7 +73,7 @@ void	raycaster(t_game *g)
 		check_vertical_line(g);
 		if (g->ray->dist_v < g->ray->dist_h)
 		{
-			g->ray->shade = 0.5;
+			g->ray->shade = 0.8;
 			g->ray->ray_x = g->ray->ver_x;
 			g->ray->ray_y = g->ray->ver_y;
 			g->ray->final_d = g->ray->dist_v;
@@ -87,20 +86,58 @@ void	raycaster(t_game *g)
 			g->ray->final_d = g->ray->dist_h;
 		}
 		set_cosine_and_values(g);
-		double	tx = (int)(g->ray->ray_x / 2.0) % 64;
+		double	tx;
+		if (g->ray->shade == 1)
+		{
+			tx = (int)(g->ray->ray_x / 2.0) % g->wall_tex->width;
+			if (g->ray->ray_a < M_PI)
+				tx = (g->wall_tex->width - 1) - tx;
+		}
+		else
+		{
+			tx = (int)(g->ray->ray_y / 2.0) % g->wall_tex->width;
+			if (g->ray->ray_a > M_PI_2 && g->ray->ray_a < 3 * M_PI_2)
+				tx = (g->wall_tex->width - 1) - tx;
+		}
 		double	ty = g->ray->ty_off * g->ray->ty_step;
 		g->dl->begin_x = g->ray->rays * (g->dis_w / g->ray->n_of_rays);
 		for (int y = 0; y < g->caster->line_hight; y++) {
-			int pixel = ((int)ty * g->wall_text->width + (int)tx) * g->wall_text->bytes_per_pixel;
-			int color = (int)g->wall_text->pixels[pixel] << 24
-			| (int)g->wall_text->pixels[pixel + 1] << 16
-			| (int)g->wall_text->pixels[pixel + 2] << 8
-			| (int)g->wall_text->pixels[pixel + 3];
-			for (int i = 0; i < 12; i++)
+			int pixel = ((int)ty * g->wall_tex->width + (int)tx) * g->wall_tex->bytes_per_pixel;
+			int color = (int)(g->wall_tex->pixels[pixel] * g->ray->shade) << 24
+			| (int)(g->wall_tex->pixels[pixel + 1] * g->ray->shade) << 16
+			| (int)(g->wall_tex->pixels[pixel + 2] * g->ray->shade) << 8
+			| (int)(g->wall_tex->pixels[pixel + 3] * g->ray->shade);
+			for (int i = 0; i < 3; i++)
 				mlx_put_pixel(g->line, i + g->dl->begin_x, y + g->caster->line_offset, color);
 			ty += g->ray->ty_step;
 		}
-		g->ray->ray_a += (DGREE / 2);
+		g->dl->begin_x = g->ray->rays * (g->dis_w / g->ray->n_of_rays);
+		for (int y = g->caster->line_offset + g->caster->line_hight; y < g->dis_h; y++) {
+			double dy = y - (g->dis_h / 2.0);
+			double ra_fix = g->caster->ca;
+			if (ra_fix < 0)
+				ra_fix += 2 * M_PI;
+			if (ra_fix > 2 * M_PI)
+				ra_fix -= 2 * M_PI;
+			ra_fix = cos(ra_fix);
+			tx = g->pl_x / 2 + cos(g->ray->ray_a) * 158 * 3 * g->floor_tex->width / dy / ra_fix;
+			ty = g->pl_y / 2 + sin(g->ray->ray_a) * 158 * 3 * g->floor_tex->width / dy / ra_fix;
+			int	pixel = (((int)ty & (g->floor_tex->width - 1)) * g->floor_tex->width + ((int)tx & (g->floor_tex->width - 1))) * g->floor_tex->bytes_per_pixel;
+			int color = (int)g->floor_tex->pixels[pixel] << 24
+			| (int)g->floor_tex->pixels[pixel + 1] << 16
+			| (int)g->floor_tex->pixels[pixel + 2] << 8
+			| (int)g->floor_tex->pixels[pixel + 3];
+			for (int i = 0; i < 3; i++)
+				mlx_put_pixel(g->line, i + g->dl->begin_x, y, color);
+			pixel = (((int)ty & (g->ceiling_tex->width - 1)) * g->ceiling_tex->width + ((int)tx & (g->floor_tex->width - 1))) * g->floor_tex->bytes_per_pixel;
+			color = (int)g->ceiling_tex->pixels[pixel] << 24
+			| (int)g->ceiling_tex->pixels[pixel + 1] << 16
+			| (int)g->ceiling_tex->pixels[pixel + 2] << 8
+			| (int)g->ceiling_tex->pixels[pixel + 3];
+			for (int i = 0; i < 3; i++)
+				mlx_put_pixel(g->line, i + g->dl->begin_x, g->dis_h - y, color);
+		}
+		g->ray->ray_a += (DGREE / 8);
 		set_limit(g);
 		g->ray->rays++;
 	}

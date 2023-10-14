@@ -6,14 +6,14 @@
 /*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:19:00 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/13 15:18:22 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/10/14 02:30:26 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# define DIMENS 50
+# define DIMENS 128
 # define DGREE 0.0174533
 
 # include "../libft/libs.h"
@@ -93,7 +93,9 @@ typedef struct game
 	mlx_image_t	*wall;
 	mlx_image_t	*space;
 	mlx_image_t	*line;
-	mlx_texture_t	*wall_text;
+	mlx_texture_t	*wall_tex;
+	mlx_texture_t	*floor_tex;
+	mlx_texture_t	*ceiling_tex;
 	int			height;
 	int			width;
 	int			dis_w;

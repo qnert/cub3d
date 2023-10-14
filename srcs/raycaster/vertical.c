@@ -6,7 +6,7 @@
 /*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 21:27:23 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/12 14:44:47 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/10/13 21:08:57 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ void	check_vertical_wall(t_game *g)
 {
 	while (g->ray->depoffield < 50)
 	{
-		g->caster->map_x = (int)g->ray->ray_x / 50;
-		g->caster->map_y = (int)g->ray->ray_y / 50;
+		g->caster->map_x = (int)g->ray->ray_x / DIMENS;
+		g->caster->map_y = (int)g->ray->ray_y / DIMENS;
 		if (g->caster->map_x < g->width && g->caster->map_y < g->height
 			&& g->caster->map_x >= 0 && g->caster->map_y >= 0
 			&& g->caster->map[g->caster->map_y][g->caster->map_x] == '1')
@@ -54,18 +54,18 @@ void	check_vertical_line(t_game *g)
 	assign_variables_vertical(g);
 	if (g->ray->ray_a > M_PI_2 && g->ray->ray_a < 3 * M_PI_2)
 	{
-		g->ray->ray_x = (((int)g->ray->player_x / 50) * 50) - 0.0001;
+		g->ray->ray_x = (((int)g->ray->player_x / DIMENS) * DIMENS) - 0.0001;
 		g->ray->ray_y =
 			(g->ray->player_x - g->ray->ray_x) * g->ray->n_tan + g->ray->player_y;
-		g->ray->x_o = -50;
+		g->ray->x_o = -DIMENS;
 		g->ray->y_o = -g->ray->x_o * g->ray->n_tan;
 	}
 	if (g->ray->ray_a < M_PI_2 || g->ray->ray_a > 3 * M_PI_2)
 	{
-		g->ray->ray_x = (((int)g->ray->player_x / 50) * 50) + 50;
+		g->ray->ray_x = (((int)g->ray->player_x / DIMENS) * DIMENS) + DIMENS;
 		g->ray->ray_y =
 			(g->ray->player_x - g->ray->ray_x) * g->ray->n_tan + g->ray->player_y;
-		g->ray->x_o = 50;
+		g->ray->x_o = DIMENS;
 		g->ray->y_o = -g->ray->x_o * g->ray->n_tan;
 	}
 	if (g->ray->ray_a == 0 || g->ray->ray_a == M_PI)
