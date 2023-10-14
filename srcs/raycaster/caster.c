@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 17:08:51 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/14 01:16:26 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/14 02:08:13 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,19 +112,18 @@ void	raycaster(t_game *g)
 				mlx_put_pixel(g->line, i + g->dl->begin_x, y + g->caster->line_offset, color);
 			ty += g->ray->ty_step;
 		}
-		g->dl->begin_x = g->ray->rays * (g->dis_w / g->ray->n_of_rays);
 		for (int y = g->caster->line_hight + g->caster->line_offset; y < g->dis_h; y++)
 		{
-			float	dy = y - (g->dis_h / 2.0) / 2.0;
-			float	fix_ra = g->caster->pa - g->ray->ray_a;
+			float	dy = y - (g->dis_h / 2.0);
+			float	fix_ra = g->caster->ca;
 			if (fix_ra < 0)
 				fix_ra += 2 * M_PI;
 			if (fix_ra > 2 * M_PI)
 				fix_ra -= 2 * M_PI;
 			fix_ra = cos(fix_ra);
-			int	tx_2 = g->pl_x/2 + cos(g->ray->ray_a)*256*64/dy/fix_ra;
-			int ty_2 = g->pl_y/2 - sin(g->ray->ray_a)*256*64/dy/fix_ra;
-			int pixel = ((ty_2 & 127) * 128 + (tx_2 & 127)) * g->floor_tex->bytes_per_pixel;
+			tx = g->pl_x / 2 + cos(g->ray->ray_a) * 158 * 3 * g->floor_tex->width / dy / fix_ra;
+			ty = g->pl_y / 2 - sin(g->ray->ray_a) * 158 * 3 * g->floor_tex->width/dy/fix_ra;
+			int pixel = (((int)ty & (g->floor_tex ->width/ 2 - 1)) * g->floor_tex->width + ((int)tx & (g->floor_tex->width / 2 - 1))) * g->floor_tex->bytes_per_pixel;
 			int color = (int)(g->floor_tex->pixels[pixel]) << 24
 			| (int)(g->floor_tex->pixels[pixel + 1]) << 16
 			| (int)(g->floor_tex->pixels[pixel + 2]) << 8
