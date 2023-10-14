@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 14:38:02 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/14 02:08:30 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/14 02:23:49 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,8 @@ void	ft_fill_map(t_game *game, char **map)
 	mlx_image_to_window(game->mlx, ceiling, 0, 0);
 	set_pixels_img(ceiling, game->dis_w, game->dis_h / 2, 0xFFFFFFFF);
 	game->wall_tex = mlx_load_png("./textures/trump.png");
-	game->floor_tex = mlx_load_png("./textures/metal.png");
+	game->floor_tex = mlx_load_png("./textures/mossy.png");
+	game->ceiling_tex = mlx_load_png("./textures/clouds.png");
 	game->wall = mlx_new_image(game->mlx, game->dis_w, game->dis_h);
 	mlx_image_to_window(game->mlx, game->wall, 0, 0);
 // 	for (int y = 0; y < 64 * 8; y++)

@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 17:08:51 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/14 02:08:13 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/14 02:28:24 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ void	raycaster(t_game *g)
 				fix_ra -= 2 * M_PI;
 			fix_ra = cos(fix_ra);
 			tx = g->pl_x / 2 + cos(g->ray->ray_a) * 158 * 3 * g->floor_tex->width / dy / fix_ra;
-			ty = g->pl_y / 2 - sin(g->ray->ray_a) * 158 * 3 * g->floor_tex->width/dy/fix_ra;
+			ty = g->pl_y / 2 + sin(g->ray->ray_a) * 158 * 3 * g->floor_tex->width/dy/fix_ra;
 			int pixel = (((int)ty & (g->floor_tex ->width/ 2 - 1)) * g->floor_tex->width + ((int)tx & (g->floor_tex->width / 2 - 1))) * g->floor_tex->bytes_per_pixel;
 			int color = (int)(g->floor_tex->pixels[pixel]) << 24
 			| (int)(g->floor_tex->pixels[pixel + 1]) << 16
@@ -130,6 +130,13 @@ void	raycaster(t_game *g)
 			| (int)(g->floor_tex->pixels[pixel + 3]);
 			for (int i = 0; i < 8; i++)
 				mlx_put_pixel(g->line, i + g->dl->begin_x, y, color);
+			pixel = (((int)ty & (g->ceiling_tex ->width/ 2 - 1)) * g->ceiling_tex->width + ((int)tx & (g->ceiling_tex->width / 2 - 1))) * g->floor_tex->bytes_per_pixel;
+			color = (int)(g->ceiling_tex->pixels[pixel]) << 24
+			| (int)(g->ceiling_tex->pixels[pixel + 1]) << 16
+			| (int)(g->ceiling_tex->pixels[pixel + 2]) << 8
+			| (int)(g->ceiling_tex->pixels[pixel + 3]);
+			for (int i = 0; i < 8; i++)
+				mlx_put_pixel(g->line, i + g->dl->begin_x, g->dis_h - y, color);
 		}
 		g->ray->ray_a += DGREE / 8;
 		set_limit(g);
