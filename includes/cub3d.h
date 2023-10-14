@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:19:00 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/14 16:29:47 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/14 16:41:30 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,14 +161,17 @@ char		**get_map(int map_fd);
 bool		check_map(char **map);
 
 //utils
+//init.c
 int			get_texture_path(t_map *init, char *trmd_line);
 int			check_line(t_map *init, char *line);
 int			get_input(t_map *init);
 t_map		*strct_init(char *file_path);
 int			check_rgb(t_map *init, char *trmd_line);
-int			get_rgb(t_map *init, char *id, char **rgb);
-int			check_rgb_validity(t_map *init);
+
+//init_utils.c
 void		initialize_vars_to_null(t_map *init);
+int			check_rgb_validity(t_map *init);
+int			get_rgb(t_map *init, char *id, char **rgb);
 
 //parsing_utils.c
 bool		is_whitespace(char c);
