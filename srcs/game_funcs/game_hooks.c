@@ -5,12 +5,34 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by skunert           #+#    #+#             */
-/*   Updated: 2023/10/13 23:13:14 by njantsch         ###   ########.fr       */
+/*   Created: 2023/10/06 13:48:12 by skunert           #+#    #+#             */
+/*   Updated: 2023/10/15 00:40:39 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+
+void	draw_sky(t_game *g)
+{
+	for (int y = 0; y < 40; y++) {
+		for (int x = 0; x < 120; x++)
+		{
+			int x_off = rad_to_degree(g->caster->pa) * 2 + x;
+			if (x_off < 0)
+				x_off += 120;
+			x_off = x_off % 120;
+			int pixel = (y * 120 + x_off) * g->ceiling_tex->bytes_per_pixel;
+			int color = (int)g->ceiling_tex->pixels[pixel] << 24
+			| (int)g->ceiling_tex->pixels[pixel + 1] << 16
+			| (int)g->ceiling_tex->pixels[pixel + 2] << 8
+			| (int)g->ceiling_tex->pixels[pixel + 3];
+			for (int j = 0; j < 12; j++) {
+				for (int i = 0; i < 12; i++)
+					mlx_put_pixel(g->line, i+x*12, j+y*12, color);
+			}
+		}
+	}
+}
 
 void	ft_rotate_left(t_game *game)
 {
@@ -61,34 +83,8 @@ void	ft_move(t_game *game)
 	ft_wall_offset_set(game);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(game->mlx);
-	if (mlx_is_key_down(game->mlx, MLX_KEY_W))
-	{
-		if (game->caster->map[(int)game->pl_y / DIMENS][(int)(game->pl_x + game->caster->x_off) / DIMENS] != '1')
-			game->pl_x += cos(game->caster->pa) * 6;
-		if (game->caster->map[(int)(game->pl_y + game->caster->y_off) / DIMENS][(int)game->pl_x / DIMENS] != '1')
-			game->pl_y += sin(game->caster->pa) * 6;
-	}
-	else if (mlx_is_key_down(game->mlx, MLX_KEY_S))
-	{
-		if (game->caster->map[(int)game->pl_y / DIMENS][(int)(game->pl_x - game->caster->x_off) / DIMENS] != '1')
-			game->pl_x -= cos(game->caster->pa) * 6;
-		if (game->caster->map[(int)(game->pl_y - game->caster->y_off) / DIMENS][(int)game->pl_x / DIMENS] != '1')
-			game->pl_y -= sin(game->caster->pa) * 6;
-	}
-	else if (mlx_is_key_down(game->mlx, MLX_KEY_D))
-	{
-		if (game->caster->map[(int)game->pl_y / DIMENS][(int)(game->pl_x + game->caster->x_off_strafe) / DIMENS] != '1')
-			game->pl_x += cos(game->caster->pa + M_PI_2) * 6;
-		if (game->caster->map[(int)(game->pl_y + game->caster->y_off_strafe) / DIMENS][(int)game->pl_x / DIMENS] != '1')
-			game->pl_y += sin(game->caster->pa + M_PI_2) * 6;
-	}
-	else if (mlx_is_key_down(game->mlx, MLX_KEY_A))
-	{
-		if (game->caster->map[(int)game->pl_y / DIMENS][(int)(game->pl_x - game->caster->x_off_strafe) / DIMENS] != '1')
-			game->pl_x -= cos(game->caster->pa + M_PI_2) * 6;
-		if (game->caster->map[(int)(game->pl_y - game->caster->y_off_strafe) / DIMENS][(int)game->pl_x / DIMENS] != '1')
-			game->pl_y -= sin(game->caster->pa + M_PI_2) * 6;
-	}
+	ft_move_up_down(game);
+	ft_move_left_right(game);
 }
 
 void	ft_hooks(void *param)
@@ -99,5 +95,6 @@ void	ft_hooks(void *param)
 	ft_rotate_left(game);
 	ft_rotate_right(game);
 	ft_move(game);
+	ft_check_door(game);
 	raycaster(game);
 }

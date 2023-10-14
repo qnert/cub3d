@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init->c                                             :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 15:24:52 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/03 21:32:30 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/10/14 16:42:27 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,15 +69,16 @@ int	check_line(t_map *init, char *line)
 	nl_check = 0;
 	if (line[0] == '\n')
 		nl_check = 1;
-	if (nl_check == 0 &&
-		(ft_strncmp(line, "NO ", 3) == 0 || ft_strncmp(line, "SO ", 3) == 0
-		|| ft_strncmp(line, "WE ", 3) == 0 || ft_strncmp(line, "EA ", 3) == 0))
+	if (nl_check == 0 && (ft_strncmp(line, "NO ", 3) == 0
+			|| ft_strncmp(line, "SO ", 3) == 0
+			|| ft_strncmp(line, "WE ", 3) == 0
+			|| ft_strncmp(line, "EA ", 3) == 0))
 	{
 		if (get_texture_path(init, line) == 1)
 			return (1);
 	}
 	else if (nl_check == 0 && (ft_strncmp(line, "F ", 2) == 0
-		|| ft_strncmp(line, "C ", 2) == 0))
+			|| ft_strncmp(line, "C ", 2) == 0))
 	{
 		if (check_rgb(init, line) == 1)
 			return (1);
@@ -140,62 +141,4 @@ int	check_rgb(t_map *init, char *trmd_line)
 		return (free_arr(rgb), 1);
 	free_arr(rgb);
 	return (0);
-}
-
-int	get_rgb(t_map *init, char *id, char **rgb)
-{
-	int	i;
-	int	j;
-	int	k;
-
-	i = 0;
-	j = 0;
-	k = 0;
-	while (rgb[i])
-	{
-		if (ft_atoi(rgb[i]) >= 0 && ft_atoi(rgb[i]) <= 255)
-		{
-			if ((id[0] == 'F' && init->floor_rgb[j] != -1)
-				|| (id[0] == 'C' && init->ceiling_rgb[k] != -1))
-				return (printf("Error\nduplicate rgb identifier\n"), 1);
-			if (id[0] == 'F' && init->floor_rgb[j] == -1)
-				init->floor_rgb[j++] = ft_atoi(rgb[i]);
-			else if (id[0] == 'C' && init->ceiling_rgb[k] == -1)
-				init->ceiling_rgb[k++] = ft_atoi(rgb[i]);
-		}
-		else
-			return (printf("Error\nnot a valid rgb range\n"), 1);
-		i++;
-	}
-	return (0);
-}
-
-int	check_rgb_validity(t_map *init)
-{
-	int	i;
-
-	i = 0;
-	while (i < 3)
-	{
-		if (init->floor_rgb[i] == -1 || init->ceiling_rgb[i] == -1)
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
-void	initialize_vars_to_null(t_map *init)
-{
-	int	i;
-
-	i = -1;
-	init->texture_path_no = NULL;
-	init->texture_path_so = NULL;
-	init->texture_path_we = NULL;
-	init->texture_path_ea = NULL;
-	while (++i < 3)
-	{
-		init->floor_rgb[i] = -1;
-		init->ceiling_rgb[i] = -1;
-	}
 }

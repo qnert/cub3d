@@ -6,7 +6,7 @@
 /*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 21:26:51 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/13 21:08:30 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/10/14 22:38:14 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,13 @@ void	check_horizontal_wall(t_game *g)
 		g->caster->map_y = (int)g->ray->ray_y / DIMENS;
 		if (g->caster->map_x < g->width && g->caster->map_y < g->height
 			&& g->caster->map_x >= 0 && g->caster->map_y >= 0
-			&& g->caster->map[g->caster->map_y][g->caster->map_x] == '1')
+			&& (g->caster->map[g->caster->map_y][g->caster->map_x] == '1'
+			|| g->caster->map[g->caster->map_y][g->caster->map_x] == 'D'))
 		{
 			g->ray->hor_x = g->ray->ray_x;
 			g->ray->hor_y = g->ray->ray_y;
 			g->ray->dist_h = ft_distance(g, g->ray->hor_x, g->ray->hor_y);
-			g->ray->depoffield = 50;
+			g->ray->depoffield = DIMENS;
 		}
 		else
 		{
@@ -55,16 +56,16 @@ void	check_horizontal_line(t_game *g)
 	if (g->ray->ray_a > M_PI)
 	{
 		g->ray->ray_y = (((int)g->ray->player_y / DIMENS) * DIMENS) - 0.0001;
-		g->ray->ray_x =
-			(g->ray->player_y - g->ray->ray_y) * g->ray->a_tan + g->ray->player_x;
+		g->ray->ray_x = (g->ray->player_y - g->ray->ray_y)
+			* g->ray->a_tan + g->ray->player_x;
 		g->ray->y_o = -DIMENS;
 		g->ray->x_o = -g->ray->y_o * g->ray->a_tan;
 	}
 	if (g->ray->ray_a < M_PI)
 	{
 		g->ray->ray_y = (((int)g->ray->player_y / DIMENS) * DIMENS) + DIMENS;
-		g->ray->ray_x =
-			(g->ray->player_y - g->ray->ray_y) * g->ray->a_tan + g->ray->player_x;
+		g->ray->ray_x = (g->ray->player_y - g->ray->ray_y)
+			* g->ray->a_tan + g->ray->player_x;
 		g->ray->y_o = DIMENS;
 		g->ray->x_o = -g->ray->y_o * g->ray->a_tan;
 	}
@@ -72,7 +73,7 @@ void	check_horizontal_line(t_game *g)
 	{
 		g->ray->ray_x = g->ray->player_x;
 		g->ray->ray_y = g->ray->player_y;
-		g->ray->depoffield = 50;
+		g->ray->depoffield = DIMENS;
 	}
 	check_horizontal_wall(g);
 }
