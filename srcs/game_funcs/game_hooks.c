@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 13:48:12 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/13 21:19:16 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/14 16:47:25 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,34 +61,8 @@ void	ft_move(t_game *game)
 	ft_wall_offset_set(game);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(game->mlx);
-	if (mlx_is_key_down(game->mlx, MLX_KEY_W))
-	{
-		if (game->caster->map[(int)game->pl_y / DIMENS][(int)(game->pl_x + game->caster->x_off) / DIMENS] != '1')
-			game->pl_x += cos(game->caster->pa) * 6;
-		if (game->caster->map[(int)(game->pl_y + game->caster->y_off) / DIMENS][(int)game->pl_x / DIMENS] != '1')
-			game->pl_y += sin(game->caster->pa) * 6;
-	}
-	else if (mlx_is_key_down(game->mlx, MLX_KEY_S))
-	{
-		if (game->caster->map[(int)game->pl_y / DIMENS][(int)(game->pl_x - game->caster->x_off) / DIMENS] != '1')
-			game->pl_x -= cos(game->caster->pa) * 6;
-		if (game->caster->map[(int)(game->pl_y - game->caster->y_off) / DIMENS][(int)game->pl_x / DIMENS] != '1')
-			game->pl_y -= sin(game->caster->pa) * 6;
-	}
-	else if (mlx_is_key_down(game->mlx, MLX_KEY_D))
-	{
-		if (game->caster->map[(int)game->pl_y / DIMENS][(int)(game->pl_x + game->caster->x_off_strafe) / DIMENS] != '1')
-			game->pl_x += cos(game->caster->pa + M_PI_2) * 6;
-		if (game->caster->map[(int)(game->pl_y + game->caster->y_off_strafe) / DIMENS][(int)game->pl_x / DIMENS] != '1')
-			game->pl_y += sin(game->caster->pa + M_PI_2) * 6;
-	}
-	else if (mlx_is_key_down(game->mlx, MLX_KEY_A))
-	{
-		if (game->caster->map[(int)game->pl_y / DIMENS][(int)(game->pl_x - game->caster->x_off_strafe) / DIMENS] != '1')
-			game->pl_x -= cos(game->caster->pa + M_PI_2) * 6;
-		if (game->caster->map[(int)(game->pl_y - game->caster->y_off_strafe) / DIMENS][(int)game->pl_x / DIMENS] != '1')
-			game->pl_y -= sin(game->caster->pa + M_PI_2) * 6;
-	}
+	ft_move_up_down(game);
+	ft_move_left_right(game);
 }
 
 void	ft_hooks(void *param)

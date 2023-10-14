@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:19:00 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/14 16:41:30 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/14 16:48:48 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,6 +188,10 @@ t_cast		*caster_init(t_map *init);
 int			ft_abs(int num);
 t_draw_line	*draw_line_init(void);
 t_ray		*ray_init(void);
+
+//hook_utils.c
+void		ft_move_up_down(t_game *g);
+void		ft_move_left_right(t_game *g);
 
 //draw_line.c
 void		ft_draw_line_3D(t_game *game);
