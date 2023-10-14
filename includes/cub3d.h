@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:19:00 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/14 02:24:30 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/14 16:29:47 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,23 +88,23 @@ typedef struct caster
 
 typedef struct game
 {
-	mlx_t		*mlx;
-	mlx_image_t	*player;
-	mlx_image_t	*wall;
-	mlx_image_t	*space;
-	mlx_image_t	*line;
+	mlx_t			*mlx;
+	mlx_image_t		*player;
+	mlx_image_t		*wall;
+	mlx_image_t		*space;
+	mlx_image_t		*line;
 	mlx_texture_t	*wall_tex;
 	mlx_texture_t	*floor_tex;
 	mlx_texture_t	*ceiling_tex;
-	int			height;
-	int			width;
-	int			dis_w;
-	int			dis_h;
-	double		pl_x;
-	double		pl_y;
-	t_cast		*caster;
-	t_draw_line	*dl;
-	t_ray		*ray;
+	int				height;
+	int				width;
+	int				dis_w;
+	int				dis_h;
+	double			pl_x;
+	double			pl_y;
+	t_cast			*caster;
+	t_draw_line		*dl;
+	t_ray			*ray;
 }	t_game;
 
 typedef struct map

@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 21:26:51 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/13 21:08:14 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/14 16:31:45 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,16 +55,16 @@ void	check_horizontal_line(t_game *g)
 	if (g->ray->ray_a > M_PI)
 	{
 		g->ray->ray_y = (((int)g->ray->player_y / DIMENS) * DIMENS) - 0.0001;
-		g->ray->ray_x =
-			(g->ray->player_y - g->ray->ray_y) * g->ray->a_tan + g->ray->player_x;
+		g->ray->ray_x = (g->ray->player_y - g->ray->ray_y)
+			* g->ray->a_tan + g->ray->player_x;
 		g->ray->y_o = -DIMENS;
 		g->ray->x_o = -g->ray->y_o * g->ray->a_tan;
 	}
 	if (g->ray->ray_a < M_PI)
 	{
 		g->ray->ray_y = (((int)g->ray->player_y / DIMENS) * DIMENS) + DIMENS;
-		g->ray->ray_x =
-			(g->ray->player_y - g->ray->ray_y) * g->ray->a_tan + g->ray->player_x;
+		g->ray->ray_x = (g->ray->player_y - g->ray->ray_y)
+			* g->ray->a_tan + g->ray->player_x;
 		g->ray->y_o = DIMENS;
 		g->ray->x_o = -g->ray->y_o * g->ray->a_tan;
 	}

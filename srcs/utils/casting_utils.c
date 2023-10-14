@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 19:18:20 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/13 21:22:59 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/14 16:32:34 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_ray	*ray_init(void)
 
 t_draw_line	*draw_line_init(void)
 {
-	t_draw_line *dl;
+	t_draw_line	*dl;
 
 	dl = malloc(sizeof(t_draw_line));
 	dl->delta_x = 0;
@@ -69,9 +69,9 @@ t_cast	*caster_init(t_map *init)
 	caster = malloc(sizeof(t_cast));
 	if (check_component('N', init->map))
 		caster->pa = 3 * M_PI_2;
-	else if(check_component('W', init->map))
+	else if (check_component('W', init->map))
 		caster->pa = 2 * M_PI_2;
-	else if(check_component('S', init->map))
+	else if (check_component('S', init->map))
 		caster->pa = M_PI_2;
 	else
 		caster->pa = 0;

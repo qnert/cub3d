@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 21:27:23 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/13 21:08:09 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/14 16:32:06 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,16 +55,16 @@ void	check_vertical_line(t_game *g)
 	if (g->ray->ray_a > M_PI_2 && g->ray->ray_a < 3 * M_PI_2)
 	{
 		g->ray->ray_x = (((int)g->ray->player_x / DIMENS) * DIMENS) - 0.0001;
-		g->ray->ray_y =
-			(g->ray->player_x - g->ray->ray_x) * g->ray->n_tan + g->ray->player_y;
+		g->ray->ray_y = (g->ray->player_x - g->ray->ray_x)
+			* g->ray->n_tan + g->ray->player_y;
 		g->ray->x_o = -DIMENS;
 		g->ray->y_o = -g->ray->x_o * g->ray->n_tan;
 	}
 	if (g->ray->ray_a < M_PI_2 || g->ray->ray_a > 3 * M_PI_2)
 	{
 		g->ray->ray_x = (((int)g->ray->player_x / DIMENS) * DIMENS) + DIMENS;
-		g->ray->ray_y =
-			(g->ray->player_x - g->ray->ray_x) * g->ray->n_tan + g->ray->player_y;
+		g->ray->ray_y = (g->ray->player_x - g->ray->ray_x)
+			* g->ray->n_tan + g->ray->player_y;
 		g->ray->x_o = DIMENS;
 		g->ray->y_o = -g->ray->x_o * g->ray->n_tan;
 	}
