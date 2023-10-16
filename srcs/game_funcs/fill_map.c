@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 14:38:02 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/14 18:35:15 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/16 10:50:41 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,6 @@ void	ft_fill_map(t_game *game, char **map)
 	ft_fill_player(game, map);
 	game->wall_tex = mlx_load_png("./textures/window.png");
 	game->floor_tex = mlx_load_png("./textures/metal.png");
-	game->ceiling_tex = mlx_load_png("./textures/clouds.png");
+	game->ceiling_tex = mlx_load_png("./textures/night_sky2.png");
 	game->door_tex = mlx_load_png("./textures/door.png");
 }

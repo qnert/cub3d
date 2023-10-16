@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_hooks.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 13:48:12 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/14 19:44:16 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/16 12:09:01 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ void	ft_rotate_right(t_game *game)
 
 void	ft_wall_offset_set(t_game *g)
 {
-	g->caster->pd_x = cos(g->caster->pa) * 3;
-	g->caster->pd_y = sin(g->caster->pa) * 3;
+	g->caster->pd_x = cos(g->caster->pa) * 6;
+	g->caster->pd_y = sin(g->caster->pa) * 6;
 	if (g->caster->pd_x < 0)
 		g->caster->x_off = -20;
 	else
@@ -44,8 +44,8 @@ void	ft_wall_offset_set(t_game *g)
 		g->caster->y_off = -20;
 	else
 		g->caster->y_off = 20;
-	g->caster->pd_x_strafe = cos(g->caster->pa + M_PI_2) * 3;
-	g->caster->pd_y_strafe = sin(g->caster->pa + M_PI_2) * 3;
+	g->caster->pd_x_strafe = cos(g->caster->pa + M_PI_2) * 6;
+	g->caster->pd_y_strafe = sin(g->caster->pa + M_PI_2) * 6;
 	if (g->caster->pd_x_strafe < 0)
 		g->caster->x_off_strafe = -20;
 	else

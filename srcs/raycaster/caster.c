@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   caster.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 17:08:51 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/14 18:08:16 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/14 22:39:41 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,14 @@ void	raycaster(t_game *g)
 	g->ray->ray_a = g->caster->pa - DGREE * 30;
 	set_limit(g);
 	replace_img(g);
+	draw_sky(g);
 	while (g->ray->rays < g->ray->n_of_rays)
 	{
 		check_horizontal_line(g);
 		check_vertical_line(g);
 		if (g->ray->dist_v < g->ray->dist_h)
 		{
-			g->ray->shade = 0.5;
+			g->ray->shade = 0.8;
 			g->ray->ray_x = g->ray->ver_x;
 			g->ray->ray_y = g->ray->ver_y;
 			g->ray->final_d = g->ray->dist_v;

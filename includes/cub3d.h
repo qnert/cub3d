@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:19:00 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/14 19:46:42 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/16 12:08:43 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ typedef struct draw_line
 	int			begin_y;
 	int			end_x;
 	int			end_y;
-	uint32_t	color;
+	int			color;
+	int			x_off;
 }	t_draw_line;
 
 typedef struct ray
@@ -186,12 +187,15 @@ void		ft_set_values_and_render_funcs(t_game *g);
 
 //texture_utils.c
 void		set_pixels_img(mlx_image_t *img, int max_x, int max_y, u_int32_t c);
+void		draw_sky(t_game *g);
+void		scale_texture(t_game *g, int x, int y, int scale);
 
 //casting_utils.c
 t_cast		*caster_init(t_map *init);
 int			ft_abs(int num);
 t_draw_line	*draw_line_init(void);
 t_ray		*ray_init(void);
+int			rad_to_degree(double rad);
 
 //hook_utils.c
 void		ft_move_up_down(t_game *g);
