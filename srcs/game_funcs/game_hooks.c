@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 13:48:12 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/16 16:37:37 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/16 18:59:33 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,9 @@ void	ft_move(t_game *game)
 
 void	ft_hooks(void *param)
 {
-	int	x;
-	int	y;
-	int	diff;
+	int		x;
+	int		y;
+	int		diff;
 	t_game	*game;
 
 	x = 0;
