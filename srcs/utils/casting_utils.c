@@ -6,7 +6,7 @@
 /*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 19:18:20 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/15 00:39:57 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/10/16 12:56:18 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	rad_to_degree(double rad)
 {
-	int deg;
+	int	deg;
 
 	deg = rad * (180 / M_PI);
 	return (deg);
