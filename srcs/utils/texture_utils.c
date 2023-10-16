@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 13:07:50 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/16 13:15:49 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/16 13:25:12 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,12 @@ uint32_t	get_right_north_south_color(t_game *g)
 	uint32_t	color;
 
 	color = 0;
-	if (g->ray->shade == 1 && g->ray->ray_a < M_PI && g->ray->ray_a > 0)
+	if (g->ray->ray_a < M_PI && g->ray->ray_a > 0)
 		color = (int)(g->wall_south_tex->pixels[g->dl->pixel]) << 24
 			| (int)(g->wall_south_tex->pixels[g->dl->pixel + 1]) << 16
 			| (int)(g->wall_south_tex->pixels[g->dl->pixel + 2]) << 8
 			| (int)(g->wall_south_tex->pixels[g->dl->pixel + 3]);
-	else if (g->ray->shade == 1 && g->ray->ray_a > M_PI
-		&& g->ray->ray_a < 2 * M_PI)
+	else
 		color = (int)(g->wall_north_tex->pixels[g->dl->pixel]) << 24
 			| (int)(g->wall_north_tex->pixels[g->dl->pixel + 1]) << 16
 			| (int)(g->wall_north_tex->pixels[g->dl->pixel + 2]) << 8
