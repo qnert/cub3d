@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   render_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 17:45:32 by skunert           #+#    #+#             */
 /*   Updated: 2023/10/16 13:14:34 by skunert          ###   ########.fr       */
@@ -47,17 +47,17 @@ void	ft_draw_floor_ceiling(t_game *g, int i)
 	j = -1;
 	while (++j < 8)
 		mlx_put_pixel(g->line, j + g->dl->begin_x, i, g->dl->color);
-	g->dl->pixel = (((int)g->dl->ty & (g->ceiling_tex->width / 2 - 1))
-			* g->ceiling_tex->width + ((int)g->dl->tx
-				& (g->ceiling_tex->width / 2 - 1)))
-		* g->floor_tex->bytes_per_pixel;
-	g->dl->color = (int)(g->ceiling_tex->pixels[g->dl->pixel]) << 24
-		| (int)(g->ceiling_tex->pixels[g->dl->pixel + 1]) << 16
-		| (int)(g->ceiling_tex->pixels[g->dl->pixel + 2]) << 8
-		| (int)(g->ceiling_tex->pixels[g->dl->pixel + 3]);
-	j = -1;
-	while (++j < 8)
-		mlx_put_pixel(g->line, j + g->dl->begin_x, g->dis_h - i, g->dl->color);
+	// g->dl->pixel = (((int)g->dl->ty & (g->ceiling_tex->width / 2 - 1))
+	// 		* g->ceiling_tex->width + ((int)g->dl->tx
+	// 			& (g->ceiling_tex->width / 2 - 1)))
+	// 	* g->floor_tex->bytes_per_pixel;
+	// g->dl->color = (int)(g->ceiling_tex->pixels[g->dl->pixel]) << 24
+	// 	| (int)(g->ceiling_tex->pixels[g->dl->pixel + 1]) << 16
+	// 	| (int)(g->ceiling_tex->pixels[g->dl->pixel + 2]) << 8
+	// 	| (int)(g->ceiling_tex->pixels[g->dl->pixel + 3]);
+	// j = -1;
+	// while (++j < 8)
+	// 	mlx_put_pixel(g->line, j + g->dl->begin_x, g->dis_h - i, g->dl->color);
 }
 
 void	ft_set_values_floor_ceiling(t_game *g)
