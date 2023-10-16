@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:19:00 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/16 13:15:10 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/16 15:58:08 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,8 +140,8 @@ void		get_images(t_game *game);
 void		ft_move(t_game *game);
 void		ft_hooks(void *param);
 void		raycaster(t_game *game);
-void		ft_rotate_left(t_game *game);
-void		ft_rotate_right(t_game *game);
+void		ft_rotate_left(t_game *game, int diff);
+void		ft_rotate_right(t_game *game, int diff);
 
 //parsing
 

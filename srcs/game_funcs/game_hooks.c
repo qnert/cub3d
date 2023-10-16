@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   game_hooks.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 13:48:12 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/16 12:09:01 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/10/16 16:37:37 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void	ft_rotate_left(t_game *game)
+void	ft_rotate_left(t_game *game, int diff)
 {
 	if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT))
 	{
@@ -20,13 +20,29 @@ void	ft_rotate_left(t_game *game)
 		if (game->caster->pa < 0)
 			game->caster->pa += 2 * M_PI;
 	}
+	else if (diff > 0)
+	{
+		if ((diff) > 150)
+			diff = 150;
+		game->caster->pa -= 0.0006 * diff;
+		if (game->caster->pa < 0)
+			game->caster->pa += 2 * M_PI;
+	}
 }
 
-void	ft_rotate_right(t_game *game)
+void	ft_rotate_right(t_game *game, int diff)
 {
 	if (mlx_is_key_down(game->mlx, MLX_KEY_RIGHT))
 	{
 		game->caster->pa += 0.05;
+		if (game->caster->pa > 2 * M_PI)
+			game->caster->pa -= 2 * M_PI;
+	}
+	else if (diff < 0)
+	{
+		if ((-diff) > 150)
+			diff = -150;
+		game->caster->pa += 0.0006 * (-diff);
 		if (game->caster->pa > 2 * M_PI)
 			game->caster->pa -= 2 * M_PI;
 	}
@@ -67,11 +83,20 @@ void	ft_move(t_game *game)
 
 void	ft_hooks(void *param)
 {
+	int	x;
+	int	y;
+	int	diff;
 	t_game	*game;
 
+	x = 0;
+	y = 0;
+	diff = 0;
 	game = param;
-	ft_rotate_left(game);
-	ft_rotate_right(game);
+	mlx_get_mouse_pos(game->mlx, &x, &y);
+	diff = game->dis_w / 2 - x;
+	mlx_set_mouse_pos(game->mlx, game->dis_w / 2, game->dis_h / 2);
+	ft_rotate_left(game, diff);
+	ft_rotate_right(game, diff);
 	ft_move(game);
 	ft_check_door(game);
 	raycaster(game);
