@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 13:22:45 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/13 20:45:59 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/10/16 13:14:50 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,12 @@ int	get_longest_line(char **matrix)
 	return (check);
 }
 
-int	ft_game_begin(t_game *game, char **map)
+int	ft_game_begin(t_game *game, t_map *m)
 {
 	game->mlx = mlx_init(game->dis_w, game->dis_h, "Raycast", true);
 	get_images(game);
-	ft_fill_map(game, map);
+	if (ft_fill_map(game, m) == 1)
+		return (mlx_terminate(game->mlx), 0);
 	game->pl_x = game->player->instances[0].x;
 	game->pl_y = game->player->instances[0].y;
 	mlx_loop_hook(game->mlx, ft_hooks, game);
@@ -47,6 +48,6 @@ void	game_init(t_map *map)
 	map->game->dis_h = 900;
 	map->game->width = get_longest_line(map->map);
 	map->game->height = ft_matrixlen(map->map);
-	ft_game_begin(map->game, map->map);
+	ft_game_begin(map->game, map);
 	return ;
 }
