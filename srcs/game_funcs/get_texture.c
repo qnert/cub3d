@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 14:16:44 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/14 18:28:29 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/17 16:53:46 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,6 @@ void	get_player_img(t_game *game)
 void	get_images(t_game *game)
 {
 	get_player_img(game);
-	game->line = mlx_new_image(game->mlx, 1, 20);
+	game->minimap = mlx_new_image(game->mlx, 160, 160);
+	game->line = mlx_new_image(game->mlx, game->dis_w + 20, game->dis_h + 20);
 }

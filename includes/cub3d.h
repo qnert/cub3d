@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:19:00 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/16 15:58:08 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/17 18:26:06 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,12 @@ typedef struct draw_line
 	double		ty;
 	double		dy;
 	double		fix_ra;
+	int			delta_x;
+	int			delta_y;
+	int			direction_x;
+	int			direction_y;
+	int			error;
+	int			two_times_error;
 	int			pixel;
 	int			begin_x;
 	int			begin_y;
@@ -91,6 +97,7 @@ typedef struct game
 	mlx_t			*mlx;
 	mlx_image_t		*player;
 	mlx_image_t		*line;
+	mlx_image_t		*minimap;
 	mlx_texture_t	*wall_north_tex;
 	mlx_texture_t	*wall_south_tex;
 	mlx_texture_t	*wall_west_tex;
@@ -175,6 +182,8 @@ void		initialize_vars_to_null(t_map *init);
 int			check_rgb_validity(t_map *init);
 int			get_rgb(t_map *init, char *id, char **rgb);
 
+//minimap_utils.c
+void		ft_fill_minimap(t_game *g);
 //parsing_utils.c
 bool		is_whitespace(char c);
 int			ft_matrixlen(char **matrix);
