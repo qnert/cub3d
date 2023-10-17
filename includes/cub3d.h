@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:19:00 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/17 18:26:06 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/17 19:10:50 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,8 @@ typedef struct map
 
 //game_funcs
 
+//draw_line.c
+void	ft_draw_line(t_game *game);
 //fill_map.c
 int			ft_fill_map(t_game *game, t_map *m);
 

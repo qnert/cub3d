@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 17:08:51 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/17 18:27:02 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/17 19:46:14 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	replace_img(t_game *g)
 	mlx_image_to_window(g->mlx, g->minimap, 20, 20);
 	g->line->instances[0].z = 0;
 	g->minimap->instances[0].z = 1;
-	ft_fill_minimap(g);
 }
 
 // sets limits for rotation
@@ -73,6 +72,7 @@ void	raycaster(t_game *g)
 	g->ray->ray_a = g->caster->pa - DGREE * 30;
 	set_limit(g);
 	replace_img(g);
+	ft_fill_minimap(g);
 	draw_sky(g);
 	while (++g->ray->rays < g->ray->n_of_rays)
 	{
@@ -92,6 +92,11 @@ void	raycaster(t_game *g)
 			g->ray->ray_y = g->ray->hor_y;
 			g->ray->final_d = g->ray->dist_h;
 		}
+		g->dl->begin_x = 80;
+		g->dl->begin_y = 80;
+		g->dl->end_x = 78 + g->caster->pd_x * 5 + 5;
+		g->dl->end_y = 78 + g->caster->pd_y * 5 + 5;
+		ft_draw_line(g);
 		ft_set_values_and_render_funcs(g);
 	}
 }
