@@ -6,29 +6,11 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 14:58:26 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/17 19:05:08 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/17 19:05:40 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-
-void	ft_fill_minispace(t_game *g, int start_x, int start_y, uint32_t color)
-{
-	int	x;
-	int	y;
-
-	y = start_y;
-	while (y < start_y)
-	{
-		x = start_x;
-		while (x < start_x)
-		{
-			mlx_put_pixel(g->minimap, x, y, color);
-			x++;
-		}
-		y++;
-	}
-}
 
 void	ft_fill_miniplayer(t_game *g, int x, int y)
 {
