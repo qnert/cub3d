@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 14:58:26 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/17 18:37:14 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/17 19:05:08 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ void	ft_fill_minispace(t_game *g, int start_x, int start_y, uint32_t color)
 	int	y;
 
 	y = start_y;
-	while (y < start_y + 20)
+	while (y < start_y)
 	{
 		x = start_x;
-		while (x < start_x + 20)
+		while (x < start_x)
 		{
 			mlx_put_pixel(g->minimap, x, y, color);
 			x++;
@@ -36,10 +36,10 @@ void	ft_fill_miniplayer(t_game *g, int x, int y)
 	int	start_y;
 
 	start_y = y;
-	while (start_y < 90)
+	while (start_y < 83)
 	{
 		start_x = x;
-		while (start_x < 90)
+		while (start_x < 83)
 		{
 			mlx_put_pixel(g->minimap, start_x, start_y, 0xF1C40FFF);
 			start_x++;
@@ -55,13 +55,14 @@ int	check_free_char(char c)
 	return (0);
 }
 
-uint32_t	ft_check_color(t_game *g, int x, int y)
+uint32_t	ft_check_color(t_game *g, float x, float y)
 {
-	if (x >= 0 && y >= 0
-		&& (check_free_char(g->caster->map[y / DIMENS][x / DIMENS])))
+	if (x >= 0 && y >= 0 && x <= 33 * DIMENS && y <= 14 * DIMENS
+		&& (check_free_char(g->caster->map[(int)y / DIMENS][(int)x / DIMENS])))
 		return (0xEAEDEDFF);
-	else if (x >= 0 && y >= 0
-		&& g->caster->map[y / DIMENS][x / DIMENS] == 'D')
+	else if (x >= 0 && y >= 0 && x <= g->width
+		* DIMENS && y <= g->height * DIMENS
+		&& g->caster->map[(int)y / DIMENS][(int)x / DIMENS] == 'D')
 		return (0x3498DBFF);
 	else
 		return (0x515A5AFF);
@@ -69,11 +70,11 @@ uint32_t	ft_check_color(t_game *g, int x, int y)
 
 void	ft_fill_minimap(t_game *g)
 {
-	int	x;
-	int	y;
-	int	c;
-	int	mini_x;
-	int	mini_y;
+	float	x;
+	float	y;
+	int		c;
+	int		mini_x;
+	int		mini_y;
 
 	y = g->pl_y - 4 * DIMENS;
 	mini_y = 0;
@@ -84,12 +85,12 @@ void	ft_fill_minimap(t_game *g)
 		while (mini_x < 160)
 		{
 			c = ft_check_color(g, x, y);
-			ft_fill_minispace(g, mini_x, mini_y, c);
-			mini_x += 20;
-			x += DIMENS;
+			mlx_put_pixel(g->minimap, mini_x, mini_y, c);
+			mini_x++;
+			x += 6.4;
 		}
-		mini_y += 20;
-		y += DIMENS;
+		mini_y++;
+		y += 6.4;
 	}
-	ft_fill_miniplayer(g, 85, 85);
+	ft_fill_miniplayer(g, 78, 78);
 }
