@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 18:27:36 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/14 18:46:15 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/17 14:44:15 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	ft_matrixlen(char **matrix)
 
 bool	is_component(char c)
 {
-	if (ft_strchr("01NSWED", c))
+	if (ft_strchr("01NSWEDP", c))
 		return (true);
 	return (false);
 }

@@ -6,7 +6,7 @@
 /*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 14:38:02 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/16 10:50:41 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/10/17 23:36:02 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,35 @@ void	ft_fill_player(t_game *game, char **map)
 	}
 }
 
+void	ft_get_location(t_game *game, char **map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (map[i][j] == 'P')
+			{
+				game->sp->x = j * DIMENS + 20;
+				game->sp->y = i * DIMENS + 20;
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
 void	ft_fill_map(t_game *game, char **map)
 {
 	ft_fill_player(game, map);
+	ft_get_location(game, map);
 	game->wall_tex = mlx_load_png("./textures/window.png");
 	game->floor_tex = mlx_load_png("./textures/metal.png");
 	game->ceiling_tex = mlx_load_png("./textures/night_sky2.png");
 	game->door_tex = mlx_load_png("./textures/door.png");
+	game->sp->sp_tex = mlx_load_png("./textures/beer.png");
 }
