@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 14:58:26 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/18 14:53:11 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/18 18:06:13 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ void	ft_fill_minispace(t_game *g, int start_x, int start_y, uint32_t color)
 	int	y;
 
 	y = start_y;
-	while (y < start_y + 20)
+	while (y < start_y + 10)
 	{
 		x = start_x;
-		while (x < start_x + 20)
+		while (x < start_x + 10)
 		{
 			mlx_put_pixel(g->minimap, x, y, color);
 			x++;
@@ -66,21 +66,21 @@ void	ft_fill_minimap(t_game *g)
 	int		mini_x;
 	int		mini_y;
 
-	y = g->pl_y - 5 * DIMENS;
+	y = 0;
 	mini_y = 0;
-	while (mini_y < 200)
+	while (y < g->height * DIMENS)
 	{
-		x = g->pl_x - 5 * DIMENS;
+		x = 0;
 		mini_x = 0;
-		while (mini_x < 200)
+		while (x/DIMENS < ft_strlen(g->caster->map[(int)y/DIMENS]))
 		{
 			c = ft_check_color(g, x, y);
-			mlx_put_pixel(g->minimap, mini_x, mini_y, c);
-			mini_x++;
-			x += 6.4;
+			ft_fill_minispace(g, mini_x, mini_y, c);
+			mini_x += 10;
+			x += 128;
 		}
-		mini_y++;
-		y += 6.4;
+		mini_y += 10;
+		y += 128;
 	}
-	ft_fill_miniplayer(g, 98, 98);
+	ft_fill_miniplayer(g, (g->pl_x / DIMENS) * 10, (g->pl_y / DIMENS) * 10);
 }
