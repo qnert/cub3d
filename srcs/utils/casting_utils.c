@@ -6,7 +6,7 @@
 /*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 19:18:20 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/16 12:56:18 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/10/18 13:21:42 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,19 @@ int	ft_abs(int num)
 	return (num);
 }
 
+t_sprite	*sprite_init(void)
+{
+	t_sprite	*sp;
+
+	sp = malloc(sizeof(t_sprite));
+	sp->state = 1;
+	sp->type = 2;
+	sp->x = 0;
+	sp->y = 0;
+	sp->z = 520;
+	return (sp);
+}
+
 t_ray	*ray_init(void)
 {
 	t_ray	*ray;
@@ -39,8 +52,6 @@ t_ray	*ray_init(void)
 	ray->ray_y = 0;
 	ray->x_o = 0;
 	ray->y_o = 0;
-	ray->player_x = 0;
-	ray->player_y = 0;
 	ray->dist_h = 0;
 	ray->dist_v = 0;
 	ray->hor_x = 0;

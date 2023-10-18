@@ -6,7 +6,7 @@
 /*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 17:08:51 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/14 22:39:41 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/10/16 19:05:23 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ void	set_cosine_and_values(t_game *g)
 	}
 	g->caster->line_offset = (g->dis_h / 2) - g->caster->line_hight / 2;
 	g->ray->final_d *= cos(g->caster->ca);
-	ft_set_values_for_rendering(g);
 }
 
 void	raycaster(t_game *g)

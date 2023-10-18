@@ -6,7 +6,7 @@
 /*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:19:00 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/16 13:15:10 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/18 12:26:47 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,16 @@
 # include <math.h>
 # include <fcntl.h>
 # include <stdbool.h>
+
+typedef struct sprite
+{
+	mlx_texture_t	*sp_tex;
+	int				type; //collectible, enemy
+	int				state; //on, off
+	int				x;
+	int				y;
+	int				z;
+}	t_sprite;
 
 typedef struct draw_line
 {
@@ -43,8 +53,6 @@ typedef struct ray
 	int		rays;
 	int		n_of_rays;
 	int		depoffield;
-	int		player_x;
-	int		player_y;
 	double	ray_x;
 	double	ray_y;
 	double	ray_a;
@@ -107,6 +115,7 @@ typedef struct game
 	t_cast			*caster;
 	t_draw_line		*dl;
 	t_ray			*ray;
+	t_sprite		*sp;
 }	t_game;
 
 typedef struct map
@@ -126,6 +135,7 @@ typedef struct map
 //game_funcs
 
 //fill_map.c
+void		ft_get_location(t_game *game, char **map);
 int			ft_fill_map(t_game *game, t_map *m);
 
 //game_init.c
@@ -200,6 +210,7 @@ int			ft_abs(int num);
 t_draw_line	*draw_line_init(void);
 t_ray		*ray_init(void);
 int			rad_to_degree(double rad);
+t_sprite	*sprite_init(void);
 
 //hook_utils.c
 void		ft_move_up_down(t_game *g);
