@@ -6,28 +6,36 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 14:58:26 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/17 19:16:09 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/18 11:08:14 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
+
+void	ft_fill_minispace(t_game *g, int start_x, int start_y, uint32_t color)
+{
+	int	x;
+	int	y;
+
+	y = start_y;
+	while (y < start_y + 20)
+	{
+		x = start_x;
+		while (x < start_x + 20)
+		{
+			mlx_put_pixel(g->minimap, x, y, color);
+			x++;
+		}
+		y++;
+	}
+}
+
 void	ft_fill_miniplayer(t_game *g, int x, int y)
 {
-	int	start_x;
-	int	start_y;
-
-	start_y = y;
-	while (start_y < 83)
-	{
-		start_x = x;
-		while (start_x < 83)
-		{
-			mlx_put_pixel(g->minimap, start_x, start_y, 0xF1C40FFF);
-			start_x++;
-		}
-		start_y++;
-	}
+	for (int j = 0; j < 5; j++)
+		for(int i = 0; i < 5; i++)
+			mlx_put_pixel(g->minimap, x + i, y + j, 0xF1C40FFF);
 }
 
 int	check_free_char(char c)
@@ -58,21 +66,21 @@ void	ft_fill_minimap(t_game *g)
 	int		mini_x;
 	int		mini_y;
 
-	y = g->pl_y - 4 * DIMENS;
+	y = 0;
 	mini_y = 0;
-	while (mini_y < 160)
+	while (y < g->height * DIMENS)
 	{
-		x = g->pl_x - 4 * DIMENS;
+		x = 0;
 		mini_x = 0;
-		while (mini_x < 160)
+		while (x/DIMENS < ft_strlen(g->caster->map[(int)y/DIMENS]))
 		{
 			c = ft_check_color(g, x, y);
-			mlx_put_pixel(g->minimap, mini_x, mini_y, c);
-			mini_x++;
-			x += 6.4;
+			ft_fill_minispace(g, mini_x, mini_y, c);
+			mini_x += 20;
+			x += 128;
 		}
-		mini_y++;
-		y += 6.4;
+		mini_y += 20;
+		y += 128;
 	}
-	ft_fill_miniplayer(g, 78, 78);
+	ft_fill_miniplayer(g, (g->pl_x / DIMENS) * 20, (g->pl_y / DIMENS) * 20);
 }

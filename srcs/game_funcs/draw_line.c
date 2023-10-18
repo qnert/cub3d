@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 17:22:42 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/17 19:45:09 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/18 11:04:28 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	ft_draw_line(t_game *game)
 
 		for (int i = 0; i < 3; i++)
 			mlx_put_pixel(game->minimap, game->dl->begin_x + i,
-				game->dl->begin_y, 0xFF000FFF);
+				game->dl->begin_y, 0xF0F00FF0);
 		if (game->dl->begin_x == game->dl->end_x
 			&& game->dl->begin_y == game->dl->end_y)
 			break ;
