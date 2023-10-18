@@ -99,7 +99,10 @@ typedef struct game
 	mlx_t			*mlx;
 	mlx_image_t		*player;
 	mlx_image_t		*line;
-	mlx_texture_t	*wall_tex;
+	mlx_texture_t	*wall_north_tex;
+	mlx_texture_t	*wall_south_tex;
+	mlx_texture_t	*wall_west_tex;
+	mlx_texture_t	*wall_east_tex;
 	mlx_texture_t	*door_tex;
 	mlx_texture_t	*floor_tex;
 	mlx_texture_t	*ceiling_tex;
@@ -132,8 +135,8 @@ typedef struct map
 //game_funcs
 
 //fill_map.c
-void		ft_fill_map(t_game *game, char **map);
 void		ft_get_location(t_game *game, char **map);
+int			ft_fill_map(t_game *game, t_map *m);
 
 //game_init.c
 int			get_longest_line(char **matrix);
@@ -196,6 +199,7 @@ void		ft_set_values_for_rendering(t_game *g);
 void		ft_set_values_and_render_funcs(t_game *g);
 
 //texture_utils.c
+uint32_t	get_right_wall_color(t_game *g);
 void		set_pixels_img(mlx_image_t *img, int max_x, int max_y, u_int32_t c);
 void		draw_sky(t_game *g);
 void		scale_texture(t_game *g, int x, int y, int scale);

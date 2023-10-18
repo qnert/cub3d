@@ -40,19 +40,10 @@ void	ft_draw_walls(t_game *g)
 	i = -1;
 	while (++i < g->caster->line_hight)
 	{
-		g->dl->pixel = ((int)g->dl->ty * g->wall_tex->width + (int)g->dl->tx)
-			* g->wall_tex->bytes_per_pixel;
-		if (g->caster->map[(int)g->ray->ray_y / DIMENS]
-			[(int)g->ray->ray_x / DIMENS] == 'D')
-			g->dl->color = (int)(g->door_tex->pixels[g->dl->pixel]) << 24
-				| (int)(g->door_tex->pixels[g->dl->pixel + 1]) << 16
-				| (int)(g->door_tex->pixels[g->dl->pixel + 2]) << 8
-				| (int)(g->door_tex->pixels[g->dl->pixel + 3]);
-		else
-			g->dl->color = (int)(g->wall_tex->pixels[g->dl->pixel]) << 24
-				| (int)(g->wall_tex->pixels[g->dl->pixel + 1]) << 16
-				| (int)(g->wall_tex->pixels[g->dl->pixel + 2]) << 8
-				| (int)(g->wall_tex->pixels[g->dl->pixel + 3]);
+		g->dl->pixel = ((int)g->dl->ty * g->wall_north_tex->width
+				+ (int)g->dl->tx)
+			* g->wall_north_tex->bytes_per_pixel;
+		g->dl->color = get_right_wall_color(g);
 		j = -1;
 		while (++j < 4)
 			mlx_put_pixel(g->line, j + g->dl->begin_x,
