@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 14:38:02 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/17 14:24:17 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/18 13:57:26 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,28 @@ void	ft_clear_up_tex(t_game *g, int i)
 	}
 }
 
+void	ft_get_location(t_game *game, char **map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (map[i][j] == 'P')
+			{
+				game->sp->x = j * DIMENS + 20;
+				game->sp->y = i * DIMENS + 20;
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
 int	ft_fill_map(t_game *game, t_map *m)
 {
 	ft_fill_player(game, m->map);
@@ -73,5 +95,6 @@ int	ft_fill_map(t_game *game, t_map *m)
 	game->floor_tex = mlx_load_png("./textures/metal.png");
 	game->ceiling_tex = mlx_load_png("./textures/night_sky2.png");
 	game->door_tex = mlx_load_png("./textures/door.png");
+  game->sp->sp_tex = mlx_load_png("./textures/beer.png");
 	return (0);
 }

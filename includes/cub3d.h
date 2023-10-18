@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:19:00 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/17 19:10:50 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/18 13:57:36 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,16 @@
 # include <math.h>
 # include <fcntl.h>
 # include <stdbool.h>
+
+typedef struct sprite
+{
+	mlx_texture_t	*sp_tex;
+	int				type; //collectible, enemy
+	int				state; //on, off
+	int				x;
+	int				y;
+	int				z;
+}	t_sprite;
 
 typedef struct draw_line
 {
@@ -49,8 +59,6 @@ typedef struct ray
 	int		rays;
 	int		n_of_rays;
 	int		depoffield;
-	int		player_x;
-	int		player_y;
 	double	ray_x;
 	double	ray_y;
 	double	ray_a;
@@ -114,6 +122,7 @@ typedef struct game
 	t_cast			*caster;
 	t_draw_line		*dl;
 	t_ray			*ray;
+	t_sprite		*sp;
 }	t_game;
 
 typedef struct map
@@ -135,6 +144,7 @@ typedef struct map
 //draw_line.c
 void	ft_draw_line(t_game *game);
 //fill_map.c
+void		ft_get_location(t_game *game, char **map);
 int			ft_fill_map(t_game *game, t_map *m);
 
 //game_init.c
@@ -211,6 +221,7 @@ int			ft_abs(int num);
 t_draw_line	*draw_line_init(void);
 t_ray		*ray_init(void);
 int			rad_to_degree(double rad);
+t_sprite	*sprite_init(void);
 
 //hook_utils.c
 void		ft_move_up_down(t_game *g);

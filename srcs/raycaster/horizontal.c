@@ -6,7 +6,7 @@
 /*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 21:26:51 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/14 22:38:14 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/10/18 13:42:29 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,8 @@
 void	assign_variables_horizontal(t_game *g)
 {
 	g->ray->dist_h = 100000;
-	g->ray->player_x = g->pl_x;
-	g->ray->player_y = g->pl_y;
-	g->ray->hor_x = g->ray->player_x;
-	g->ray->hor_y = g->ray->player_y;
+	g->ray->hor_x = g->pl_x;
+	g->ray->hor_y = g->pl_y;
 	g->ray->depoffield = 0;
 	g->ray->a_tan = -1 / tan(g->ray->ray_a);
 }
@@ -37,7 +35,7 @@ void	check_horizontal_wall(t_game *g)
 			g->ray->hor_x = g->ray->ray_x;
 			g->ray->hor_y = g->ray->ray_y;
 			g->ray->dist_h = ft_distance(g, g->ray->hor_x, g->ray->hor_y);
-			g->ray->depoffield = DIMENS;
+			g->ray->depoffield = 50;
 		}
 		else
 		{
@@ -55,25 +53,25 @@ void	check_horizontal_line(t_game *g)
 	assign_variables_horizontal(g);
 	if (g->ray->ray_a > M_PI)
 	{
-		g->ray->ray_y = (((int)g->ray->player_y / DIMENS) * DIMENS) - 0.0001;
-		g->ray->ray_x = (g->ray->player_y - g->ray->ray_y)
-			* g->ray->a_tan + g->ray->player_x;
+		g->ray->ray_y = (((int)g->pl_y / DIMENS) * DIMENS) - 0.0001;
+		g->ray->ray_x = (g->pl_y - g->ray->ray_y)
+			* g->ray->a_tan + g->pl_x;
 		g->ray->y_o = -DIMENS;
 		g->ray->x_o = -g->ray->y_o * g->ray->a_tan;
 	}
 	if (g->ray->ray_a < M_PI)
 	{
-		g->ray->ray_y = (((int)g->ray->player_y / DIMENS) * DIMENS) + DIMENS;
-		g->ray->ray_x = (g->ray->player_y - g->ray->ray_y)
-			* g->ray->a_tan + g->ray->player_x;
+		g->ray->ray_y = (((int)g->pl_y / DIMENS) * DIMENS) + DIMENS;
+		g->ray->ray_x = (g->pl_y - g->ray->ray_y)
+			* g->ray->a_tan + g->pl_x;
 		g->ray->y_o = DIMENS;
 		g->ray->x_o = -g->ray->y_o * g->ray->a_tan;
 	}
 	if (g->ray->ray_a == 0 || g->ray->ray_a == M_PI)
 	{
-		g->ray->ray_x = g->ray->player_x;
-		g->ray->ray_y = g->ray->player_y;
-		g->ray->depoffield = DIMENS;
+		g->ray->ray_x = g->pl_x;
+		g->ray->ray_y = g->pl_y;
+		g->ray->depoffield = 50;
 	}
 	check_horizontal_wall(g);
 }

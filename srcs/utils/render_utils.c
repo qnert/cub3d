@@ -6,11 +6,31 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 17:45:32 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/17 19:15:29 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/18 13:57:18 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+
+void	ft_draw_sprites(t_game *g)
+{
+	double sx = g->sp->x - g->pl_x;
+	double sy = g->sp->y - g->pl_y;
+	double sz = g->sp->z;
+	double cs = cos(g->caster->pa);
+	double sn = sin(g->caster->pa);
+	double a = sy * cs * 12 - sx * sn * 12;
+	double b = sx * cs + sy * sn;
+	sx = (a * 108.0 / b) + (g->dis_w / 2);
+	sy = (sz * 108.0 / b) + (g->dis_h / 2);
+	if (sx > 0 && sy > g->dis_h / 2 && sx < g->dis_w && sy < g->dis_h) {
+		for (int i = 0; i < 20; i++) {
+			for (int j = 0; j < 20; j++) {
+				mlx_put_pixel(g->line,  j + sx, i + sy, 0x000000FF);
+			}
+		}
+	}
+}
 
 void	ft_draw_walls(t_game *g)
 {
@@ -36,7 +56,7 @@ void	ft_draw_floor_ceiling(t_game *g, int i)
 {
 	int	j;
 
-	g->dl->pixel = (((int)g->dl->ty & (g->floor_tex ->width / 2 - 1))
+	g->dl->pixel = (((int)g->dl->ty & (g->floor_tex->width / 2 - 1))
 			* g->floor_tex->width + ((int)g->dl->tx
 				& (g->floor_tex->width / 2 - 1)))
 		* g->floor_tex->bytes_per_pixel;
@@ -104,8 +124,10 @@ void	ft_set_values_for_rendering(t_game *g)
 void	ft_set_values_and_render_funcs(t_game *g)
 {
 	set_cosine_and_values(g);
+	ft_set_values_for_rendering(g);
 	ft_draw_walls(g);
 	ft_set_values_floor_ceiling(g);
+	ft_draw_sprites(g);
 	g->ray->ray_a += DGREE / 8;
 	set_limit(g);
 }
