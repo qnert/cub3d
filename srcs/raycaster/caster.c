@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   caster.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 17:08:51 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/16 19:05:23 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/10/18 13:57:13 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,14 @@
 // deletes and replaces image for new line
 void	replace_img(t_game *g)
 {
+	mlx_delete_image(g->mlx, g->minimap);
 	mlx_delete_image(g->mlx, g->line);
 	g->line = mlx_new_image(g->mlx, g->dis_w + 20, g->dis_h + 20);
+	g->minimap = mlx_new_image(g->mlx, g->dis_w, g->dis_h);
 	mlx_image_to_window(g->mlx, g->line, 0, 0);
+	mlx_image_to_window(g->mlx, g->minimap, 0, 0);
+	g->line->instances[0].z = 0;
+	g->minimap->instances[0].z = 1;
 }
 
 // sets limits for rotation
@@ -62,12 +67,13 @@ void	set_cosine_and_values(t_game *g)
 
 void	raycaster(t_game *g)
 {
-	g->ray->rays = 0;
+	g->ray->rays = -1;
 	g->ray->ray_a = g->caster->pa - DGREE * 30;
 	set_limit(g);
 	replace_img(g);
+	ft_fill_minimap(g);
 	draw_sky(g);
-	while (g->ray->rays < g->ray->n_of_rays)
+	while (++g->ray->rays < g->ray->n_of_rays)
 	{
 		check_horizontal_line(g);
 		check_vertical_line(g);
@@ -85,7 +91,14 @@ void	raycaster(t_game *g)
 			g->ray->ray_y = g->ray->hor_y;
 			g->ray->final_d = g->ray->dist_h;
 		}
+		g->dl->begin_x = (g->pl_x / DIMENS) * 20;
+		g->dl->begin_y = (g->pl_y / DIMENS) * 20;
+		if (g->caster->pa > M_PI_2 && g->caster->pa < 3 * M_PI_2)
+			g->dl->end_x = (g->ray->ray_x / DIMENS) * 20 + 1;
+		else
+			g->dl->end_x = (g->ray->ray_x / DIMENS) * 20 - 3;
+		g->dl->end_y = (g->ray->ray_y / DIMENS) * 20;
+		ft_draw_line(g);
 		ft_set_values_and_render_funcs(g);
-		g->ray->rays++;
 	}
 }
