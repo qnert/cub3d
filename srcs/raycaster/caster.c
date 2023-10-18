@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   caster.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 17:08:51 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/18 14:56:02 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/18 21:21:12 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,11 +91,7 @@ void	raycaster(t_game *g)
 			g->ray->ray_y = g->ray->hor_y;
 			g->ray->final_d = g->ray->dist_h;
 		}
-		g->dl->begin_x = 98;
-		g->dl->begin_y = 98;
-		g->dl->end_x = 98 + g->caster->pd_x * 5 + 5;
-		g->dl->end_y = 98 + g->caster->pd_y * 5 + 5;
-		ft_draw_line(g);
+		draw_minimap(g);
 		ft_set_values_and_render_funcs(g);
 	}
 }

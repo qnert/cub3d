@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hook_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 16:46:02 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/14 20:05:40 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/18 21:29:21 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,54 +17,6 @@ bool	ft_check_collision(char c)
 	if (c == '1' || c == 'D')
 		return (false);
 	return (true);
-}
-
-void	ft_move_up_down(t_game *g)
-{
-	if (mlx_is_key_down(g->mlx, MLX_KEY_W))
-	{
-		if (ft_check_collision(g->caster->map[(int)g->pl_y / DIMENS]
-				[(int)(g->pl_x + g->caster->x_off) / DIMENS]))
-			g->pl_x += cos(g->caster->pa) * 6;
-		if (ft_check_collision(g->caster->map
-				[(int)(g->pl_y + g->caster->y_off) / DIMENS]
-			[(int)g->pl_x / DIMENS]))
-			g->pl_y += sin(g->caster->pa) * 6;
-	}
-	else if (mlx_is_key_down(g->mlx, MLX_KEY_S))
-	{
-		if (ft_check_collision(g->caster->map[(int)g->pl_y / DIMENS]
-				[(int)(g->pl_x - g->caster->x_off) / DIMENS]))
-			g->pl_x -= cos(g->caster->pa) * 6;
-		if (ft_check_collision(g->caster->map
-				[(int)(g->pl_y - g->caster->y_off) / DIMENS]
-			[(int)g->pl_x / DIMENS]))
-			g->pl_y -= sin(g->caster->pa) * 6;
-	}
-}
-
-void	ft_move_left_right(t_game *g)
-{
-	if (mlx_is_key_down(g->mlx, MLX_KEY_D))
-	{
-		if (ft_check_collision(g->caster->map[(int)g->pl_y / DIMENS]
-				[(int)(g->pl_x + g->caster->x_off_strafe) / DIMENS]))
-			g->pl_x += cos(g->caster->pa + M_PI_2) * 6;
-		if (ft_check_collision(g->caster->map
-				[(int)(g->pl_y + g->caster->y_off_strafe) / DIMENS]
-			[(int)g->pl_x / DIMENS]))
-			g->pl_y += sin(g->caster->pa + M_PI_2) * 6;
-	}
-	else if (mlx_is_key_down(g->mlx, MLX_KEY_A))
-	{
-		if (ft_check_collision(g->caster->map[(int)g->pl_y / DIMENS]
-				[(int)(g->pl_x - g->caster->x_off_strafe) / DIMENS]))
-			g->pl_x -= cos(g->caster->pa + M_PI_2) * 6;
-		if (ft_check_collision(g->caster->map[(int)(g->pl_y
-					- g->caster->y_off_strafe) / DIMENS]
-			[(int)g->pl_x / DIMENS]))
-			g->pl_y -= sin(g->caster->pa + M_PI_2) * 6;
-	}
 }
 
 void	ft_close_doors(t_game *g)

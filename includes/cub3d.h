@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:19:00 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/18 13:57:36 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/18 21:38:51 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,6 +161,7 @@ void		ft_hooks(void *param);
 void		raycaster(t_game *game);
 void		ft_rotate_left(t_game *game, int diff);
 void		ft_rotate_right(t_game *game, int diff);
+void		ft_wall_offset_set(t_game *g);
 
 //parsing
 
@@ -194,8 +195,10 @@ void		initialize_vars_to_null(t_map *init);
 int			check_rgb_validity(t_map *init);
 int			get_rgb(t_map *init, char *id, char **rgb);
 
-//minimap_utils.c
+//minimap.c
 void		ft_fill_minimap(t_game *g);
+void		draw_minimap(t_game *g);
+
 //parsing_utils.c
 bool		is_whitespace(char c);
 int			ft_matrixlen(char **matrix);
@@ -227,6 +230,7 @@ t_sprite	*sprite_init(void);
 void		ft_move_up_down(t_game *g);
 void		ft_move_left_right(t_game *g);
 void		ft_check_door(t_game *g);
+bool		ft_check_collision(char c);
 
 //draw_line.c
 void		ft_draw_line_3D(t_game *game);
