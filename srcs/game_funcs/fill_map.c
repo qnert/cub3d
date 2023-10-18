@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 14:38:02 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/18 13:57:26 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/18 13:59:46 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ void	ft_get_location(t_game *game, char **map)
 int	ft_fill_map(t_game *game, t_map *m)
 {
 	ft_fill_player(game, m->map);
+	ft_get_location(game, m->map);
 	game->wall_north_tex = mlx_load_png(m->texture_path_no);
 	if (game->wall_north_tex == NULL)
 		return (ft_error_msg("NO texture couldn't be opnened\n"), 1);
