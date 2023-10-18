@@ -6,7 +6,7 @@
 /*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 19:18:20 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/17 23:21:58 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/10/18 13:21:42 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,6 @@ t_ray	*ray_init(void)
 	ray->ray_y = 0;
 	ray->x_o = 0;
 	ray->y_o = 0;
-	ray->player_x = 0;
-	ray->player_y = 0;
 	ray->dist_h = 0;
 	ray->dist_v = 0;
 	ray->hor_x = 0;

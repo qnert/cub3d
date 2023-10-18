@@ -6,7 +6,7 @@
 /*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:19:00 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/17 23:23:42 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/10/18 12:26:47 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@
 typedef struct sprite
 {
 	mlx_texture_t	*sp_tex;
-	int	type; //collectible, enemy
-	int	state; //on, off
-	int	x;
-	int	y;
-	int	z;
+	int				type; //collectible, enemy
+	int				state; //on, off
+	int				x;
+	int				y;
+	int				z;
 }	t_sprite;
 
 typedef struct draw_line
@@ -53,8 +53,6 @@ typedef struct ray
 	int		rays;
 	int		n_of_rays;
 	int		depoffield;
-	int		player_x;
-	int		player_y;
 	double	ray_x;
 	double	ray_y;
 	double	ray_a;
