@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 14:58:26 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/18 13:58:39 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/18 14:53:11 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,21 +66,21 @@ void	ft_fill_minimap(t_game *g)
 	int		mini_x;
 	int		mini_y;
 
-	y = 0;
+	y = g->pl_y - 5 * DIMENS;
 	mini_y = 0;
-	while (y < g->height * DIMENS)
+	while (mini_y < 200)
 	{
-		x = 0;
+		x = g->pl_x - 5 * DIMENS;
 		mini_x = 0;
-		while (x/DIMENS < ft_strlen(g->caster->map[(int)y/DIMENS]))
+		while (mini_x < 200)
 		{
 			c = ft_check_color(g, x, y);
-			ft_fill_minispace(g, mini_x, mini_y, c);
-			mini_x += 20;
-			x += 128;
+			mlx_put_pixel(g->minimap, mini_x, mini_y, c);
+			mini_x++;
+			x += 6.4;
 		}
-		mini_y += 20;
-		y += 128;
+		mini_y++;
+		y += 6.4;
 	}
-	ft_fill_miniplayer(g, (g->pl_x / DIMENS) * 20, (g->pl_y / DIMENS) * 20);
+	ft_fill_miniplayer(g, 98, 98);
 }

@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 17:08:51 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/18 13:57:13 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/18 14:56:02 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	replace_img(t_game *g)
 	g->line = mlx_new_image(g->mlx, g->dis_w + 20, g->dis_h + 20);
 	g->minimap = mlx_new_image(g->mlx, g->dis_w, g->dis_h);
 	mlx_image_to_window(g->mlx, g->line, 0, 0);
-	mlx_image_to_window(g->mlx, g->minimap, 0, 0);
+	mlx_image_to_window(g->mlx, g->minimap, 20, 20);
 	g->line->instances[0].z = 0;
 	g->minimap->instances[0].z = 1;
 }
@@ -91,13 +91,10 @@ void	raycaster(t_game *g)
 			g->ray->ray_y = g->ray->hor_y;
 			g->ray->final_d = g->ray->dist_h;
 		}
-		g->dl->begin_x = (g->pl_x / DIMENS) * 20;
-		g->dl->begin_y = (g->pl_y / DIMENS) * 20;
-		if (g->caster->pa > M_PI_2 && g->caster->pa < 3 * M_PI_2)
-			g->dl->end_x = (g->ray->ray_x / DIMENS) * 20 + 1;
-		else
-			g->dl->end_x = (g->ray->ray_x / DIMENS) * 20 - 3;
-		g->dl->end_y = (g->ray->ray_y / DIMENS) * 20;
+		g->dl->begin_x = 98;
+		g->dl->begin_y = 98;
+		g->dl->end_x = 98 + g->caster->pd_x * 5 + 5;
+		g->dl->end_y = 98 + g->caster->pd_y * 5 + 5;
 		ft_draw_line(g);
 		ft_set_values_and_render_funcs(g);
 	}
