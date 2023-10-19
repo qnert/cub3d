@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 14:58:26 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/19 13:09:05 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/19 15:37:20 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	draw_minimap(t_game *g)
 	g->dl->begin_y = 98;
 	g->dl->end_x = (g->ray->ray_x - (g->pl_x - 5 * DIMENS)) / DIMENS * 20;
 	g->dl->end_y = (g->ray->ray_y - (g->pl_y - 5 * DIMENS)) / DIMENS * 20;
-	g->dl->end_x = fmin(fmax(g->dl->end_x, 0), 198);
-	g->dl->end_y = fmin(fmax(g->dl->end_y, 0), 198);
+	g->dl->end_x = fmin(fmax(g->dl->end_x, 20), 178);
+	g->dl->end_y = fmin(fmax(g->dl->end_y, 20), 178);
 	ft_draw_line(g);
 }
 
@@ -42,12 +42,7 @@ uint32_t	ft_check_color(t_game *g, float x, float y)
 	if (x >= 0 && y >= 0 && x <= 33 * DIMENS && y <= 14 * DIMENS
 		&& (check_free_char(g->caster->map[(int)y / DIMENS][(int)x / DIMENS])))
 		return (0xEAEDEDFF);
-	else if (x >= 0 && y >= 0 && x <= g->width
-		* DIMENS && y <= g->height * DIMENS
-		&& g->caster->map[(int)y / DIMENS][(int)x / DIMENS] == 'D')
-		return (0x3498DBFF);
-	else
-		return (0x515A5AFF);
+	return (0);
 }
 
 void	ft_fill_minimap(t_game *g)
@@ -67,7 +62,8 @@ void	ft_fill_minimap(t_game *g)
 		while (mini_x < 200)
 		{
 			c = ft_check_color(g, x, y);
-			mlx_put_pixel(g->minimap, mini_x, mini_y, c);
+			if (c != 0)
+				mlx_put_pixel(g->minimap, mini_x, mini_y, c);
 			mini_x++;
 			x += 6.4;
 		}

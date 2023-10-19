@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:19:00 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/18 21:38:51 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/10/19 15:39:08 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,8 @@ typedef struct map
 //game_funcs
 
 //draw_line.c
-void	ft_draw_line(t_game *game);
+void		ft_draw_line(t_game *game);
+
 //fill_map.c
 void		ft_get_location(t_game *game, char **map);
 int			ft_fill_map(t_game *game, t_map *m);
@@ -198,6 +199,10 @@ int			get_rgb(t_map *init, char *id, char **rgb);
 //minimap.c
 void		ft_fill_minimap(t_game *g);
 void		draw_minimap(t_game *g);
+void		ft_fill_miniplayer(t_game *g, int x, int y);
+
+//mini_map_utils.c
+void		ft_fill_minimap_walls(t_game *g);
 
 //parsing_utils.c
 bool		is_whitespace(char c);
@@ -246,4 +251,5 @@ void		check_horizontal_line(t_game *g);
 // vertical.c
 void		check_vertical_line(t_game *g);
 void		replace_img(t_game *g);
+
 #endif

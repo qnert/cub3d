@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 14:38:02 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/18 13:59:46 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/19 15:40:59 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,6 @@ int	ft_fill_map(t_game *game, t_map *m)
 	game->floor_tex = mlx_load_png("./textures/metal.png");
 	game->ceiling_tex = mlx_load_png("./textures/night_sky2.png");
 	game->door_tex = mlx_load_png("./textures/door.png");
-  game->sp->sp_tex = mlx_load_png("./textures/beer.png");
+	game->sp->sp_tex = mlx_load_png("./textures/beer.png");
 	return (0);
 }
