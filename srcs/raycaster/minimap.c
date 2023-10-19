@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 14:58:26 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/19 15:37:20 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/19 17:22:09 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ void	draw_minimap(t_game *g)
 	g->dl->begin_y = 98;
 	g->dl->end_x = (g->ray->ray_x - (g->pl_x - 5 * DIMENS)) / DIMENS * 20;
 	g->dl->end_y = (g->ray->ray_y - (g->pl_y - 5 * DIMENS)) / DIMENS * 20;
-	g->dl->end_x = fmin(fmax(g->dl->end_x, 20), 178);
-	g->dl->end_y = fmin(fmax(g->dl->end_y, 20), 178);
 	ft_draw_line(g);
 }
 
