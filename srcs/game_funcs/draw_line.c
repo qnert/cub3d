@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_line.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 17:22:42 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/18 11:04:28 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/19 17:09:37 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,14 @@ void	ft_draw_line(t_game *game)
 	ft_dl_assign_values(game);
 	while (1)
 	{
-
+		if ((game->dl->begin_x == game->dl->end_x
+			&& game->dl->begin_y == game->dl->end_y)
+			|| (game->dl->begin_x > 197 || game->dl->begin_y > 197
+			|| game->dl->begin_x < 0 || game->dl->begin_y < 0))
+			break ;
 		for (int i = 0; i < 3; i++)
 			mlx_put_pixel(game->minimap, game->dl->begin_x + i,
 				game->dl->begin_y, 0xF0F00FF0);
-		if (game->dl->begin_x == game->dl->end_x
-			&& game->dl->begin_y == game->dl->end_y)
-			break ;
 		game->dl->two_times_error = 2 * game->dl->error;
 		if (game->dl->two_times_error > -game->dl->delta_y)
 		{
