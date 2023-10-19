@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 17:08:51 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/18 18:07:37 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/19 13:07:25 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,14 +91,7 @@ void	raycaster(t_game *g)
 			g->ray->ray_y = g->ray->hor_y;
 			g->ray->final_d = g->ray->dist_h;
 		}
-		g->dl->begin_x = (g->pl_x / DIMENS) * 10;
-		g->dl->begin_y = (g->pl_y / DIMENS) * 10;
-		if (g->caster->pa > M_PI_2 && g->caster->pa < 3 * M_PI_2)
-			g->dl->end_x = (g->ray->ray_x / DIMENS) * 10 + 1;
-		else
-			g->dl->end_x = (g->ray->ray_x / DIMENS) * 10 - 3;
-		g->dl->end_y = (g->ray->ray_y / DIMENS) * 10;
-		ft_draw_line(g);
+		draw_minimap(g);
 		ft_set_values_and_render_funcs(g);
 	}
 }
