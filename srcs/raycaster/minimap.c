@@ -1,34 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minimap_utils.c                                    :+:      :+:    :+:   */
+/*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 14:58:26 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/18 13:58:39 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/18 21:19:41 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-
-void	ft_fill_minispace(t_game *g, int start_x, int start_y, uint32_t color)
+void	draw_minimap(t_game *g)
 {
-	int	x;
-	int	y;
-
-	y = start_y;
-	while (y < start_y + 20)
-	{
-		x = start_x;
-		while (x < start_x + 20)
-		{
-			mlx_put_pixel(g->minimap, x, y, color);
-			x++;
-		}
-		y++;
-	}
+	g->dl->begin_x = 98;
+	g->dl->begin_y = 98;
+	g->dl->end_x = (g->ray->ray_x - (g->pl_x - 5 * DIMENS)) / DIMENS * 20;
+	g->dl->end_y = (g->ray->ray_y - (g->pl_y - 5 * DIMENS)) / DIMENS * 20;
+	g->dl->end_x = fmin(fmax(g->dl->end_x, 0), 198);
+	g->dl->end_y = fmin(fmax(g->dl->end_y, 0), 198);
+	ft_draw_line(g);
 }
 
 void	ft_fill_miniplayer(t_game *g, int x, int y)
@@ -66,21 +58,21 @@ void	ft_fill_minimap(t_game *g)
 	int		mini_x;
 	int		mini_y;
 
-	y = 0;
+	y = g->pl_y - 5 * DIMENS;
 	mini_y = 0;
-	while (y < g->height * DIMENS)
+	while (mini_y < 200)
 	{
-		x = 0;
+		x = g->pl_x - 5 * DIMENS;
 		mini_x = 0;
-		while (x/DIMENS < ft_strlen(g->caster->map[(int)y/DIMENS]))
+		while (mini_x < 200)
 		{
 			c = ft_check_color(g, x, y);
-			ft_fill_minispace(g, mini_x, mini_y, c);
-			mini_x += 20;
-			x += 128;
+			mlx_put_pixel(g->minimap, mini_x, mini_y, c);
+			mini_x++;
+			x += 6.4;
 		}
-		mini_y += 20;
-		y += 128;
+		mini_y++;
+		y += 6.4;
 	}
-	ft_fill_miniplayer(g, (g->pl_x / DIMENS) * 20, (g->pl_y / DIMENS) * 20);
+	ft_fill_miniplayer(g, 98, 98);
 }

@@ -6,7 +6,7 @@
 /*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 21:27:23 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/18 13:42:36 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/10/18 20:41:08 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ void	check_vertical_wall(t_game *g)
 		g->caster->map_y = (int)g->ray->ray_y / DIMENS;
 		if (g->caster->map_x < g->width && g->caster->map_y < g->height
 			&& g->caster->map_x >= 0 && g->caster->map_y >= 0
-			&& g->caster->map[g->caster->map_y][g->caster->map_x] == '1')
+			&& (g->caster->map[g->caster->map_y][g->caster->map_x] == '1'
+			|| g->caster->map[g->caster->map_y][g->caster->map_x] == 'D'))
 		{
 			g->ray->ver_x = g->ray->ray_x;
 			g->ray->ver_y = g->ray->ray_y;
