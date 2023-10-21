@@ -10,7 +10,7 @@ SRCS = main.c ./srcs/parsing/file_type.c ./srcs/utils/init.c ./srcs/utils/parsin
 		./srcs/utils/texture_utils.c ./srcs/game_funcs/draw_line.c ./srcs/raycaster/caster.c ./srcs/raycaster/horizontal.c \
 		./srcs/raycaster/vertical.c ./srcs/utils/init_utils.c ./srcs/utils/hook_utils.c ./srcs/utils/render_utils.c \
 		./srcs/raycaster/minimap.c ./srcs/player_funcs/player_movement.c ./srcs/player_funcs/player_rotation.c ./srcs/utils/mini_map_utils.c \
-		./srcs/utils/draw_utils.c ./srcs/utils/math_utils.c
+		./srcs/utils/draw_utils.c ./srcs/utils/math_utils.c ./srcs/raycaster/sprites.c
 
 OBJS = $(SRCS:.c=.o)
 
