@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 17:45:32 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/20 18:45:20 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/21 16:54:10 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	ft_set_values_and_render_funcs(t_game *g)
 	ft_set_values_for_rendering(g);
 	ft_draw_walls(g);
 	ft_set_values_floor_ceiling(g);
-	ft_draw_sprites(g);
+	ft_set_values_sprites(g);
 	g->ray->ray_a += DGREE / 8;
 	set_limit(g);
 }

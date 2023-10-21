@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:19:00 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/21 13:42:36 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/21 16:53:31 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -272,4 +272,6 @@ void			check_horizontal_line(t_game *g);
 void			check_vertical_line(t_game *g);
 void			replace_img(t_game *g);
 
+//sprites.c
+void			ft_set_values_sprites(t_game *g);
 #endif
