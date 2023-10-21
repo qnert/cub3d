@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:19:00 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/20 18:48:15 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/21 13:42:36 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,7 +162,7 @@ int				ft_fill_map(t_game *game, t_map *m);
 
 //game_init.c
 int				get_longest_line(char **matrix);
-void			game_init(t_map *map);
+int				game_init(t_map *map);
 
 //get_texture.c
 void			get_player_img(t_game *game);

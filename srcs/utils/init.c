@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 15:24:52 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/20 18:36:21 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/21 14:11:24 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_map	*strct_init(char *file_path)
 	if (get_input(init) == 1)
 		return (init->error = 1, init);
 	init->map = get_and_check_map(init->map_fd);
-	if (!init->map)
+	if (init->map == NULL)
 		return (init->error = 1, init);
 	init->game = malloc(sizeof(t_game));
 	init->game->sp = sprite_init();

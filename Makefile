@@ -18,7 +18,7 @@ all: MLX42 $(NAME)
 
 $(NAME): $(OBJS)
 	@cd libft && make
-	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) ./libft/libs.a ./MLX42/build/libmlx42.a $(MLXFLAGS)
+	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) ./libft/libs.a ./MLX42/build/libmlx42.a $(MLXFLAGS) -Wno-gnu-include-next
 
 MLX42:
 	@if [ ! -d "MLX42" ]; then git clone https://github.com/codam-coding-college/MLX42.git; fi

@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 12:21:20 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/12 10:30:06 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/21 14:11:01 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ bool	check_invalid_component(char **map)
 
 bool	complete_component_check(char **map)
 {
-	if (!check_map(map))
+	if (check_map(map) == false)
 		return (false);
 	if (!check_invalid_component(map))
 		return (ft_error_msg("Invalid map component found\n"), false);
