@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_texture.c                                      :+:      :+:    :+:   */
+/*   math_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/06 14:16:44 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/20 18:26:32 by skunert          ###   ########.fr       */
+/*   Created: 2023/10/20 18:46:47 by skunert           #+#    #+#             */
+/*   Updated: 2023/10/20 18:47:00 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void	get_player_img(t_game *game)
+int	rad_to_degree(double rad)
 {
-	game->player = mlx_new_image(game->mlx, 10, 10);
-	set_pixels_img(game->player, 10, 10, 0x000000);
+	int	deg;
+
+	deg = rad * (180 / M_PI);
+	return (deg);
 }
 
-void	get_images(t_game *game)
+int	ft_abs(int num)
 {
-	get_player_img(game);
-	game->minimap = mlx_new_image(game->mlx,
-			game->width * DIMENS, game->height * DIMENS);
-	game->line = mlx_new_image(game->mlx, game->dis_w + 20, game->dis_h + 20);
+	if (num < 0)
+		return (-num);
+	return (num);
 }

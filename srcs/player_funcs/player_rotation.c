@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_rotation.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 21:29:58 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/18 21:30:59 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/10/19 15:41:12 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,3 @@ void	ft_rotate_right(t_game *game, int diff)
 			game->caster->pa -= 2 * M_PI;
 	}
 }
-

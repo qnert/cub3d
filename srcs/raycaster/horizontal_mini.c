@@ -1,18 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   horizontal.c                                       :+:      :+:    :+:   */
+/*   horizontal_mini.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 21:26:51 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/20 19:18:13 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/19 14:52:11 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void	assign_variables_horizontal(t_game *g)
+#include "../../includes/cub3d.h"
+
+static void	assign_variables_horizontal(t_game *g)
 {
 	g->ray->dist_h = 100000;
 	g->ray->hor_x = g->pl_x;
@@ -21,7 +23,7 @@ void	assign_variables_horizontal(t_game *g)
 	g->ray->a_tan = -1 / tan(g->ray->ray_a);
 }
 
-void	check_horizontal_wall(t_game *g)
+static void	check_horizontal_wall(t_game *g)
 {
 	while (g->ray->depoffield < 50)
 	{
@@ -48,7 +50,7 @@ void	check_horizontal_wall(t_game *g)
 
 // checks the horizontal lines of our map grids and determines if a wall
 // is hit or not
-void	check_horizontal_line(t_game *g)
+void	check_horizontal_line_mini(t_game *g)
 {
 	assign_variables_horizontal(g);
 	if (g->ray->ray_a > M_PI)

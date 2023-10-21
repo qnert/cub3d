@@ -1,56 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minimap.c                                          :+:      :+:    :+:   */
+/*   mini_map_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/17 14:58:26 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/20 18:28:15 by skunert          ###   ########.fr       */
+/*   Created: 2023/10/19 15:36:51 by skunert           #+#    #+#             */
+/*   Updated: 2023/10/19 15:40:22 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void	draw_minimap(t_game *g)
+uint32_t	ft_check_color_walls(t_game *g, float x, float y)
 {
-	g->dl->begin_x = 98;
-	g->dl->begin_y = 98;
-	g->dl->end_x = (g->ray->ray_x - (g->pl_x - 5 * DIMENS)) / DIMENS * 20;
-	g->dl->end_y = (g->ray->ray_y - (g->pl_y - 5 * DIMENS)) / DIMENS * 20;
-	ft_draw_line(g, -1);
-}
-
-void	ft_fill_miniplayer(t_game *g, int x, int y)
-{
-	int	i;
-	int	j;
-
-	i = -1;
-	while (++i < 5)
-	{
-		j = -1;
-		while (++j < 5)
-			mlx_put_pixel(g->minimap, x + j, y + i, 0xF1C40FFF);
-	}
-}
-
-int	check_free_char(char c)
-{
-	if (ft_strchr("0XNWSEP", c))
-		return (1);
+	if (x >= 0 && y >= 0 && x <= g->width
+		* DIMENS && y <= g->height * DIMENS
+		&& g->caster->map[(int)y / DIMENS][(int)x / DIMENS] == 'D')
+		return (0x3498DBFF);
+	else if (x >= 0 && y >= 0 && x <= g->width
+		* DIMENS && y <= g->height * DIMENS
+		&& g->caster->map[(int)y / DIMENS][(int)x / DIMENS] == '1')
+		return (0x515A5AFF);
 	return (0);
 }
 
-uint32_t	ft_check_color(t_game *g, float x, float y)
-{
-	if (x >= 0 && y >= 0 && x <= 33 * DIMENS && y <= 14 * DIMENS
-		&& (check_free_char(g->caster->map[(int)y / DIMENS][(int)x / DIMENS])))
-		return (0xEAEDEDFF);
-	return (0);
-}
-
-void	ft_fill_minimap(t_game *g)
+void	ft_fill_minimap_walls(t_game *g)
 {
 	float	x;
 	float	y;
@@ -66,7 +41,7 @@ void	ft_fill_minimap(t_game *g)
 		mini_x = 0;
 		while (mini_x < 200)
 		{
-			c = ft_check_color(g, x, y);
+			c = ft_check_color_walls(g, x, y);
 			if (c != 0)
 				mlx_put_pixel(g->minimap, mini_x, mini_y, c);
 			mini_x++;

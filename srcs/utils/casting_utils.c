@@ -3,29 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   casting_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 19:18:20 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/18 13:21:42 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/10/20 18:46:42 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-
-int	rad_to_degree(double rad)
-{
-	int	deg;
-
-	deg = rad * (180 / M_PI);
-	return (deg);
-}
-
-int	ft_abs(int num)
-{
-	if (num < 0)
-		return (-num);
-	return (num);
-}
 
 t_sprite	*sprite_init(void)
 {
@@ -79,6 +64,21 @@ t_draw_line	*draw_line_init(void)
 	dl->end_x = 0;
 	dl->end_y = 0;
 	return (dl);
+}
+
+t_draw_sprite	*draw_sprite_init(void)
+{
+	t_draw_sprite	*ds;
+
+	ds = malloc(sizeof(t_draw_sprite));
+	ds->sx = 0;
+	ds->sy = 0;
+	ds->sz = 0;
+	ds->cosine = 0;
+	ds->sine = 0;
+	ds->rot_a = 0;
+	ds->rot_b = 0;
+	return (ds);
 }
 
 t_cast	*caster_init(t_map *init)

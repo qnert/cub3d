@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   horizontal.c                                       :+:      :+:    :+:   */
+/*   vertical_mini.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/10 21:26:51 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/20 19:18:13 by skunert          ###   ########.fr       */
+/*   Created: 2023/10/10 21:27:23 by njantsch          #+#    #+#             */
+/*   Updated: 2023/10/19 14:56:54 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void	assign_variables_horizontal(t_game *g)
+static void	assign_variables_vertical(t_game *g)
 {
-	g->ray->dist_h = 100000;
-	g->ray->hor_x = g->pl_x;
-	g->ray->hor_y = g->pl_y;
+	g->ray->dist_v = 100000;
+	g->ray->ver_x = g->pl_x;
+	g->ray->ver_y = g->pl_y;
 	g->ray->depoffield = 0;
-	g->ray->a_tan = -1 / tan(g->ray->ray_a);
+	g->ray->n_tan = -tan(g->ray->ray_a);
 }
 
-void	check_horizontal_wall(t_game *g)
+static void	check_vertical_wall(t_game *g)
 {
 	while (g->ray->depoffield < 50)
 	{
@@ -32,10 +32,10 @@ void	check_horizontal_wall(t_game *g)
 			&& (g->caster->map[g->caster->map_y][g->caster->map_x] == '1'
 			|| g->caster->map[g->caster->map_y][g->caster->map_x] == 'D'))
 		{
-			g->ray->hor_x = g->ray->ray_x;
-			g->ray->hor_y = g->ray->ray_y;
-			g->ray->dist_h = ft_distance(g, g->ray->hor_x, g->ray->hor_y);
-			g->ray->depoffield = 50;
+			g->ray->ver_x = g->ray->ray_x;
+			g->ray->ver_y = g->ray->ray_y;
+			g->ray->dist_v = ft_distance(g, g->ray->ver_x, g->ray->ver_y);
+			g->ray->depoffield = 100;
 		}
 		else
 		{
@@ -46,26 +46,26 @@ void	check_horizontal_wall(t_game *g)
 	}
 }
 
-// checks the horizontal lines of our map grids and determines if a wall
+// checks the vertical lines of our map grids and determines if a wall
 // is hit or not
-void	check_horizontal_line(t_game *g)
+void	check_vertical_line_mini(t_game *g)
 {
-	assign_variables_horizontal(g);
-	if (g->ray->ray_a > M_PI)
+	assign_variables_vertical(g);
+	if (g->ray->ray_a > M_PI_2 && g->ray->ray_a < 3 * M_PI_2)
 	{
-		g->ray->ray_y = (((int)g->pl_y / DIMENS) * DIMENS) - 0.0001;
-		g->ray->ray_x = (g->pl_y - g->ray->ray_y)
-			* g->ray->a_tan + g->pl_x;
-		g->ray->y_o = -DIMENS;
-		g->ray->x_o = -g->ray->y_o * g->ray->a_tan;
+		g->ray->ray_x = (((int)g->pl_x / DIMENS) * DIMENS) - 0.0001;
+		g->ray->ray_y = (g->pl_x - g->ray->ray_x)
+			* g->ray->n_tan + g->pl_y;
+		g->ray->x_o = -DIMENS;
+		g->ray->y_o = -g->ray->x_o * g->ray->n_tan;
 	}
-	if (g->ray->ray_a < M_PI)
+	if (g->ray->ray_a < M_PI_2 || g->ray->ray_a > 3 * M_PI_2)
 	{
-		g->ray->ray_y = (((int)g->pl_y / DIMENS) * DIMENS) + DIMENS;
-		g->ray->ray_x = (g->pl_y - g->ray->ray_y)
-			* g->ray->a_tan + g->pl_x;
-		g->ray->y_o = DIMENS;
-		g->ray->x_o = -g->ray->y_o * g->ray->a_tan;
+		g->ray->ray_x = (((int)g->pl_x / DIMENS) * DIMENS) + DIMENS;
+		g->ray->ray_y = (g->pl_x - g->ray->ray_x)
+			* g->ray->n_tan + g->pl_y;
+		g->ray->x_o = DIMENS;
+		g->ray->y_o = -g->ray->x_o * g->ray->n_tan;
 	}
 	if (g->ray->ray_a == 0 || g->ray->ray_a == M_PI)
 	{
@@ -73,5 +73,5 @@ void	check_horizontal_line(t_game *g)
 		g->ray->ray_y = g->pl_y;
 		g->ray->depoffield = 50;
 	}
-	check_horizontal_wall(g);
+	check_vertical_wall(g);
 }
