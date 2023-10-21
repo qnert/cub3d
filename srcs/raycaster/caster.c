@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   caster.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 17:08:51 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/19 17:22:06 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/21 19:18:15 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,5 +94,6 @@ void	raycaster(t_game *g)
 		draw_minimap(g);
 		ft_set_values_and_render_funcs(g);
 	}
+	ft_set_values_sprites(g);
 	ft_fill_minimap_walls(g);
 }
