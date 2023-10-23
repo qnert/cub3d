@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:19:00 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/23 11:58:31 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/23 12:03:55 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@
 typedef struct sprite
 {
 	mlx_texture_t	*sp_tex;
-	int				type; //collectible, enemy
-	int				state; //on, off
+	int				type;
+	int				state;
 	int				x;
 	int				y;
 	int				z;
