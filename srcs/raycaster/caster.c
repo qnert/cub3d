@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   caster.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 17:08:51 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/21 19:18:15 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/10/23 11:58:25 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,20 +77,7 @@ void	raycaster(t_game *g)
 	{
 		check_horizontal_line(g);
 		check_vertical_line(g);
-		if (g->ray->dist_v < g->ray->dist_h)
-		{
-			g->ray->shade = 0.8;
-			g->ray->ray_x = g->ray->ver_x;
-			g->ray->ray_y = g->ray->ver_y;
-			g->ray->final_d = g->ray->dist_v;
-		}
-		if (g->ray->dist_h < g->ray->dist_v)
-		{
-			g->ray->shade = 1.0;
-			g->ray->ray_x = g->ray->hor_x;
-			g->ray->ray_y = g->ray->hor_y;
-			g->ray->final_d = g->ray->dist_h;
-		}
+		ft_check_right_distance(g);
 		draw_minimap(g);
 		ft_set_values_and_render_funcs(g);
 	}

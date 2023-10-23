@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 18:45:04 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/21 16:52:57 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/10/23 12:03:47 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,17 +47,6 @@ void	ft_draw_floor_ceiling(t_game *g, int i)
 	j = -1;
 	while (++j < 8)
 		mlx_put_pixel(g->line, j + g->dl->begin_x, i, g->dl->color);
-	// g->dl->pixel = (((int)g->dl->ty & (g->ceiling_tex->width / 2 - 1))
-	// 		* g->ceiling_tex->width + ((int)g->dl->tx
-	// 			& (g->ceiling_tex->width / 2 - 1)))
-	// 	* g->floor_tex->bytes_per_pixel;
-	// g->dl->color = (int)(g->ceiling_tex->pixels[g->dl->pixel]) << 24
-	// 	| (int)(g->ceiling_tex->pixels[g->dl->pixel + 1]) << 16
-	// 	| (int)(g->ceiling_tex->pixels[g->dl->pixel + 2]) << 8
-	// 	| (int)(g->ceiling_tex->pixels[g->dl->pixel + 3]);
-	// j = -1;
-	// while (++j < 8)
-	// 	mlx_put_pixel(g->line, j + g->dl->begin_x, g->dis_h - i, g->dl->color);
 }
 
 void	draw_sky(t_game *g)
