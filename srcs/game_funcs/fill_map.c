@@ -6,7 +6,7 @@
 /*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 14:38:02 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/23 17:34:06 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/10/23 20:21:56 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,28 +56,6 @@ void	ft_clear_up_tex(t_game *g, int i)
 		mlx_delete_texture(g->tex->wall_south_tex);
 		mlx_delete_texture(g->tex->wall_west_tex);
 		mlx_delete_texture(g->tex->wall_east_tex);
-	}
-}
-
-void	ft_get_location(t_game *game, char **map)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (map[i])
-	{
-		j = 0;
-		while (map[i][j])
-		{
-			if (map[i][j] == 'P')
-			{
-				game->sp->x = j * DIMENS + 20;
-				game->sp->y = i * DIMENS + 20;
-			}
-			j++;
-		}
-		i++;
 	}
 }
 
