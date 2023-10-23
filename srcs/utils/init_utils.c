@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 16:39:01 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/23 16:33:44 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/23 20:21:23 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,38 +73,38 @@ int	get_rgb(t_map *init, char *id, char **rgb)
 void	ft_clear_up_other_tex(t_game *g, int i)
 {
 	if (i == 1)
-		mlx_delete_texture(g->floor_tex);
+		mlx_delete_texture(g->tex->floor_tex);
 	if (i == 2)
 	{
-		mlx_delete_texture(g->floor_tex);
-		mlx_delete_texture(g->ceiling_tex);
+		mlx_delete_texture(g->tex->floor_tex);
+		mlx_delete_texture(g->tex->ceiling_tex);
 	}
 	if (i == 3)
 	{
-		mlx_delete_texture(g->floor_tex);
-		mlx_delete_texture(g->ceiling_tex);
-		mlx_delete_texture(g->door_tex);
+		mlx_delete_texture(g->tex->floor_tex);
+		mlx_delete_texture(g->tex->ceiling_tex);
+		mlx_delete_texture(g->tex->door_tex);
 	}
 }
 
 int	ft_get_other_tex(t_game *game)
 {
-	game->floor_tex = mlx_load_png("./textures/metal.png");
-	if (game->floor_tex == NULL)
+	game->tex->floor_tex = mlx_load_png("./textures/metal.png");
+	if (game->tex->floor_tex == NULL)
 		return (ft_error_msg("Wall texture couldn't be opnened\n"),
 			ft_clear_up_tex(game, 4), 1);
-	game->ceiling_tex = mlx_load_png("./textures/night_sky2.png");
-	if (game->ceiling_tex == NULL)
+	game->tex->ceiling_tex = mlx_load_png("./textures/night_sky2.png");
+	if (game->tex->ceiling_tex == NULL)
 		return (ft_clear_up_other_tex(game, 1),
 			ft_error_msg("Ceiling texture couldn't be opnened\n"),
 			ft_clear_up_tex(game, 4), 1);
-	game->door_tex = mlx_load_png("./textures/door.png");
-	if (game->door_tex == NULL)
+	game->tex->door_tex = mlx_load_png("./textures/door.png");
+	if (game->tex->door_tex == NULL)
 		return (ft_clear_up_other_tex(game, 2),
 			ft_error_msg("Door texture couldn't be opnened\n"),
 			ft_clear_up_tex(game, 4), 1);
-	game->sp->sp_tex = mlx_load_png("./textures/beer.png");
-	if (game->sp->sp_tex == NULL)
+	game->tex->coll_tex = mlx_load_png("./textures/beer.png");
+	if (game->tex->coll_tex == NULL)
 		return (ft_clear_up_other_tex(game, 3),
 			ft_error_msg("Sprite texture couldn't be opnened\n"),
 			ft_clear_up_tex(game, 4), 1);
