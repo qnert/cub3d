@@ -6,7 +6,7 @@
 /*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:19:00 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/21 16:53:31 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/10/23 11:54:37 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,9 +153,6 @@ typedef struct map
 
 //game_funcs
 
-//draw_line.c
-void			ft_draw_line(t_game *game, int i);
-
 //fill_map.c
 void			ft_get_location(t_game *game, char **map);
 int				ft_fill_map(t_game *game, t_map *m);
@@ -258,7 +255,7 @@ void			ft_check_door(t_game *g);
 bool			ft_check_collision(char c);
 
 //draw_line.c
-void			ft_draw_line_3D(t_game *game);
+void			ft_draw_line(t_game *game, int i);
 
 //caster.c
 void			set_limit(t_game *g);
