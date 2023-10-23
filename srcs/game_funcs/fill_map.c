@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 14:38:02 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/23 14:46:59 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/23 16:19:03 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,9 +93,7 @@ int	ft_fill_map(t_game *game, t_map *m)
 	if (game->wall_east_tex == NULL)
 		return (ft_clear_up_tex(game, 3),
 			ft_error_msg("EA texture couldn't be opnened\n"), 1);
-	game->floor_tex = mlx_load_png("./textures/metal.png");
-	game->ceiling_tex = mlx_load_png("./textures/night_sky2.png");
-	game->door_tex = mlx_load_png("./textures/door.png");
-	game->sp->sp_tex = mlx_load_png("./textures/beer.png");
+	if (ft_get_other_tex(game) == 1)
+		return (1);
 	return (0);
 }

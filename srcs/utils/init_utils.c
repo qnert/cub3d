@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 16:39:01 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/14 16:39:54 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/23 16:21:07 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,42 @@ int	get_rgb(t_map *init, char *id, char **rgb)
 			return (printf("Error\nnot a valid rgb range\n"), 1);
 		i++;
 	}
+	return (0);
+}
+
+void	ft_clear_up_other_tex(t_game *g, int i)
+{
+	if (i == 1)
+		mlx_delete_texture(g->floor_tex);
+	if (i == 2)
+	{
+		mlx_delete_texture(g->floor_tex);
+		mlx_delete_texture(g->ceiling_tex);
+	}
+	if (i == 3)
+	{
+		mlx_delete_texture(g->floor_tex);
+		mlx_delete_texture(g->ceiling_tex);
+		mlx_delete_texture(g->door_tex);
+	}
+}
+
+int	ft_get_other_tex(t_game *game)
+{
+	game->floor_tex = mlx_load_png("./textures/metal.png");
+	if (game->floor_tex == NULL)
+		return (ft_error_msg("Wall texture couldn't be opnened\n"), 1);
+	game->ceiling_tex = mlx_load_png("./textures/night_sky2.png");
+	if (game->ceiling_tex == NULL)
+		return (ft_clear_up_other_tex(game, 1),
+			ft_error_msg("Ceiling texture couldn't be opnened\n"), 1);
+	game->door_tex = mlx_load_png("./textures/door.png");
+	if (game->door_tex == NULL)
+		return (ft_clear_up_other_tex(game, 2),
+			ft_error_msg("Door texture couldn't be opnened\n"), 1);
+	game->sp->sp_tex = mlx_load_png("./textures/beer.png");
+	if (game->sp->sp_tex == NULL)
+		return (ft_clear_up_other_tex(game, 3),
+			ft_error_msg("Sprite texture couldn't be opnened\n"), 1);
 	return (0);
 }
