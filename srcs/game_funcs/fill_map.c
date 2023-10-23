@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 14:38:02 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/23 16:19:03 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/23 16:33:18 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,13 @@ void	ft_clear_up_tex(t_game *g, int i)
 		mlx_delete_texture(g->wall_north_tex);
 		mlx_delete_texture(g->wall_south_tex);
 		mlx_delete_texture(g->wall_west_tex);
+	}
+	if (i == 4)
+	{
+		mlx_delete_texture(g->wall_north_tex);
+		mlx_delete_texture(g->wall_south_tex);
+		mlx_delete_texture(g->wall_west_tex);
+		mlx_delete_texture(g->wall_east_tex);
 	}
 }
 

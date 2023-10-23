@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:19:00 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/23 16:13:23 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/23 16:30:37 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,6 +156,7 @@ typedef struct map
 //game_funcs
 
 //fill_map.c
+void			ft_clear_up_tex(t_game *g, int i);
 void			ft_get_location(t_game *game, char **map);
 int				ft_fill_map(t_game *game, t_map *m);
 
