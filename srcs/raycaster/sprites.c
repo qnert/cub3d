@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 16:52:24 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/23 11:58:21 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/23 12:01:35 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,20 +42,27 @@ bool	ft_check_walls_sprite(t_game *g)
 
 void	ft_draw_sprites(t_game *g)
 {
-	int scale = 16 * g->dis_w / g->ds->rot_b;
+	int	x;
+	int	y;
+	int	scale;
+
+	scale = 16 * g->dis_w / g->ds->rot_b;
+	x = g->ds->sx - scale / 2;
 	if (scale > 105)
 		scale = 105;
 	if (scale < 0)
 		scale = 0;
-	for (int x = g->ds->sx - scale / 2; x < g->ds->sx + scale / 2; x++)
+	while (x < g->ds->sx + scale / 2)
 	{
-		for (int y = 0; y < scale; y++)
+		y = -1;
+		while (++y < scale)
 		{
 			if (x > 0 && g->ds->sy > g->dis_h / 2
 				&& x < g->dis_w && g->ds->sy < g->dis_h
 				&& ft_check_walls_sprite(g) == false)
 				mlx_put_pixel(g->line, x, g->ds->sy - y, 0x000000FF);
 		}
+		x++;
 	}
 }
 
