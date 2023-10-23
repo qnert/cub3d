@@ -6,7 +6,7 @@
 /*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 17:45:32 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/21 19:18:09 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/10/23 17:49:05 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ void	ft_set_values_floor_ceiling(t_game *g)
 			g->dl->fix_ra -= 2 * M_PI;
 		g->dl->fix_ra = cos(g->dl->fix_ra);
 		g->dl->tx = g->pl_x / 2 + cos(g->ray->ray_a) * 158
-			* 3 * g->floor_tex->width / g->dl->dy / g->dl->fix_ra;
+			* 3 * g->tex->floor_tex->width / g->dl->dy / g->dl->fix_ra;
 		g->dl->ty = g->pl_y / 2 + sin(g->ray->ray_a) * 158
-			* 3 * g->floor_tex->width / g->dl->dy / g->dl->fix_ra;
+			* 3 * g->tex->floor_tex->width / g->dl->dy / g->dl->fix_ra;
 		ft_draw_floor_ceiling(g, i);
 		i++;
 	}

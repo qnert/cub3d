@@ -6,24 +6,11 @@
 /*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 19:18:20 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/21 19:24:52 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/10/23 17:26:01 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-
-t_sprite	*sprite_init(void)
-{
-	t_sprite	*sp;
-
-	sp = malloc(sizeof(t_sprite));
-	sp->state = 1;
-	sp->type = 2;
-	sp->x = 0;
-	sp->y = 0;
-	sp->z = 550;
-	return (sp);
-}
 
 t_ray	*ray_init(void)
 {

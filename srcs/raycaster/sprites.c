@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprites.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 16:52:24 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/23 15:08:31 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/23 19:30:26 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,24 +45,24 @@ void	ft_draw_sprite_tex(t_game *g, int x, int y, int scale)
 	while (x < g->ds->sx + scale / 2)
 	{
 		y = -1;
-		g->ds->t_y = g->sp->sp_tex->height - 1;
+		g->ds->t_y = g->tex->coll_tex->height - 1;
 		while (++y < scale)
 		{
-			g->dl->pixel = ((int)g->ds->t_y * g->sp->sp_tex->height
-					+ (int)g->ds->t_x) * g->sp->sp_tex->bytes_per_pixel;
-			g->dl->color = (int)(g->sp->sp_tex->pixels[g->dl->pixel]) << 24
-				| (int)(g->sp->sp_tex->pixels[g->dl->pixel + 1]) << 16
-				| (int)(g->sp->sp_tex->pixels[g->dl->pixel + 2]) << 8
-				| (int)(g->sp->sp_tex->pixels[g->dl->pixel + 3]);
+			g->dl->pixel = ((int)g->ds->t_y * g->tex->coll_tex->height
+					+ (int)g->ds->t_x) * g->tex->coll_tex->bytes_per_pixel;
+			g->dl->color = (int)(g->tex->coll_tex->pixels[g->dl->pixel]) << 24
+				| (int)(g->tex->coll_tex->pixels[g->dl->pixel + 1]) << 16
+				| (int)(g->tex->coll_tex->pixels[g->dl->pixel + 2]) << 8
+				| (int)(g->tex->coll_tex->pixels[g->dl->pixel + 3]);
 			if (x > 0 && g->ds->sy > g->dis_h / 2
 				&& x < g->dis_w && g->ds->sy < g->dis_h
 				&& g->dl->color != 0)
 				mlx_put_pixel(g->line, x, g->ds->sy - y, g->dl->color);
-			g->ds->t_y -= g->sp->sp_tex->height / (float)scale;
+			g->ds->t_y -= g->tex->coll_tex->height / (float)scale;
 			if (g->ds->t_y < 0)
 				g->ds->t_y = 0;
 		}
-		g->ds->t_x += (g->sp->sp_tex->height - 0.5) / (float)scale;
+		g->ds->t_x += (g->tex->coll_tex->height - 0.5) / (float)scale;
 		x++;
 	}
 }
@@ -84,22 +84,28 @@ void	ft_draw_sprites(t_game *g)
 	if (ft_distance(g, g->sp->x, g->sp->y) < 100)
 		g->sp->state = 0;
 	if (ft_check_walls_sprite(g) == false && g->sp->state == 1)
-	{
 		ft_draw_sprite_tex(g, x, y, scale);
-	}
 }
 
 void	ft_set_values_sprites(t_game *g)
 {
-	g->ds->sx = g->sp->x - g->pl_x;
-	g->ds->sy = g->sp->y - g->pl_y;
-	g->ds->sz = g->sp->z;
-	g->ds->cosine = cos(g->caster->pa);
-	g->ds->sine = sin(g->caster->pa);
-	g->ds->rot_a = g->ds->sy * g->ds->cosine * 12
-		- g->ds->sx * g->ds->sine * 12;
-	g->ds->rot_b = g->ds->sx * g->ds->cosine + g->ds->sy * g->ds->sine;
-	g->ds->sx = (g->ds->rot_a * 108.0 / g->ds->rot_b) + (g->dis_w / 2);
-	g->ds->sy = (g->ds->sz * 108.0 / g->ds->rot_b) + (g->dis_h / 2);
-	ft_draw_sprites(g);
+	t_sprite	*begin;
+
+	begin = g->sp;
+	while (g->sp)
+	{
+		g->ds->sx = g->sp->x - g->pl_x;
+		g->ds->sy = g->sp->y - g->pl_y;
+		g->ds->sz = g->sp->z;
+		g->ds->cosine = cos(g->caster->pa);
+		g->ds->sine = sin(g->caster->pa);
+		g->ds->rot_a = g->ds->sy * g->ds->cosine * 12
+			- g->ds->sx * g->ds->sine * 12;
+		g->ds->rot_b = g->ds->sx * g->ds->cosine + g->ds->sy * g->ds->sine;
+		g->ds->sx = (g->ds->rot_a * 108.0 / g->ds->rot_b) + (g->dis_w / 2);
+		g->ds->sy = (g->ds->sz * 108.0 / g->ds->rot_b) + (g->dis_h / 2);
+		ft_draw_sprites(g);
+		g->sp = g->sp->next;
+	}
+	g->sp = begin;
 }

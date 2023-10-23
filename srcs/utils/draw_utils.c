@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 18:45:04 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/23 16:24:34 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/23 17:43:16 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ void	ft_draw_walls(t_game *g)
 	i = -1;
 	while (++i < g->caster->line_hight)
 	{
-		g->dl->pixel = ((int)g->dl->ty * g->wall_north_tex->width
+		g->dl->pixel = ((int)g->dl->ty * g->tex->wall_north_tex->width
 				+ (int)g->dl->tx)
-			* g->wall_north_tex->bytes_per_pixel;
+			* g->tex->wall_north_tex->bytes_per_pixel;
 		g->dl->color = get_right_wall_color(g);
 		j = -1;
 		while (++j < 4)
@@ -36,14 +36,14 @@ void	ft_draw_floor_ceiling(t_game *g, int i)
 {
 	int	j;
 
-	g->dl->pixel = (((int)g->dl->ty & (g->floor_tex->width / 2 - 1))
-			* g->floor_tex->width + ((int)g->dl->tx
-				& (g->floor_tex->width / 2 - 1)))
-		* g->floor_tex->bytes_per_pixel;
-	g->dl->color = (int)(g->floor_tex->pixels[g->dl->pixel]) << 24
-		| (int)(g->floor_tex->pixels[g->dl->pixel + 1]) << 16
-		| (int)(g->floor_tex->pixels[g->dl->pixel + 2]) << 8
-		| (int)(g->floor_tex->pixels[g->dl->pixel + 3]);
+	g->dl->pixel = (((int)g->dl->ty & (g->tex->floor_tex->width / 2 - 1))
+			* g->tex->floor_tex->width + ((int)g->dl->tx
+				& (g->tex->floor_tex->width / 2 - 1)))
+		* g->tex->floor_tex->bytes_per_pixel;
+	g->dl->color = (int)(g->tex->floor_tex->pixels[g->dl->pixel]) << 24
+		| (int)(g->tex->floor_tex->pixels[g->dl->pixel + 1]) << 16
+		| (int)(g->tex->floor_tex->pixels[g->dl->pixel + 2]) << 8
+		| (int)(g->tex->floor_tex->pixels[g->dl->pixel + 3]);
 	j = -1;
 	while (++j < 8)
 		mlx_put_pixel(g->line, j + g->dl->begin_x, i, g->dl->color);
@@ -65,11 +65,11 @@ void	draw_sky(t_game *g)
 				g->dl->x_off += 120;
 			g->dl->x_off = g->dl->x_off % 120;
 			g->dl->pixel = (y * 120 + g->dl->x_off)
-				* g->ceiling_tex->bytes_per_pixel;
-			g->dl->color = (int)g->ceiling_tex->pixels[g->dl->pixel] << 24
-				| (int)g->ceiling_tex->pixels[g->dl->pixel + 1] << 16
-				| (int)g->ceiling_tex->pixels[g->dl->pixel + 2] << 8
-				| (int)g->ceiling_tex->pixels[g->dl->pixel + 3];
+				* g->tex->ceiling_tex->bytes_per_pixel;
+			g->dl->color = (int)g->tex->ceiling_tex->pixels[g->dl->pixel] << 24
+				| (int)g->tex->ceiling_tex->pixels[g->dl->pixel + 1] << 16
+				| (int)g->tex->ceiling_tex->pixels[g->dl->pixel + 2] << 8
+				| (int)g->tex->ceiling_tex->pixels[g->dl->pixel + 3];
 			scale_texture(g, x, y, 12);
 		}
 	}

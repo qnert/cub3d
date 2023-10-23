@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 15:24:52 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/23 12:06:55 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/23 19:22:14 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_map	*strct_init(char *file_path)
 {
-	t_map	*init;
+	t_map		*init;
 
 	init = malloc(sizeof(t_map));
 	init->error = 0;
@@ -28,12 +28,16 @@ t_map	*strct_init(char *file_path)
 	init->map = get_and_check_map(init->map_fd);
 	if (init->map == NULL)
 		return (init->error = 1, init);
+	init->n_of_coll = check_component('P', init->map);
 	init->game = malloc(sizeof(t_game));
-	init->game->sp = sprite_init();
 	init->game->caster = caster_init(init);
 	init->game->dl = draw_line_init();
 	init->game->ray = ray_init();
 	init->game->ds = draw_sprite_init();
+	init->game->sp = malloc(sizeof(t_sprite));
+	sprite_init(init->game->sp, init);
+	init->game->tex = malloc(sizeof(t_tex));
+	ft_get_location(init->game, init->map);
 	return (init);
 }
 
