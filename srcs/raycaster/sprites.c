@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 16:52:24 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/23 12:01:35 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/23 14:59:39 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,21 +48,37 @@ void	ft_draw_sprites(t_game *g)
 
 	scale = 16 * g->dis_w / g->ds->rot_b;
 	x = g->ds->sx - scale / 2;
-	if (scale > 105)
-		scale = 105;
+	if (scale > 171)
+		scale = 171;
 	if (scale < 0)
 		scale = 0;
-	while (x < g->ds->sx + scale / 2)
+	g->ds->t_x = 0;
+	if (ft_distance(g, g->sp->x, g->sp->y) < 100)
+		g->sp->state = 0;
+	if (ft_check_walls_sprite(g) == false && g->sp->state == 1)
 	{
-		y = -1;
-		while (++y < scale)
+		while (x < g->ds->sx + scale / 2)
 		{
-			if (x > 0 && g->ds->sy > g->dis_h / 2
-				&& x < g->dis_w && g->ds->sy < g->dis_h
-				&& ft_check_walls_sprite(g) == false)
-				mlx_put_pixel(g->line, x, g->ds->sy - y, 0x000000FF);
+			y = -1;
+			g->ds->t_y = g->sp->sp_tex->height - 1;
+			while (++y < scale)
+			{
+				g->dl->pixel = ((int)g->ds->t_y * g->sp->sp_tex->height + (int)g->ds->t_x) * g->sp->sp_tex->bytes_per_pixel;
+				g->dl->color = (int)(g->sp->sp_tex->pixels[g->dl->pixel]) << 24
+					| (int)(g->sp->sp_tex->pixels[g->dl->pixel + 1]) << 16
+					| (int)(g->sp->sp_tex->pixels[g->dl->pixel + 2]) << 8
+					| (int)(g->sp->sp_tex->pixels[g->dl->pixel + 3]);
+				if (x > 0 && g->ds->sy > g->dis_h / 2
+					&& x < g->dis_w && g->ds->sy < g->dis_h
+					&& g->dl->color != 0)
+					mlx_put_pixel(g->line, x, g->ds->sy - y, g->dl->color);
+				g->ds->t_y -= g->sp->sp_tex->height/(float)scale;
+				if (g->ds->t_y < 0)
+					g->ds->t_y = 0;
+			}
+			g->ds->t_x += (g->sp->sp_tex->height - 0.5)/(float)scale;
+			x++;
 		}
-		x++;
 	}
 }
 

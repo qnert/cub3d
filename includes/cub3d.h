@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:19:00 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/23 12:03:55 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/23 14:58:41 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ typedef struct draw_sprite
 	double		sx;
 	double		sy;
 	double		sz;
+	double		t_x;
+	double		t_y;
 	double		cosine;
 	double		sine;
 	double		rot_a;
