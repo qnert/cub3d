@@ -50,6 +50,35 @@ void	ft_clear_up_tex(t_game *g, int i)
 		mlx_delete_texture(g->tex->wall_south_tex);
 		mlx_delete_texture(g->tex->wall_west_tex);
 	}
+	if (i == 4)
+	{
+		mlx_delete_texture(g->tex->wall_north_tex);
+		mlx_delete_texture(g->tex->wall_south_tex);
+		mlx_delete_texture(g->tex->wall_west_tex);
+		mlx_delete_texture(g->tex->wall_east_tex);
+	}
+}
+
+void	ft_get_location(t_game *game, char **map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (map[i][j] == 'P')
+			{
+				game->sp->x = j * DIMENS + 20;
+				game->sp->y = i * DIMENS + 20;
+			}
+			j++;
+		}
+		i++;
+	}
 }
 
 int	ft_fill_map(t_game *game, t_map *m)
@@ -70,9 +99,7 @@ int	ft_fill_map(t_game *game, t_map *m)
 	if (game->tex->wall_east_tex == NULL)
 		return (ft_clear_up_tex(game, 3),
 			ft_error_msg("EA texture couldn't be opnened\n"), 1);
-	game->tex->floor_tex = mlx_load_png("./textures/metal.png");
-	game->tex->ceiling_tex = mlx_load_png("./textures/night_sky2.png");
-	game->tex->door_tex = mlx_load_png("./textures/door.png");
-	game->tex->coll_tex = mlx_load_png("./textures/beer.png");
+	if (ft_get_other_tex(game) == 1)
+		return (1);
 	return (0);
 }

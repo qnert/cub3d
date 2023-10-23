@@ -163,6 +163,7 @@ typedef struct map
 //game_funcs
 
 //fill_map.c
+void			ft_clear_up_tex(t_game *g, int i);
 void			ft_get_location(t_game *game, char **map);
 int				ft_fill_map(t_game *game, t_map *m);
 
@@ -213,6 +214,7 @@ int				check_rgb(t_map *init, char *trmd_line);
 void			initialize_vars_to_null(t_map *init);
 int				check_rgb_validity(t_map *init);
 int				get_rgb(t_map *init, char *id, char **rgb);
+int				ft_get_other_tex(t_game *game);
 
 //minimap.c
 void			ft_fill_minimap(t_game *g);
