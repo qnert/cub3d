@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:19:00 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/21 16:53:31 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/10/23 11:57:14 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -241,6 +241,7 @@ void			set_pixels_img(mlx_image_t *img, int max_x,
 void			scale_texture(t_game *g, int x, int y, int scale);
 
 //math_utils.c
+void			ft_check_right_distance(t_game *g);
 int				ft_abs(int num);
 int				rad_to_degree(double rad);
 

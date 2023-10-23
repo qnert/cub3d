@@ -6,11 +6,32 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:17:12 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/21 14:13:09 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/23 11:52:06 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/cub3d.h"
+
+void	ft_terminate_struct_helper(t_map *map)
+{
+	if (map->error == 0)
+	{
+		mlx_delete_texture(map->game->ceiling_tex);
+		mlx_delete_texture(map->game->wall_north_tex);
+		mlx_delete_texture(map->game->wall_south_tex);
+		mlx_delete_texture(map->game->wall_east_tex);
+		mlx_delete_texture(map->game->wall_west_tex);
+		mlx_delete_texture(map->game->door_tex);
+		mlx_delete_texture(map->game->floor_tex);
+		mlx_delete_texture(map->game->sp->sp_tex);
+	}
+	if (map->map != NULL)
+	{
+		free(map->game->sp);
+		free(map->game);
+	}
+	free(map);
+}
 
 void	ft_terminate_struct(t_map *map)
 {
@@ -32,23 +53,7 @@ void	ft_terminate_struct(t_map *map)
 		free(map->game->dl);
 		free(map->game->ds);
 	}
-	if (map->error == 0)
-	{
-		mlx_delete_texture(map->game->ceiling_tex);
-		mlx_delete_texture(map->game->wall_north_tex);
-		mlx_delete_texture(map->game->wall_south_tex);
-		mlx_delete_texture(map->game->wall_east_tex);
-		mlx_delete_texture(map->game->wall_west_tex);
-		mlx_delete_texture(map->game->door_tex);
-		mlx_delete_texture(map->game->floor_tex);
-		mlx_delete_texture(map->game->sp->sp_tex);
-	}
-	if (map->map != NULL)
-	{
-		free(map->game->sp);
-		free(map->game);
-	}
-	free(map);
+	ft_terminate_struct_helper(map);
 }
 
 int	main(int argc, char **argv)
