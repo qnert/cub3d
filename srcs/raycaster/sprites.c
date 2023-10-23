@@ -6,26 +6,11 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 16:52:24 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/23 11:50:51 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/23 11:58:21 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-
-void	ft_draw_sprites(t_game *g)
-{
-	int	i;
-	int	j;
-
-	i = -1;
-	while (++i < 20)
-	{
-		j = -1;
-		while (++j < 20)
-			mlx_put_pixel(g->line, j + g->ds->sx, i
-				+ g->ds->sy, 0x000000FF);
-	}
-}
 
 bool	ft_check_walls_sprite(t_game *g)
 {
@@ -55,6 +40,25 @@ bool	ft_check_walls_sprite(t_game *g)
 	return (false);
 }
 
+void	ft_draw_sprites(t_game *g)
+{
+	int scale = 16 * g->dis_w / g->ds->rot_b;
+	if (scale > 105)
+		scale = 105;
+	if (scale < 0)
+		scale = 0;
+	for (int x = g->ds->sx - scale / 2; x < g->ds->sx + scale / 2; x++)
+	{
+		for (int y = 0; y < scale; y++)
+		{
+			if (x > 0 && g->ds->sy > g->dis_h / 2
+				&& x < g->dis_w && g->ds->sy < g->dis_h
+				&& ft_check_walls_sprite(g) == false)
+				mlx_put_pixel(g->line, x, g->ds->sy - y, 0x000000FF);
+		}
+	}
+}
+
 void	ft_set_values_sprites(t_game *g)
 {
 	g->ds->sx = g->sp->x - g->pl_x;
@@ -67,8 +71,5 @@ void	ft_set_values_sprites(t_game *g)
 	g->ds->rot_b = g->ds->sx * g->ds->cosine + g->ds->sy * g->ds->sine;
 	g->ds->sx = (g->ds->rot_a * 108.0 / g->ds->rot_b) + (g->dis_w / 2);
 	g->ds->sy = (g->ds->sz * 108.0 / g->ds->rot_b) + (g->dis_h / 2);
-	if (g->ds->sx > 0 && g->ds->sy > g->dis_h / 2
-		&& g->ds->sx < g->dis_w && g->ds->sy < g->dis_h
-		&& ft_check_walls_sprite(g) == false)
-		ft_draw_sprites(g);
+	ft_draw_sprites(g);
 }
