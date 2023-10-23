@@ -6,7 +6,7 @@
 /*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:19:00 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/21 19:22:01 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/10/23 11:54:37 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -255,7 +255,7 @@ void			ft_check_door(t_game *g);
 bool			ft_check_collision(char c);
 
 //draw_line.c
-void			ft_draw_line(t_game *game);
+void			ft_draw_line(t_game *game, int i);
 
 //caster.c
 void			set_limit(t_game *g);
