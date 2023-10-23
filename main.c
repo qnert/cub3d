@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:17:12 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/23 11:52:06 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/23 17:35:48 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,17 @@ void	ft_terminate_struct_helper(t_map *map)
 {
 	if (map->error == 0)
 	{
-		mlx_delete_texture(map->game->ceiling_tex);
-		mlx_delete_texture(map->game->wall_north_tex);
-		mlx_delete_texture(map->game->wall_south_tex);
-		mlx_delete_texture(map->game->wall_east_tex);
-		mlx_delete_texture(map->game->wall_west_tex);
-		mlx_delete_texture(map->game->door_tex);
-		mlx_delete_texture(map->game->floor_tex);
-		mlx_delete_texture(map->game->sp->sp_tex);
+		mlx_delete_texture(map->game->tex->ceiling_tex);
+		mlx_delete_texture(map->game->tex->wall_north_tex);
+		mlx_delete_texture(map->game->tex->wall_south_tex);
+		mlx_delete_texture(map->game->tex->wall_east_tex);
+		mlx_delete_texture(map->game->tex->wall_west_tex);
+		mlx_delete_texture(map->game->tex->door_tex);
+		mlx_delete_texture(map->game->tex->floor_tex);
+		mlx_delete_texture(map->game->tex->coll_tex);
 	}
 	if (map->map != NULL)
-	{
-		free(map->game->sp);
 		free(map->game);
-	}
 	free(map);
 }
 
@@ -52,6 +49,8 @@ void	ft_terminate_struct(t_map *map)
 		free(map->game->caster);
 		free(map->game->dl);
 		free(map->game->ds);
+		if (map->n_of_coll > 0)
+			free_lst_sprites(map->game->sp);
 	}
 	ft_terminate_struct_helper(map);
 }

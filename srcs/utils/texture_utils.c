@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 13:07:50 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/20 18:47:56 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/23 17:44:54 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,15 @@ uint32_t	get_right_north_south_color(t_game *g)
 
 	color = 0;
 	if (g->ray->ray_a < M_PI && g->ray->ray_a > 0)
-		color = (int)(g->wall_south_tex->pixels[g->dl->pixel]) << 24
-			| (int)(g->wall_south_tex->pixels[g->dl->pixel + 1]) << 16
-			| (int)(g->wall_south_tex->pixels[g->dl->pixel + 2]) << 8
-			| (int)(g->wall_south_tex->pixels[g->dl->pixel + 3]);
+		color = (int)(g->tex->wall_south_tex->pixels[g->dl->pixel]) << 24
+			| (int)(g->tex->wall_south_tex->pixels[g->dl->pixel + 1]) << 16
+			| (int)(g->tex->wall_south_tex->pixels[g->dl->pixel + 2]) << 8
+			| (int)(g->tex->wall_south_tex->pixels[g->dl->pixel + 3]);
 	else
-		color = (int)(g->wall_north_tex->pixels[g->dl->pixel]) << 24
-			| (int)(g->wall_north_tex->pixels[g->dl->pixel + 1]) << 16
-			| (int)(g->wall_north_tex->pixels[g->dl->pixel + 2]) << 8
-			| (int)(g->wall_north_tex->pixels[g->dl->pixel + 3]);
+		color = (int)(g->tex->wall_north_tex->pixels[g->dl->pixel]) << 24
+			| (int)(g->tex->wall_north_tex->pixels[g->dl->pixel + 1]) << 16
+			| (int)(g->tex->wall_north_tex->pixels[g->dl->pixel + 2]) << 8
+			| (int)(g->tex->wall_north_tex->pixels[g->dl->pixel + 3]);
 	return (color);
 }
 
@@ -36,15 +36,15 @@ uint32_t	get_right_west_east_color(t_game *g)
 
 	color = 0;
 	if (g->ray->ray_a < 3 * M_PI_2 && g->ray->ray_a > M_PI_2)
-		color = (int)(g->wall_west_tex->pixels[g->dl->pixel]) << 24
-			| (int)(g->wall_west_tex->pixels[g->dl->pixel + 1]) << 16
-			| (int)(g->wall_west_tex->pixels[g->dl->pixel + 2]) << 8
-			| (int)(g->wall_west_tex->pixels[g->dl->pixel + 3]);
+		color = (int)(g->tex->wall_west_tex->pixels[g->dl->pixel]) << 24
+			| (int)(g->tex->wall_west_tex->pixels[g->dl->pixel + 1]) << 16
+			| (int)(g->tex->wall_west_tex->pixels[g->dl->pixel + 2]) << 8
+			| (int)(g->tex->wall_west_tex->pixels[g->dl->pixel + 3]);
 	else
-		color = (int)(g->wall_east_tex->pixels[g->dl->pixel]) << 24
-			| (int)(g->wall_east_tex->pixels[g->dl->pixel + 1]) << 16
-			| (int)(g->wall_east_tex->pixels[g->dl->pixel + 2]) << 8
-			| (int)(g->wall_east_tex->pixels[g->dl->pixel + 3]);
+		color = (int)(g->tex->wall_east_tex->pixels[g->dl->pixel]) << 24
+			| (int)(g->tex->wall_east_tex->pixels[g->dl->pixel + 1]) << 16
+			| (int)(g->tex->wall_east_tex->pixels[g->dl->pixel + 2]) << 8
+			| (int)(g->tex->wall_east_tex->pixels[g->dl->pixel + 3]);
 	return (color);
 }
 
@@ -55,10 +55,10 @@ uint32_t	get_right_wall_color(t_game *g)
 	color = 0;
 	if (g->caster->map[(int)g->ray->ray_y / DIMENS]
 		[(int)g->ray->ray_x / DIMENS] == 'D')
-		color = (int)(g->door_tex->pixels[g->dl->pixel]) << 24
-			| (int)(g->door_tex->pixels[g->dl->pixel + 1]) << 16
-			| (int)(g->door_tex->pixels[g->dl->pixel + 2]) << 8
-			| (int)(g->door_tex->pixels[g->dl->pixel + 3]);
+		color = (int)(g->tex->door_tex->pixels[g->dl->pixel]) << 24
+			| (int)(g->tex->door_tex->pixels[g->dl->pixel + 1]) << 16
+			| (int)(g->tex->door_tex->pixels[g->dl->pixel + 2]) << 8
+			| (int)(g->tex->door_tex->pixels[g->dl->pixel + 3]);
 	else if (g->ray->shade == 0.5)
 		color = get_right_west_east_color(g);
 	else

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:19:00 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/23 14:58:41 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/23 19:14:59 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@
 
 typedef struct sprite
 {
-	mlx_texture_t	*sp_tex;
 	int				type;
 	int				state;
 	int				x;
 	int				y;
 	int				z;
+	struct sprite	*next;
 }	t_sprite;
 
 typedef struct draw_sprite
@@ -113,12 +113,8 @@ typedef struct caster
 	char		**map;
 }	t_cast;
 
-typedef struct game
+typedef struct textures
 {
-	mlx_t			*mlx;
-	mlx_image_t		*player;
-	mlx_image_t		*line;
-	mlx_image_t		*minimap;
 	mlx_texture_t	*wall_north_tex;
 	mlx_texture_t	*wall_south_tex;
 	mlx_texture_t	*wall_west_tex;
@@ -126,6 +122,15 @@ typedef struct game
 	mlx_texture_t	*door_tex;
 	mlx_texture_t	*floor_tex;
 	mlx_texture_t	*ceiling_tex;
+	mlx_texture_t	*coll_tex;
+}	t_tex;
+
+typedef struct game
+{
+	mlx_t			*mlx;
+	mlx_image_t		*player;
+	mlx_image_t		*line;
+	mlx_image_t		*minimap;
 	int				height;
 	int				width;
 	int				dis_w;
@@ -137,6 +142,7 @@ typedef struct game
 	t_ray			*ray;
 	t_sprite		*sp;
 	t_draw_sprite	*ds;
+	t_tex			*tex;
 }	t_game;
 
 typedef struct map
@@ -149,6 +155,7 @@ typedef struct map
 	char	*texture_path_we;
 	int		floor_rgb[3];
 	int		ceiling_rgb[3];
+	int		n_of_coll;
 	int		error;
 	t_game	*game;
 }	t_map;
@@ -248,7 +255,6 @@ int				rad_to_degree(double rad);
 t_cast			*caster_init(t_map *init);
 t_draw_line		*draw_line_init(void);
 t_ray			*ray_init(void);
-t_sprite		*sprite_init(void);
 t_draw_sprite	*draw_sprite_init(void);
 
 //hook_utils.c
@@ -274,4 +280,10 @@ void			replace_img(t_game *g);
 
 //sprites.c
 void			ft_set_values_sprites(t_game *g);
+
+//sprite_utils.c
+void			sprite_init(t_sprite *sp, t_map *m);
+void			ft_get_location(t_game *game, char **map);
+void			free_lst_sprites(t_sprite *lst);
+
 #endif
