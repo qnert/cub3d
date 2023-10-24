@@ -6,7 +6,7 @@
 /*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 17:24:58 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/23 19:38:31 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/10/24 16:33:32 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,8 @@ void	sprite_init(t_sprite *start, t_map *m)
 	curr->x = 0;
 	curr->y = 0;
 	curr->z = 550;
-	while (++i < m->n_of_coll - 1)
+	curr->next = NULL;
+	while (++i < m->game->n_of_coll)
 	{
 		new_node = malloc(sizeof(t_sprite));
 		new_node->state = 1;
@@ -75,5 +76,5 @@ void	sprite_init(t_sprite *start, t_map *m)
 		curr->next = new_node;
 		curr = curr->next;
 	}
-	curr = NULL;
+	curr->next = NULL;
 }

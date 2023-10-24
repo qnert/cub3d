@@ -6,7 +6,7 @@
 /*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 16:52:24 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/23 19:30:26 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/10/24 16:32:25 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ void	ft_draw_sprite_tex(t_game *g, int x, int y, int scale)
 				g->ds->t_y = 0;
 		}
 		g->ds->t_x += (g->tex->coll_tex->height - 0.5) / (float)scale;
+		if (g->ds->t_x >= g->tex->coll_tex->width)
+			g->ds->t_x = g->tex->coll_tex->width - 1;
 		x++;
 	}
 }
@@ -92,7 +94,7 @@ void	ft_set_values_sprites(t_game *g)
 	t_sprite	*begin;
 
 	begin = g->sp;
-	while (g->sp)
+	while (g->n_of_coll > 0 && g->sp)
 	{
 		g->ds->sx = g->sp->x - g->pl_x;
 		g->ds->sy = g->sp->y - g->pl_y;

@@ -6,7 +6,7 @@
 /*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 15:24:52 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/23 19:22:14 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/10/24 16:24:53 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ t_map	*strct_init(char *file_path)
 	init->map = get_and_check_map(init->map_fd);
 	if (init->map == NULL)
 		return (init->error = 1, init);
-	init->n_of_coll = check_component('P', init->map);
 	init->game = malloc(sizeof(t_game));
 	init->game->caster = caster_init(init);
 	init->game->dl = draw_line_init();
 	init->game->ray = ray_init();
 	init->game->ds = draw_sprite_init();
+	init->game->n_of_coll = check_component('P', init->map);
 	init->game->sp = malloc(sizeof(t_sprite));
 	sprite_init(init->game->sp, init);
 	init->game->tex = malloc(sizeof(t_tex));
@@ -129,12 +129,12 @@ int	check_rgb(t_map *init, char *trmd_line)
 	int		j;
 
 	i = -1;
-	j = -1;
 	rgb = ft_split(trmd_line + 2, ',');
 	if (ft_matrixlen(rgb) != 3)
 		return (free_arr(rgb), printf("Error\nwrong rgb format\n"), 1);
 	while (rgb[++i])
 	{
+		j = -1;
 		while (rgb[i][++j])
 			if (ft_isdigit(rgb[i][j]) == 0 && rgb[i][j] != '\n')
 				return (free_arr(rgb), printf("Error\nno valid rgb nbr\n"), 1);
