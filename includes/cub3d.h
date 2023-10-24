@@ -6,7 +6,7 @@
 /*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:19:00 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/23 19:14:59 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/10/24 16:18:21 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,7 @@ typedef struct game
 	int				dis_h;
 	double			pl_x;
 	double			pl_y;
+	int				n_of_coll;
 	t_cast			*caster;
 	t_draw_line		*dl;
 	t_ray			*ray;
@@ -155,7 +156,6 @@ typedef struct map
 	char	*texture_path_we;
 	int		floor_rgb[3];
 	int		ceiling_rgb[3];
-	int		n_of_coll;
 	int		error;
 	t_game	*game;
 }	t_map;

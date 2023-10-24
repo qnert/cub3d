@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 14:58:26 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/20 18:28:15 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/24 16:37:51 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	check_free_char(char c)
 
 uint32_t	ft_check_color(t_game *g, float x, float y)
 {
-	if (x >= 0 && y >= 0 && x <= 33 * DIMENS && y <= 14 * DIMENS
+	if (x >= 0 && y >= 0 && x <= g->width * DIMENS && y <= g->height * DIMENS
 		&& (check_free_char(g->caster->map[(int)y / DIMENS][(int)x / DIMENS])))
 		return (0xEAEDEDFF);
 	return (0);

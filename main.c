@@ -6,7 +6,7 @@
 /*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:17:12 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/23 17:35:48 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/10/24 16:26:34 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	ft_terminate_struct(t_map *map)
 		free(map->game->caster);
 		free(map->game->dl);
 		free(map->game->ds);
-		if (map->n_of_coll > 0)
+		if (map->game->n_of_coll > 0)
 			free_lst_sprites(map->game->sp);
 	}
 	ft_terminate_struct_helper(map);
