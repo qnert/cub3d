@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:19:00 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/25 16:22:01 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/10/25 16:35:10 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,16 @@
 # include <fcntl.h>
 # include <stdbool.h>
 
-// type 2 == beer
-// type 3 == water
+typedef struct luffy
+{
+	mlx_texture_t	**animation;
+	int				i;
+	int				check;
+	int				x;
+	int				y;
+	int				z;
+}	t_luffy;
+
 typedef struct sprite
 {
 	int				type;
@@ -150,6 +158,7 @@ typedef struct game
 	t_sprite		*sp;
 	t_draw_sprite	*ds;
 	t_tex			*tex;
+	t_luffy			*luffy;
 }	t_game;
 
 typedef struct map
@@ -213,12 +222,10 @@ int				get_texture_path(t_map *init, char *trmd_line);
 int				check_line(t_map *init, char *line);
 int				get_input(t_map *init);
 t_map			*strct_init(char *file_path);
-int				check_rgb(t_map *init, char *trmd_line);
 
 //init_utils.c
 void			initialize_vars_to_null(t_map *init);
-int				check_rgb_validity(t_map *init);
-int				get_rgb(t_map *init, char *id, char **rgb);
+void			ft_allocate_helper_structs(t_map *init);
 int				ft_get_other_tex(t_game *game);
 
 //minimap.c
@@ -236,6 +243,12 @@ bool			is_component(char c);
 bool			is_valid_border(char c);
 void			ft_error_msg(char *str);
 
+//luffy_utils.c
+t_luffy			*luffy_init(char **map);
+
+//luffy_set_values.c
+void			ft_set_values_luffy(t_game *g);
+
 //draw_utils.c
 void			ft_draw_sprites(t_game *g);
 void			ft_draw_walls(t_game *g);
@@ -246,6 +259,11 @@ void			draw_sky(t_game *g);
 void			ft_set_values_floor_ceiling(t_game *g);
 void			ft_set_values_for_rendering(t_game *g);
 void			ft_set_values_and_render_funcs(t_game *g);
+
+//rgb_utils.c
+int				check_rgb(t_map *init, char *trmd_line);
+int				check_rgb_validity(t_map *init);
+int				get_rgb(t_map *init, char *id, char **rgb);
 
 //texture_utils.c
 uint32_t		get_right_wall_color(t_game *g);
@@ -286,6 +304,7 @@ void			check_vertical_line(t_game *g);
 void			replace_img(t_game *g);
 
 //sprites.c
+bool			ft_check_walls_sprite(t_game *g);
 void			ft_set_values_sprites(t_game *g);
 
 //sprite_utils.c

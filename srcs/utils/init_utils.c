@@ -3,14 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   init_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 16:39:01 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/25 13:56:04 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/10/25 16:34:41 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+
+void	ft_allocate_helper_structs(t_map *init)
+{
+	init->game = malloc(sizeof(t_game));
+	init->game->drunk = 0;
+	init->game->caster = caster_init(init);
+	init->game->dl = draw_line_init();
+	init->game->ray = ray_init();
+	init->game->ds = draw_sprite_init();
+	init->game->n_of_coll = check_component('2', init->map);
+	init->game->n_of_water = check_component('3', init->map);
+	init->game->sp = malloc(sizeof(t_sprite));
+	sprite_init(init->game->sp, init);
+	init->game->luffy = luffy_init(init->map);
+	ft_get_location(init->game, init->map, '2');
+	ft_get_location(init->game, init->map, '3');
+	init->game->tex = malloc(sizeof(t_tex));
+}
 
 void	initialize_vars_to_null(t_map *init)
 {
@@ -26,48 +44,6 @@ void	initialize_vars_to_null(t_map *init)
 		init->floor_rgb[i] = -1;
 		init->ceiling_rgb[i] = -1;
 	}
-}
-
-int	check_rgb_validity(t_map *init)
-{
-	int	i;
-
-	i = 0;
-	while (i < 3)
-	{
-		if (init->floor_rgb[i] == -1 || init->ceiling_rgb[i] == -1)
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
-int	get_rgb(t_map *init, char *id, char **rgb)
-{
-	int	i;
-	int	j;
-	int	k;
-
-	i = 0;
-	j = 0;
-	k = 0;
-	while (rgb[i])
-	{
-		if (ft_atoi(rgb[i]) >= 0 && ft_atoi(rgb[i]) <= 255)
-		{
-			if ((id[0] == 'F' && init->floor_rgb[j] != -1)
-				|| (id[0] == 'C' && init->ceiling_rgb[k] != -1))
-				return (printf("Error\nduplicate rgb identifier\n"), 1);
-			if (id[0] == 'F' && init->floor_rgb[j] == -1)
-				init->floor_rgb[j++] = ft_atoi(rgb[i]);
-			else if (id[0] == 'C' && init->ceiling_rgb[k] == -1)
-				init->ceiling_rgb[k++] = ft_atoi(rgb[i]);
-		}
-		else
-			return (printf("Error\nnot a valid rgb range\n"), 1);
-		i++;
-	}
-	return (0);
 }
 
 void	ft_clear_up_other_tex(t_game *g, int i)

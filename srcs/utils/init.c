@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 15:24:52 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/25 15:48:53 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/10/25 16:34:30 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,19 +28,7 @@ t_map	*strct_init(char *file_path)
 	init->map = get_and_check_map(init->map_fd);
 	if (init->map == NULL)
 		return (init->error = 1, init);
-	init->game = malloc(sizeof(t_game));
-	init->game->drunk = 0;
-	init->game->caster = caster_init(init);
-	init->game->dl = draw_line_init();
-	init->game->ray = ray_init();
-	init->game->ds = draw_sprite_init();
-	init->game->n_of_coll = check_component('2', init->map);
-	init->game->n_of_water = check_component('3', init->map);
-	init->game->sp = malloc(sizeof(t_sprite));
-	sprite_init(init->game->sp, init);
-	ft_get_location(init->game, init->map, '2');
-	ft_get_location(init->game, init->map, '3');
-	init->game->tex = malloc(sizeof(t_tex));
+	ft_allocate_helper_structs(init);
 	return (init);
 }
 
@@ -122,33 +110,5 @@ int	get_texture_path(t_map *init, char *trmd_line)
 		init->texture_path_ea = ft_substr(trmd_line, i, j - 1);
 	else
 		return (printf("Error\nduplicate identifier\n"), 1);
-	return (0);
-}
-
-int	check_rgb(t_map *init, char *trmd_line)
-{
-	char	**rgb;
-	int		i;
-	int		j;
-
-	i = -1;
-	rgb = ft_split(trmd_line + 2, ',');
-	if (ft_matrixlen(rgb) != 3)
-		return (free_arr(rgb), printf("Error\nwrong rgb format\n"), 1);
-	while (rgb[++i])
-	{
-		j = -1;
-		while (rgb[i][++j])
-			if (ft_isdigit(rgb[i][j]) == 0 && rgb[i][j] != '\n')
-				return (free_arr(rgb), printf("Error\nno valid rgb nbr\n"), 1);
-		if (ft_strlen(rgb[i]) > 3)
-		{
-			free_arr(rgb);
-			return (printf("Error\nnot a valid rgb range\n"), 1);
-		}
-	}
-	if (get_rgb(init, trmd_line, rgb) == 1)
-		return (free_arr(rgb), 1);
-	free_arr(rgb);
 	return (0);
 }

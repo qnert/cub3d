@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_movement.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 21:28:11 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/18 21:31:46 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/10/25 15:15:08 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
