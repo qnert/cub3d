@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 16:39:01 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/25 15:47:55 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/25 16:34:41 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,19 @@
 void	ft_allocate_helper_structs(t_map *init)
 {
 	init->game = malloc(sizeof(t_game));
+	init->game->drunk = 0;
 	init->game->caster = caster_init(init);
 	init->game->dl = draw_line_init();
 	init->game->ray = ray_init();
 	init->game->ds = draw_sprite_init();
-	init->game->n_of_coll = check_component('P', init->map);
+	init->game->n_of_coll = check_component('2', init->map);
+	init->game->n_of_water = check_component('3', init->map);
 	init->game->sp = malloc(sizeof(t_sprite));
 	sprite_init(init->game->sp, init);
 	init->game->luffy = luffy_init(init->map);
+	ft_get_location(init->game, init->map, '2');
+	ft_get_location(init->game, init->map, '3');
 	init->game->tex = malloc(sizeof(t_tex));
-	ft_get_location(init->game, init->map);
 }
 
 void	initialize_vars_to_null(t_map *init)
@@ -79,6 +82,11 @@ int	ft_get_other_tex(t_game *game)
 	game->tex->coll_tex = mlx_load_png("./textures/beer.png");
 	if (game->tex->coll_tex == NULL)
 		return (ft_clear_up_other_tex(game, 3),
+			ft_error_msg("Sprite texture couldn't be opnened\n"),
+			ft_clear_up_tex(game, 4), 1);
+	game->tex->water_tex = mlx_load_png("./textures/water.png");
+	if (game->tex->water_tex == NULL)
+		return (ft_clear_up_other_tex(game, 4),
 			ft_error_msg("Sprite texture couldn't be opnened\n"),
 			ft_clear_up_tex(game, 4), 1);
 	return (0);

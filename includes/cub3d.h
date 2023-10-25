@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:19:00 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/25 15:39:39 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/25 16:35:10 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,8 @@ typedef struct textures
 	mlx_texture_t	*floor_tex;
 	mlx_texture_t	*ceiling_tex;
 	mlx_texture_t	*coll_tex;
+	mlx_texture_t	*water_tex;
+	mlx_texture_t	*enemy_tex;
 }	t_tex;
 
 typedef struct game
@@ -148,6 +150,8 @@ typedef struct game
 	double			pl_x;
 	double			pl_y;
 	int				n_of_coll;
+	int				n_of_water;
+	double			drunk;
 	t_cast			*caster;
 	t_draw_line		*dl;
 	t_ray			*ray;
@@ -175,7 +179,6 @@ typedef struct map
 
 //fill_map.c
 void			ft_clear_up_tex(t_game *g, int i);
-void			ft_get_location(t_game *game, char **map);
 int				ft_fill_map(t_game *game, t_map *m);
 
 //game_init.c
@@ -306,7 +309,7 @@ void			ft_set_values_sprites(t_game *g);
 
 //sprite_utils.c
 void			sprite_init(t_sprite *sp, t_map *m);
-void			ft_get_location(t_game *game, char **map);
+void			ft_get_location(t_game *game, char **map, char c);
 void			free_lst_sprites(t_sprite *lst);
 
 #endif

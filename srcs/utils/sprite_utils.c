@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 17:24:58 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/25 15:49:08 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/25 16:34:56 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	free_lst_sprites(t_sprite *lst)
 	}
 }
 
-void	ft_get_location(t_game *game, char **map)
+void	ft_get_location(t_game *game, char **map, char c)
 {
 	int			i;
 	int			j;
@@ -34,12 +34,14 @@ void	ft_get_location(t_game *game, char **map)
 
 	i = 0;
 	curr = game->sp;
+	while (curr && curr->type != ft_atoi(&c))
+		curr = curr->next;
 	while (map[i] && curr)
 	{
 		j = 0;
 		while (map[i][j] && curr)
 		{
-			if (map[i][j] == 'P')
+			if (map[i][j] == c && curr->x == 0 && curr->y == 0)
 			{
 				curr->x = j * DIMENS + 20;
 				curr->y = i * DIMENS + 20;
@@ -49,6 +51,19 @@ void	ft_get_location(t_game *game, char **map)
 		}
 		i++;
 	}
+}
+
+t_sprite	*new_lst_node_sprite(t_sprite *curr, t_sprite *new_node, int type)
+{
+	new_node = malloc(sizeof(t_sprite));
+	new_node->state = 1;
+	new_node->type = type;
+	new_node->x = 0;
+	new_node->y = 0;
+	new_node->z = 550;
+	curr->next = new_node;
+	curr = curr->next;
+	return (curr);
 }
 
 void	sprite_init(t_sprite *start, t_map *m)
@@ -65,16 +80,11 @@ void	sprite_init(t_sprite *start, t_map *m)
 	curr->y = 0;
 	curr->z = 550;
 	curr->next = NULL;
+	new_node = NULL;
 	while (++i < m->game->n_of_coll)
-	{
-		new_node = malloc(sizeof(t_sprite));
-		new_node->state = 1;
-		new_node->type = 2;
-		new_node->x = 0;
-		new_node->y = 0;
-		new_node->z = 550;
-		curr->next = new_node;
-		curr = curr->next;
-	}
+		curr = new_lst_node_sprite(curr, new_node, 2);
+	i = -1;
+	while (++i < m->game->n_of_water)
+		curr = new_lst_node_sprite(curr, new_node, 3);
 	curr->next = NULL;
 }

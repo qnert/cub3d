@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 17:08:51 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/25 13:52:47 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/25 16:33:29 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ double	ft_distance(t_game *g, double bx, double by)
 
 void	set_cosine_and_values(t_game *g)
 {
-	g->caster->ca = g->caster->pa - g->ray->ray_a;
+	g->caster->ca = g->caster->pa - g->ray->ray_a - g->drunk;
 	if (g->caster->ca < 0)
 		g->caster->ca += 2 * M_PI;
 	if (g->caster->ca > 2 * M_PI)

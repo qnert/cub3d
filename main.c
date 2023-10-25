@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:17:12 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/25 16:19:12 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/25 16:35:41 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void	ft_terminate_struct_helper(t_map *map)
 
 void	ft_terminate_struct(t_map *map)
 {
-	printf("Error in terminate struct\n");
 	if (map->texture_path_no)
 		free(map->texture_path_no);
 	if (map->texture_path_ea)
