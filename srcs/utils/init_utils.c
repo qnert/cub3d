@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 16:39:01 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/25 16:34:41 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/25 18:57:17 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,11 @@ void	ft_clear_up_other_tex(t_game *g, int i)
 
 int	ft_get_other_tex(t_game *game)
 {
-	game->tex->floor_tex = mlx_load_png("./textures/metal.png");
+	game->tex->floor_tex = mlx_load_png("./textures/wooden_wall_no_window.png");
 	if (game->tex->floor_tex == NULL)
 		return (ft_error_msg("Wall texture couldn't be opnened\n"),
 			ft_clear_up_tex(game, 4), 1);
-	game->tex->ceiling_tex = mlx_load_png("./textures/night_sky2.png");
+	game->tex->ceiling_tex = mlx_load_png("./textures/sky_with_clouds.png");
 	if (game->tex->ceiling_tex == NULL)
 		return (ft_clear_up_other_tex(game, 1),
 			ft_error_msg("Ceiling texture couldn't be opnened\n"),

@@ -1,8 +1,8 @@
 
-EA ./textures/window.png
-NO ./textures/window.png
-SO ./textures/window.png
-WE ./textures/window.png
+EA ./textures/wooden_wall_no_window.png
+NO ./textures/wooden_wall.png
+SO ./textures/wooden_wall.png
+WE ./textures/wooden_wall_no_window.png
 
 C 225,30,0
 F 225,30,0
