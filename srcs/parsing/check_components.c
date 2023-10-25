@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 12:21:20 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/21 14:11:01 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/25 17:47:46 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,7 @@ bool	complete_component_check(char **map)
 		return (ft_error_msg("Invalid map component found\n"), false);
 	if (check_player_pos(map) == 'F')
 		return (ft_error_msg("Invalid player position\n"), false);
+	if (check_component('L', map) != 1)
+		return (ft_error_msg("Invalid enemy\n"), false);
 	return (true);
 }
