@@ -6,7 +6,7 @@
 /*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 16:52:24 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/25 16:29:21 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/10/25 18:04:26 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,14 @@ void	decrement_drunkness(t_game *g)
 	}
 }
 
+void	check_sprite_type_for_draw(t_game *g, int x, int y, int scale)
+{
+	if (g->sp->type == 2)
+		ft_draw_beer(g, x, y, scale);
+	if (g->sp->type == 3)
+		ft_draw_water(g, x, y, scale);
+}
+
 void	ft_draw_sprites(t_game *g)
 {
 	int	x;
@@ -136,13 +144,10 @@ void	ft_draw_sprites(t_game *g)
 		increment_drunkness(g);
 		decrement_drunkness(g);
 	}
-	if (ft_check_walls_sprite(g) == false && g->sp->state == 1)
-	{
-		if (g->sp->type == 2)
-			ft_draw_beer(g, x, y, scale);
-		if (g->sp->type == 3)
-			ft_draw_water(g, x, y, scale);
-	}
+	if (ft_check_walls_sprite(g) == false && g->sp->state == 1
+		&& x > 0 && g->ds->sy > g->dis_h / 2
+		&& x < g->dis_w && g->ds->sy < g->dis_h)
+		check_sprite_type_for_draw(g, x, y, scale);
 }
 
 void	ft_set_values_sprites(t_game *g)
