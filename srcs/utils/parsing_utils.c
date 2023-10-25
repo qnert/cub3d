@@ -6,7 +6,7 @@
 /*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 18:27:36 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/17 14:44:15 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/10/25 13:17:28 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	ft_matrixlen(char **matrix)
 
 bool	is_component(char c)
 {
-	if (ft_strchr("01NSWEDP", c))
+	if (ft_strchr("01NSWED23", c))
 		return (true);
 	return (false);
 }

@@ -6,7 +6,7 @@
 /*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 15:24:52 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/24 16:24:53 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/10/25 15:48:53 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,18 @@ t_map	*strct_init(char *file_path)
 	if (init->map == NULL)
 		return (init->error = 1, init);
 	init->game = malloc(sizeof(t_game));
+	init->game->drunk = 0;
 	init->game->caster = caster_init(init);
 	init->game->dl = draw_line_init();
 	init->game->ray = ray_init();
 	init->game->ds = draw_sprite_init();
-	init->game->n_of_coll = check_component('P', init->map);
+	init->game->n_of_coll = check_component('2', init->map);
+	init->game->n_of_water = check_component('3', init->map);
 	init->game->sp = malloc(sizeof(t_sprite));
 	sprite_init(init->game->sp, init);
+	ft_get_location(init->game, init->map, '2');
+	ft_get_location(init->game, init->map, '3');
 	init->game->tex = malloc(sizeof(t_tex));
-	ft_get_location(init->game, init->map);
 	return (init);
 }
 
