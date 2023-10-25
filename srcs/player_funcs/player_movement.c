@@ -6,23 +6,38 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 21:28:11 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/25 15:15:08 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/25 17:56:35 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
+void	ft_forward_movement(t_game *g)
+{
+	if (ft_check_collision(g->caster->map[(int)g->pl_y / DIMENS]
+			[(int)(g->pl_x + g->caster->x_off) / DIMENS]))
+	{
+		if (mlx_is_key_down(g->mlx, MLX_KEY_LEFT_SHIFT))
+			g->pl_x += cos(g->caster->pa) * 10;
+		else
+			g->pl_x += cos(g->caster->pa) * 6;
+	}
+	if (ft_check_collision(g->caster->map
+			[(int)(g->pl_y + g->caster->y_off) / DIMENS]
+		[(int)g->pl_x / DIMENS]))
+	{
+		if (mlx_is_key_down(g->mlx, MLX_KEY_LEFT_SHIFT))
+			g->pl_y += sin(g->caster->pa) * 10;
+		else
+			g->pl_y += sin(g->caster->pa) * 6;
+	}
+}
+
 void	ft_move_up_down(t_game *g)
 {
 	if (mlx_is_key_down(g->mlx, MLX_KEY_W))
 	{
-		if (ft_check_collision(g->caster->map[(int)g->pl_y / DIMENS]
-				[(int)(g->pl_x + g->caster->x_off) / DIMENS]))
-			g->pl_x += cos(g->caster->pa) * 6;
-		if (ft_check_collision(g->caster->map
-				[(int)(g->pl_y + g->caster->y_off) / DIMENS]
-			[(int)g->pl_x / DIMENS]))
-			g->pl_y += sin(g->caster->pa) * 6;
+		ft_forward_movement(g);
 	}
 	else if (mlx_is_key_down(g->mlx, MLX_KEY_S))
 	{
