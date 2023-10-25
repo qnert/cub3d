@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   caster.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 17:08:51 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/23 11:58:25 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/25 12:00:33 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ double	ft_distance(t_game *g, double bx, double by)
 
 void	set_cosine_and_values(t_game *g)
 {
-	g->caster->ca = g->caster->pa - g->ray->ray_a;
+	g->caster->ca = g->caster->pa - g->ray->ray_a - g->drunk;
 	if (g->caster->ca < 0)
 		g->caster->ca += 2 * M_PI;
 	if (g->caster->ca > 2 * M_PI)

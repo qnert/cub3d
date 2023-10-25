@@ -6,7 +6,7 @@
 /*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 16:39:01 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/23 20:21:23 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/10/25 13:56:04 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,11 @@ int	ft_get_other_tex(t_game *game)
 	game->tex->coll_tex = mlx_load_png("./textures/beer.png");
 	if (game->tex->coll_tex == NULL)
 		return (ft_clear_up_other_tex(game, 3),
+			ft_error_msg("Sprite texture couldn't be opnened\n"),
+			ft_clear_up_tex(game, 4), 1);
+	game->tex->water_tex = mlx_load_png("./textures/water.png");
+	if (game->tex->water_tex == NULL)
+		return (ft_clear_up_other_tex(game, 4),
 			ft_error_msg("Sprite texture couldn't be opnened\n"),
 			ft_clear_up_tex(game, 4), 1);
 	return (0);
