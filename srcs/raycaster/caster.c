@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 17:08:51 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/23 11:58:25 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/25 13:52:47 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,5 +82,6 @@ void	raycaster(t_game *g)
 		ft_set_values_and_render_funcs(g);
 	}
 	ft_set_values_sprites(g);
+	ft_set_values_luffy(g);
 	ft_fill_minimap_walls(g);
 }

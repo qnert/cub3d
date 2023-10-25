@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:17:12 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/24 16:26:34 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/10/25 16:19:12 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,15 @@
 
 void	ft_terminate_struct_helper(t_map *map)
 {
+	if (map->error == 0)
+	{
+		map->game->luffy->i = -1;
+		while (++map->game->luffy->i < 72)
+			mlx_delete_texture(map->game->luffy->animation
+			[map->game->luffy->i]);
+		free(map->game->luffy->animation);
+		free(map->game->luffy);
+	}
 	if (map->error == 0)
 	{
 		mlx_delete_texture(map->game->tex->ceiling_tex);
@@ -24,6 +33,7 @@ void	ft_terminate_struct_helper(t_map *map)
 		mlx_delete_texture(map->game->tex->door_tex);
 		mlx_delete_texture(map->game->tex->floor_tex);
 		mlx_delete_texture(map->game->tex->coll_tex);
+		free(map->game->tex);
 	}
 	if (map->map != NULL)
 		free(map->game);
@@ -32,6 +42,7 @@ void	ft_terminate_struct_helper(t_map *map)
 
 void	ft_terminate_struct(t_map *map)
 {
+	printf("Error in terminate struct\n");
 	if (map->texture_path_no)
 		free(map->texture_path_no);
 	if (map->texture_path_ea)

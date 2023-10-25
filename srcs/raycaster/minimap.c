@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 14:58:26 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/24 16:37:51 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/10/25 14:26:43 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	ft_fill_miniplayer(t_game *g, int x, int y)
 
 int	check_free_char(char c)
 {
-	if (ft_strchr("0XNWSEP", c))
+	if (ft_strchr("0XNWSEPL", c))
 		return (1);
 	return (0);
 }
