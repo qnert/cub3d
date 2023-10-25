@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   luffy_set_values.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 15:19:23 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/25 15:29:15 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/25 18:01:38 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,8 @@ void	ft_draw_luffy(t_game *g)
 	if (scale < 0)
 		scale = 0;
 	g->ds->t_x = 0;
-	if (ft_check_walls_luffy(g) == false)
+	if (ft_check_walls_luffy(g) == false && x > 0 && g->ds->sy > g->dis_h / 2
+		&& x < g->dis_w && g->ds->sy < g->dis_h)
 		ft_draw_luffy_tex(g, x, y, scale);
 }
 
