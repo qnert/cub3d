@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   luffy_set_values.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 15:19:23 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/26 13:23:26 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/26 14:56:22 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ bool	ft_check_walls_luffy(t_game *g)
 	return (false);
 }
 
-//luffy only clips if rotating to the left and just disappears if rotate right
 void	ft_draw_luffy(t_game *g)
 {
 	int	x;

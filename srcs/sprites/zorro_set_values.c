@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   zorro_set_values.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 15:19:23 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/26 14:37:26 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/26 17:58:31 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	ft_get_zorro_colors_and_draw(t_game *g, int x, int y)
 		| (int)(g->zorro->animation
 		[g->zorro->i]->pixels[g->dl->pixel + 3]);
 	if (x > 0 && g->ds->sy > g->dis_h / 2
-		&& x < g->dis_w && g->ds->sy < g->dis_h
+		&& x < g->dis_w && g->ds->sy < g->dis_h + g->zorro->animation[0]->height / 4
 		&& g->dl->color != 0)
 		mlx_put_pixel(g->line, x, g->ds->sy - y, g->dl->color);
 }
@@ -89,7 +89,6 @@ bool	ft_check_walls_zorro(t_game *g)
 	return (false);
 }
 
-//zorro only clips if rotating to the left and just disappears if rotate right
 void	ft_draw_zorro(t_game *g)
 {
 	int	x;
@@ -104,9 +103,22 @@ void	ft_draw_zorro(t_game *g)
 	if (scale < 0)
 		scale = 0;
 	g->ds->t_x = 0;
-	if (ft_check_walls_zorro(g) == false && x + g->zorro->animation[0]->width > 0 && g->ds->sy > g->dis_h / 2
-		&& x < g->dis_w && g->ds->sy < g->dis_h)
+	if (ft_check_walls_zorro(g) == false && x
+		+ g->zorro->animation[0]->width > 0 && g->ds->sy > g->dis_h / 2
+		&& x < g->dis_w && g->ds->sy < g->dis_h + g->zorro->animation[0]->height / 4)
 		ft_draw_zorro_tex(g, x, y, scale);
+}
+
+void	enemy_follow(t_game *g)
+{
+	if ((int)g->ds->sx > 0)
+		g->zorro->x -= 1;
+	if ((int)g->ds->sx < 0)
+		g->zorro->x += 1;
+	if ((int)g->ds->sy > 0)
+		g->zorro->y -= 1;
+	if ((int)g->ds->sy < 0)
+		g->zorro->y += 1;
 }
 
 void	ft_set_values_zorro(t_game *g)
@@ -114,6 +126,7 @@ void	ft_set_values_zorro(t_game *g)
 	g->ds->sx = g->zorro->x - g->pl_x;
 	g->ds->sy = g->zorro->y - g->pl_y;
 	g->ds->sz = g->zorro->z;
+	enemy_follow(g);
 	g->ds->cosine = cos(g->caster->pa);
 	g->ds->sine = sin(g->caster->pa);
 	g->ds->rot_a = g->ds->sy * g->ds->cosine * 12
