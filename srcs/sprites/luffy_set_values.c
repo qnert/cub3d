@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   luffy_set_values.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 15:19:23 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/25 19:58:42 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/10/26 13:23:26 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	ft_draw_luffy_tex(t_game *g, int x, int y, int scale)
 			g->ds->t_x = g->luffy->animation[0]->width - 1;
 		x++;
 	}
-	if (g->luffy->i < 73 && g->luffy->check == 0)
+	if (g->luffy->i < 72 && g->luffy->check == 0)
 		g->luffy->i++;
 	g->luffy->check++;
 }
@@ -104,7 +104,7 @@ void	ft_draw_luffy(t_game *g)
 	if (scale < 0)
 		scale = 0;
 	g->ds->t_x = 0;
-	if (ft_check_walls_luffy(g) == false && x > 0 && g->ds->sy > g->dis_h / 2
+	if (ft_check_walls_luffy(g) == false && x + g->luffy->animation[0]->width > 0 && g->ds->sy > g->dis_h / 2
 		&& x < g->dis_w && g->ds->sy < g->dis_h)
 		ft_draw_luffy_tex(g, x, y, scale);
 }
