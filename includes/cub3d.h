@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:19:00 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/25 16:35:10 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/26 14:53:41 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,16 @@
 # include <math.h>
 # include <fcntl.h>
 # include <stdbool.h>
+
+typedef struct zorro
+{
+	mlx_texture_t	**animation;
+	int				i;
+	int				check;
+	int				x;
+	int				y;
+	int				z;
+}	t_zorro;
 
 typedef struct luffy
 {
@@ -159,6 +169,7 @@ typedef struct game
 	t_draw_sprite	*ds;
 	t_tex			*tex;
 	t_luffy			*luffy;
+	t_zorro			*zorro;
 }	t_game;
 
 typedef struct map
@@ -248,6 +259,12 @@ t_luffy			*luffy_init(char **map);
 
 //luffy_set_values.c
 void			ft_set_values_luffy(t_game *g);
+
+//zorro_utils.c
+t_zorro			*zorro_init(char **map);
+
+//zorro_set_values.c
+void			ft_set_values_zorro(t_game *g);
 
 //draw_utils.c
 void			ft_draw_sprites(t_game *g);

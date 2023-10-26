@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:17:12 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/25 16:35:41 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/26 14:38:08 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,12 @@ void	ft_terminate_struct_helper(t_map *map)
 			[map->game->luffy->i]);
 		free(map->game->luffy->animation);
 		free(map->game->luffy);
+		map->game->zorro->i = -1;
+		while (++map->game->zorro->i < 17)
+			mlx_delete_texture(map->game->zorro->animation
+			[map->game->zorro->i]);
+		free(map->game->zorro->animation);
+		free(map->game->zorro);
 	}
 	if (map->error == 0)
 	{

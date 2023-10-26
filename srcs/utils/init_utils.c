@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 16:39:01 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/26 11:41:54 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/26 14:21:02 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	ft_allocate_helper_structs(t_map *init)
 	init->game->sp = malloc(sizeof(t_sprite));
 	sprite_init(init->game->sp, init);
 	init->game->luffy = luffy_init(init->map);
+	init->game->zorro = zorro_init(init->map);
 	ft_get_location(init->game, init->map, '2');
 	ft_get_location(init->game, init->map, '3');
 	init->game->tex = malloc(sizeof(t_tex));
