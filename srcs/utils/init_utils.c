@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 16:39:01 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/30 11:38:05 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/30 16:06:16 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	ft_allocate_helper_structs(t_map *init)
 {
 	init->game = malloc(sizeof(t_game));
 	init->game->drunk = 0;
+	init->game->game_over = 0;
 	init->game->caster = caster_init(init);
 	init->game->dl = draw_line_init();
 	init->game->ray = ray_init();

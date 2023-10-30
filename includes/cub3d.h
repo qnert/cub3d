@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:19:00 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/30 11:15:22 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/30 16:05:48 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,6 +163,7 @@ typedef struct game
 	int				n_of_coll;
 	int				n_of_water;
 	double			drunk;
+	int				game_over;
 	t_cast			*caster;
 	t_draw_line		*dl;
 	t_ray			*ray;
@@ -238,6 +239,7 @@ t_map			*strct_init(char *file_path);
 //init_utils.c
 void			initialize_vars_to_null(t_map *init);
 void			ft_allocate_helper_structs(t_map *init);
+void			ft_clear_up_other_tex(t_game *g, int i);
 int				ft_get_other_tex(t_game *game);
 
 //minimap.c

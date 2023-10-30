@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 16:52:24 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/30 11:29:57 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/30 16:07:02 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,6 +171,8 @@ void	ft_draw_sprites(t_game *g)
 	g->ds->t_x = 0;
 	if (ft_distance(g, g->sp->x, g->sp->y) < 100 && g->sp->state == 1)
 	{
+		if (g->sp->type == 4)
+			g->game_over = 1;
 		g->sp->state = 0;
 		increment_drunkness(g);
 		decrement_drunkness(g);
