@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 13:48:12 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/30 16:24:09 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/30 18:33:48 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,18 @@ void	ft_hooks(void *param)
 	y = 0;
 	diff = 0;
 	game = param;
+	if (mlx_is_key_down(game->mlx, MLX_KEY_ESCAPE))
+		mlx_close_window(game->mlx);
 	check_game_over(game);
-	mlx_get_mouse_pos(game->mlx, &x, &y);
-	diff = game->dis_w / 2 - x;
-	mlx_set_mouse_pos(game->mlx, game->dis_w / 2, game->dis_h / 2);
-	ft_rotate_left(game, diff);
-	ft_rotate_right(game, diff);
-	ft_move(game);
-	ft_check_door(game);
-	raycaster(game);
+	if (game->game_over == 0)
+	{
+		mlx_get_mouse_pos(game->mlx, &x, &y);
+		diff = game->dis_w / 2 - x;
+		mlx_set_mouse_pos(game->mlx, game->dis_w / 2, game->dis_h / 2);
+		ft_rotate_left(game, diff);
+		ft_rotate_right(game, diff);
+		ft_move(game);
+		ft_check_door(game);
+		raycaster(game);
+	}
 }

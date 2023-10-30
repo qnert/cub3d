@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 21:28:11 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/26 14:45:15 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/30 18:33:44 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,6 @@ void	ft_move_left_right(t_game *g)
 void	ft_move(t_game *game)
 {
 	ft_wall_offset_set(game);
-	if (mlx_is_key_down(game->mlx, MLX_KEY_ESCAPE))
-		mlx_close_window(game->mlx);
 	ft_move_up_down(game);
 	ft_move_left_right(game);
 }
