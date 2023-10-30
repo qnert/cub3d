@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 15:19:23 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/26 14:37:26 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/30 16:23:14 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,8 @@ void	ft_draw_zorro(t_game *g)
 	if (scale < 0)
 		scale = 0;
 	g->ds->t_x = 0;
-	if (ft_check_walls_zorro(g) == false && x + g->zorro->animation[0]->width > 0 && g->ds->sy > g->dis_h / 2
+	if (ft_check_walls_zorro(g) == false && x
+		+ g->zorro->animation[0]->width > 0 && g->ds->sy > g->dis_h / 2
 		&& x < g->dis_w && g->ds->sy < g->dis_h)
 		ft_draw_zorro_tex(g, x, y, scale);
 }

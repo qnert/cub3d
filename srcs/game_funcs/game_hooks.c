@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 13:48:12 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/30 16:19:48 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/30 16:24:09 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,12 @@ void	ft_wall_offset_set(t_game *g)
 
 void	check_game_over(t_game *game)
 {
+	mlx_texture_t	*win;
+	mlx_image_t		*win_img;
+	mlx_image_t		*background;
+
 	if (game->game_over == 1)
 	{
-		mlx_texture_t	*win;
-		mlx_image_t		*win_img;
-		mlx_image_t		*background;
-
 		win_img = NULL;
 		background = NULL;
 		mlx_delete_image(game->mlx, win_img);
