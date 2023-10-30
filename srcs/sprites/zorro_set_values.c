@@ -6,7 +6,7 @@
 /*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 15:19:23 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/30 16:33:51 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/10/30 19:15:00 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,8 @@ void	ft_set_values_zorro(t_game *g)
 	g->ds->sy = g->zorro->y - g->pl_y;
 	g->ds->sz = g->zorro->z;
 	enemy_follow(g);
+	if (ft_distance(g, g->zorro->x, g->zorro->y) < 150)
+		g->game_over = 2;
 	g->ds->cosine = cos(g->caster->pa);
 	g->ds->sine = sin(g->caster->pa);
 	g->ds->rot_a = g->ds->sy * g->ds->cosine * 12

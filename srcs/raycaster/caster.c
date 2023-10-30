@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   caster.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 17:08:51 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/30 12:52:07 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/30 21:12:07 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 // deletes and replaces image for new line
 void	replace_img(t_game *g)
 {
-	mlx_delete_image(g->mlx, g->minimap);
-	mlx_delete_image(g->mlx, g->line);
+	if (g->minimap)
+		mlx_delete_image(g->mlx, g->minimap);
+	if (g->line)
+		mlx_delete_image(g->mlx, g->line);
 	g->line = mlx_new_image(g->mlx, g->dis_w + 20, g->dis_h + 20);
 	g->minimap = mlx_new_image(g->mlx, g->dis_w, g->dis_h);
 	mlx_image_to_window(g->mlx, g->line, 0, 0);

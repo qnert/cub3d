@@ -6,7 +6,7 @@
 /*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:19:00 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/30 16:33:48 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/10/30 20:40:53 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ typedef struct zorro
 	mlx_texture_t	**animation;
 	int				i;
 	int				check;
-	int				x;
-	int				y;
+	double			x;
+	double			y;
 	int				z;
 }	t_zorro;
 
@@ -145,7 +145,6 @@ typedef struct textures
 	mlx_texture_t	*coll_tex;
 	mlx_texture_t	*water_tex;
 	mlx_texture_t	*chest_tex;
-	mlx_texture_t	*enemy_tex;
 }	t_tex;
 
 typedef struct game
@@ -154,6 +153,7 @@ typedef struct game
 	mlx_image_t		*player;
 	mlx_image_t		*line;
 	mlx_image_t		*minimap;
+	mlx_image_t		*background;
 	int				height;
 	int				width;
 	int				dis_w;
@@ -164,6 +164,7 @@ typedef struct game
 	int				n_of_water;
 	double			drunk;
 	int				game_over;
+	int				backg_fade;
 	t_cast			*caster;
 	t_draw_line		*dl;
 	t_ray			*ray;
@@ -185,6 +186,7 @@ typedef struct map
 	int		floor_rgb[3];
 	int		ceiling_rgb[3];
 	int		error;
+	int		replay_check;
 	t_game	*game;
 }	t_map;
 

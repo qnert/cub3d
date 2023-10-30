@@ -6,7 +6,7 @@
 /*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 15:25:31 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/30 16:33:39 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/10/30 17:00:39 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 void	enemy_follow(t_game *g)
 {
 	if ((int)g->ds->sx > 0)
-		g->zorro->x -= 1;
+		g->zorro->x -= 1.4;
 	if ((int)g->ds->sx < 0)
-		g->zorro->x += 1;
+		g->zorro->x += 1.4;
 	if ((int)g->ds->sy > 0)
-		g->zorro->y -= 1;
+		g->zorro->y -= 0.45;
 	if ((int)g->ds->sy < 0)
-		g->zorro->y += 1;
+		g->zorro->y += 0.45;
 }
 
 static mlx_texture_t	**load_all_pngs_zorro(int i)
