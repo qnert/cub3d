@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 18:27:36 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/26 14:21:56 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/30 11:22:18 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	ft_matrixlen(char **matrix)
 
 bool	is_component(char c)
 {
-	if (ft_strchr("01NSWED23LZ", c))
+	if (ft_strchr("01NSWED23LZ4", c))
 		return (true);
 	return (false);
 }

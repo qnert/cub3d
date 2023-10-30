@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:19:00 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/26 14:53:41 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/30 11:15:22 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,7 @@ typedef struct textures
 	mlx_texture_t	*ceiling_tex;
 	mlx_texture_t	*coll_tex;
 	mlx_texture_t	*water_tex;
+	mlx_texture_t	*chest_tex;
 	mlx_texture_t	*enemy_tex;
 }	t_tex;
 

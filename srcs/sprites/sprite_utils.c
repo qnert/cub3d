@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 17:24:58 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/25 16:34:56 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/30 11:18:26 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,5 +86,6 @@ void	sprite_init(t_sprite *start, t_map *m)
 	i = -1;
 	while (++i < m->game->n_of_water)
 		curr = new_lst_node_sprite(curr, new_node, 3);
+	curr = new_lst_node_sprite(curr, new_node, 4);
 	curr->next = NULL;
 }
