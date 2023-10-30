@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:19:00 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/26 14:53:41 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/30 16:33:48 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,7 @@ typedef struct textures
 	mlx_texture_t	*ceiling_tex;
 	mlx_texture_t	*coll_tex;
 	mlx_texture_t	*water_tex;
+	mlx_texture_t	*chest_tex;
 	mlx_texture_t	*enemy_tex;
 }	t_tex;
 
@@ -162,6 +163,7 @@ typedef struct game
 	int				n_of_coll;
 	int				n_of_water;
 	double			drunk;
+	int				game_over;
 	t_cast			*caster;
 	t_draw_line		*dl;
 	t_ray			*ray;
@@ -237,6 +239,7 @@ t_map			*strct_init(char *file_path);
 //init_utils.c
 void			initialize_vars_to_null(t_map *init);
 void			ft_allocate_helper_structs(t_map *init);
+void			ft_clear_up_other_tex(t_game *g, int i);
 int				ft_get_other_tex(t_game *game);
 
 //minimap.c
@@ -262,6 +265,7 @@ void			ft_set_values_luffy(t_game *g);
 
 //zorro_utils.c
 t_zorro			*zorro_init(char **map);
+void			enemy_follow(t_game *g);
 
 //zorro_set_values.c
 void			ft_set_values_zorro(t_game *g);

@@ -3,14 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   zorro_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 15:25:31 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/26 14:42:30 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/30 16:33:39 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+
+void	enemy_follow(t_game *g)
+{
+	if ((int)g->ds->sx > 0)
+		g->zorro->x -= 1;
+	if ((int)g->ds->sx < 0)
+		g->zorro->x += 1;
+	if ((int)g->ds->sy > 0)
+		g->zorro->y -= 1;
+	if ((int)g->ds->sy < 0)
+		g->zorro->y += 1;
+}
 
 static mlx_texture_t	**load_all_pngs_zorro(int i)
 {

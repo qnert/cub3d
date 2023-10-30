@@ -6,7 +6,7 @@
 /*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 15:19:23 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/26 14:56:22 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/10/30 16:28:17 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,8 @@ void	ft_draw_luffy(t_game *g)
 	if (scale < 0)
 		scale = 0;
 	g->ds->t_x = 0;
-	if (ft_check_walls_luffy(g) == false && x + g->luffy->animation[0]->width > 0 && g->ds->sy > g->dis_h / 2
+	if (ft_check_walls_luffy(g) == false && x
+		+ g->luffy->animation[0]->width > 0 && g->ds->sy > g->dis_h / 2
 		&& x < g->dis_w && g->ds->sy < g->dis_h)
 		ft_draw_luffy_tex(g, x, y, scale);
 }
