@@ -6,7 +6,7 @@
 /*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 21:26:51 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/24 14:45:36 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/10/31 17:48:49 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,10 @@ void	check_horizontal_wall(t_game *g)
 	{
 		g->caster->map_x = (int)g->ray->ray_x / DIMENS;
 		g->caster->map_y = (int)g->ray->ray_y / DIMENS;
-		if (g->caster->map_x < g->width && g->caster->map_y < g->height
-			&& g->caster->map_x >= 0 && g->caster->map_y >= 0
+		if (g->caster->map_y < g->height && g->caster->map_x >= 0
+			&& g->caster->map_y >= 0
+			&& g->caster->map_x < (int)ft_strlen(
+				g->caster->map[g->caster->map_y])
 			&& (g->caster->map[g->caster->map_y][g->caster->map_x] == '1'
 			|| g->caster->map[g->caster->map_y][g->caster->map_x] == 'D'))
 		{

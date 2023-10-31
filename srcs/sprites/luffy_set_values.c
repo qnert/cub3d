@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   luffy_set_values.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 15:19:23 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/31 16:56:00 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/31 17:14:05 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	ft_get_luffy_colors_and_draw(t_game *g, int x, int y)
 		| (int)(g->luffy->animation
 		[g->luffy->i]->pixels[g->dl->pixel + 3]);
 	if (x > 0 && g->ds->sy > g->dis_h / 2
-		&& x < g->dis_w && g->ds->sy < g->dis_h
+		&& x < g->dis_w && g->ds->sy - y < g->dis_h
 		&& g->dl->color != 0)
 		mlx_put_pixel(g->line, x, g->ds->sy - y, g->dl->color);
 }
@@ -78,7 +78,7 @@ void	ft_draw_luffy(t_game *g)
 	if (ft_check_walls_sprite(g, (double)g->luffy->x,
 			(double)g->luffy->y) == false && x
 		+ g->luffy->animation[0]->width > 0 && g->ds->sy > g->dis_h / 2
-		&& x < g->dis_w && g->ds->sy < g->dis_h)
+		&& x < g->dis_w)
 		ft_draw_luffy_tex(g, x, y, scale * 1.5);
 }
 
