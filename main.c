@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:17:12 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/31 11:50:44 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/30 20:45:37 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,11 +87,19 @@ int	main(int argc, char **argv)
 	check = ft_check_file_type(argv[1]);
 	if (check == 0)
 		return (printf("Error\n"), 1);
-	map = strct_init(argv[1]);
-	if (map->error == 1 || map->error == 2)
-		return (ft_terminate_struct(map), system ("leaks cub3D"), 1);
-	map->error = game_init(map);
-	ft_terminate_struct(map);
-	system("leaks cub3D");
+	while (1)
+	{
+		map = strct_init(argv[1]);
+		if (map->error == 1 || map->error == 2)
+			return (ft_terminate_struct(map), 1);
+		map->error = game_init(map);
+		if (map->game->game_over != 3)
+		{
+			ft_terminate_struct(map);
+			break ;
+		}
+		ft_terminate_struct(map);
+	}
+	// system("leaks cub3D");
 	return (0);
 }

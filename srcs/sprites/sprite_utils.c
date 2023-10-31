@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprite_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 17:24:58 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/30 18:40:35 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/30 21:08:41 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,9 @@ void	ft_get_location(t_game *game, char **map, char c)
 	curr = game->sp;
 	while (curr && curr->type != ft_atoi(&c))
 		curr = curr->next;
+	// printf("went in function\n");
+	// printf("type : %d, id : %c\n", curr->type, c);
+	// printf("x = %d, y = %d\n", curr->x, curr->y);
 	while (map[i] && curr)
 	{
 		j = 0;
