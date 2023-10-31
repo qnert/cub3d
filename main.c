@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:17:12 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/30 16:18:27 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/31 11:50:44 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	ft_free_luffy_zorro(t_map *map)
 
 void	ft_terminate_struct_helper(t_map *map)
 {
-	if (map->error == 0 || map->error == 1)
+	if (map->error == 0 || map->error == 3)
 		ft_free_luffy_zorro(map);
 	if (map->error == 0)
 	{
@@ -45,7 +45,8 @@ void	ft_terminate_struct_helper(t_map *map)
 		mlx_delete_texture(map->game->tex->chest_tex);
 		mlx_delete_texture(map->game->tex->water_tex);
 	}
-	free(map->game->tex);
+	if (map->error == 0 || map->error == 3)
+		free(map->game->tex);
 	if (map->map != NULL)
 		free(map->game);
 	free(map);
@@ -88,9 +89,9 @@ int	main(int argc, char **argv)
 		return (printf("Error\n"), 1);
 	map = strct_init(argv[1]);
 	if (map->error == 1 || map->error == 2)
-		return (ft_terminate_struct(map), 1);
+		return (ft_terminate_struct(map), system ("leaks cub3D"), 1);
 	map->error = game_init(map);
 	ft_terminate_struct(map);
-	// system("leaks cub3D");
+	system("leaks cub3D");
 	return (0);
 }
