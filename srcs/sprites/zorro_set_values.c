@@ -6,7 +6,7 @@
 /*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 15:19:23 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/30 19:15:00 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/10/31 13:06:43 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	ft_get_zorro_colors_and_draw(t_game *g, int x, int y)
 		[g->zorro->i]->pixels[g->dl->pixel + 3]);
 	if (x > 0 && g->ds->sy > g->dis_h / 2
 		&& x < g->dis_w && g->ds->sy < g->dis_h
-		+ g->zorro->animation[0]->height / 4
 		&& g->dl->color != 0)
 		mlx_put_pixel(g->line, x, g->ds->sy - y, g->dl->color);
 }
@@ -106,8 +105,7 @@ void	ft_draw_zorro(t_game *g)
 	g->ds->t_x = 0;
 	if (ft_check_walls_zorro(g) == false && x
 		+ g->zorro->animation[0]->width > 0 && g->ds->sy > g->dis_h / 2
-		&& x < g->dis_w && g->ds->sy < g->dis_h
-		+ g->zorro->animation[0]->height / 4)
+		&& x < g->dis_w && g->ds->sy < g->dis_h)
 		ft_draw_zorro_tex(g, x, y, scale);
 }
 
