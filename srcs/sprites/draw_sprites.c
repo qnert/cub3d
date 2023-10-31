@@ -6,7 +6,7 @@
 /*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 12:09:23 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/31 14:30:04 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/10/31 17:17:21 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	ft_draw_beer(t_game *g, int x, int y, int scale)
 				| (int)(g->tex->coll_tex->pixels[g->dl->pixel + 2]) << 8
 				| (int)(g->tex->coll_tex->pixels[g->dl->pixel + 3]);
 			if (x > 0 && g->ds->sy > g->dis_h / 2
-				&& x < g->dis_w && g->ds->sy < g->dis_h
+				&& x < g->dis_w && g->ds->sy - y < g->dis_h
 				&& g->dl->color != 0)
 				mlx_put_pixel(g->line, x, g->ds->sy - y, g->dl->color);
 			g->ds->t_y -= g->tex->coll_tex->height / (float)scale;
@@ -56,7 +56,7 @@ void	ft_draw_water(t_game *g, int x, int y, int scale)
 				| (int)(g->tex->water_tex->pixels[g->dl->pixel + 2]) << 8
 				| (int)(g->tex->water_tex->pixels[g->dl->pixel + 3]);
 			if (x > 0 && g->ds->sy > g->dis_h / 2
-				&& x < g->dis_w && g->ds->sy < g->dis_h
+				&& x < g->dis_w && g->ds->sy - y < g->dis_h
 				&& g->dl->color != 0)
 				mlx_put_pixel(g->line, x, g->ds->sy - y, g->dl->color);
 			g->ds->t_y -= g->tex->water_tex->height / (float)scale;
@@ -85,7 +85,7 @@ void	ft_draw_chest(t_game *g, int x, int y, int scale)
 				| (int)(g->tex->chest_tex->pixels[g->dl->pixel + 2]) << 8
 				| (int)(g->tex->chest_tex->pixels[g->dl->pixel + 3]);
 			if (x > 0 && g->ds->sy > g->dis_h / 2
-				&& x < g->dis_w && g->ds->sy < g->dis_h
+				&& x < g->dis_w && g->ds->sy - y < g->dis_h
 				&& g->dl->color != 0)
 				mlx_put_pixel(g->line, x, g->ds->sy - y, g->dl->color);
 			g->ds->t_y -= g->tex->chest_tex->height / (float)scale;
@@ -125,6 +125,6 @@ void	ft_draw_sprites(t_game *g)
 	if (ft_check_walls_sprite(g, (double)g->sp->x, (double)g->sp->y) == false
 		&& g->sp->state == 1
 		&& x + g->tex->chest_tex->width > 0 && g->ds->sy > g->dis_h / 2
-		&& x < g->dis_w && g->ds->sy < g->dis_h)
+		&& x < g->dis_w)
 		check_sprite_type_for_draw(g, x, y, scale);
 }
