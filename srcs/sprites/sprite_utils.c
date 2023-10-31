@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 17:24:58 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/25 16:34:56 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/30 18:40:35 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ void	ft_get_location(t_game *game, char **map, char c)
 		{
 			if (map[i][j] == c && curr->x == 0 && curr->y == 0)
 			{
-				curr->x = j * DIMENS + 20;
-				curr->y = i * DIMENS + 20;
+				curr->x = j * DIMENS + (DIMENS / 2);
+				curr->y = i * DIMENS + (DIMENS / 2);
 				curr = curr->next;
 			}
 			j++;
@@ -86,5 +86,6 @@ void	sprite_init(t_sprite *start, t_map *m)
 	i = -1;
 	while (++i < m->game->n_of_water)
 		curr = new_lst_node_sprite(curr, new_node, 3);
+	curr = new_lst_node_sprite(curr, new_node, 4);
 	curr->next = NULL;
 }

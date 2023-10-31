@@ -6,29 +6,32 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:17:12 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/26 14:38:08 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/31 11:50:44 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/cub3d.h"
 
+void	ft_free_luffy_zorro(t_map *map)
+{
+	map->game->luffy->i = -1;
+	while (++map->game->luffy->i < 72)
+		mlx_delete_texture(map->game->luffy->animation
+		[map->game->luffy->i]);
+	free(map->game->luffy->animation);
+	free(map->game->luffy);
+	map->game->zorro->i = -1;
+	while (++map->game->zorro->i < 17)
+		mlx_delete_texture(map->game->zorro->animation
+		[map->game->zorro->i]);
+	free(map->game->zorro->animation);
+	free(map->game->zorro);
+}
+
 void	ft_terminate_struct_helper(t_map *map)
 {
-	if (map->error == 0)
-	{
-		map->game->luffy->i = -1;
-		while (++map->game->luffy->i < 72)
-			mlx_delete_texture(map->game->luffy->animation
-			[map->game->luffy->i]);
-		free(map->game->luffy->animation);
-		free(map->game->luffy);
-		map->game->zorro->i = -1;
-		while (++map->game->zorro->i < 17)
-			mlx_delete_texture(map->game->zorro->animation
-			[map->game->zorro->i]);
-		free(map->game->zorro->animation);
-		free(map->game->zorro);
-	}
+	if (map->error == 0 || map->error == 3)
+		ft_free_luffy_zorro(map);
 	if (map->error == 0)
 	{
 		mlx_delete_texture(map->game->tex->ceiling_tex);
@@ -39,8 +42,11 @@ void	ft_terminate_struct_helper(t_map *map)
 		mlx_delete_texture(map->game->tex->door_tex);
 		mlx_delete_texture(map->game->tex->floor_tex);
 		mlx_delete_texture(map->game->tex->coll_tex);
-		free(map->game->tex);
+		mlx_delete_texture(map->game->tex->chest_tex);
+		mlx_delete_texture(map->game->tex->water_tex);
 	}
+	if (map->error == 0 || map->error == 3)
+		free(map->game->tex);
 	if (map->map != NULL)
 		free(map->game);
 	free(map);
@@ -83,9 +89,9 @@ int	main(int argc, char **argv)
 		return (printf("Error\n"), 1);
 	map = strct_init(argv[1]);
 	if (map->error == 1 || map->error == 2)
-		return (ft_terminate_struct(map), 1);
-	map->error = 0;
-	game_init(map);
+		return (ft_terminate_struct(map), system ("leaks cub3D"), 1);
+	map->error = game_init(map);
 	ft_terminate_struct(map);
+	system("leaks cub3D");
 	return (0);
 }

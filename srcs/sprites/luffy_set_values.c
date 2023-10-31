@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 15:19:23 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/26 13:23:26 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/31 11:59:14 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ bool	ft_check_walls_luffy(t_game *g)
 	return (false);
 }
 
-//luffy only clips if rotating to the left and just disappears if rotate right
 void	ft_draw_luffy(t_game *g)
 {
 	int	x;
@@ -104,9 +103,10 @@ void	ft_draw_luffy(t_game *g)
 	if (scale < 0)
 		scale = 0;
 	g->ds->t_x = 0;
-	if (ft_check_walls_luffy(g) == false && x + g->luffy->animation[0]->width > 0 && g->ds->sy > g->dis_h / 2
+	if (ft_check_walls_luffy(g) == false && x
+		+ g->luffy->animation[0]->width > 0 && g->ds->sy > g->dis_h / 2
 		&& x < g->dis_w && g->ds->sy < g->dis_h)
-		ft_draw_luffy_tex(g, x, y, scale);
+		ft_draw_luffy_tex(g, x, y, scale * 1.5);
 }
 
 void	ft_set_values_luffy(t_game *g)
