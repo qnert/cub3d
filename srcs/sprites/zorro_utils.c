@@ -6,22 +6,34 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 15:25:31 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/31 14:24:53 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/31 16:56:35 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void	enemy_follow(t_game *g)
+double	distance(double x1, double y1, double x2, double y2)
 {
-	if ((int)g->ds->sx > 0)
-		g->zorro->x -= 1.4;
-	if ((int)g->ds->sx < 0)
-		g->zorro->x += 1.4;
-	if ((int)g->ds->sy > 0)
-		g->zorro->y -= 0.45;
-	if ((int)g->ds->sy < 0)
-		g->zorro->y += 0.45;
+	return (sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1)));
+}
+
+void	enemy_follow(t_game *game)
+{
+	double	dx;
+	double	dy;
+	double	speed;
+	double	distance_to_player;
+
+	speed = 1.4;
+	distance_to_player = distance(game->zorro->x, game->zorro->y,
+			game->pl_x, game->pl_y);
+	if (distance_to_player > 0)
+	{
+		dx = (game->pl_x - game->zorro->x) / distance_to_player;
+		dy = (game->pl_y - game->zorro->y) / distance_to_player;
+		game->zorro->x += dx * speed;
+		game->zorro->y += dy * speed;
+	}
 }
 
 static mlx_texture_t	**load_all_pngs_zorro(int i)
