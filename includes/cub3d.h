@@ -261,6 +261,7 @@ bool			is_valid_border(char c);
 void			ft_error_msg(char *str);
 
 //luffy_utils.c
+void			free_prior_pngs(mlx_texture_t **animation, int n);
 t_luffy			*luffy_init(char **map);
 
 //luffy_set_values.c

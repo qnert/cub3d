@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   zorro_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 15:25:31 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/30 17:00:39 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/10/31 14:24:53 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,16 @@ static mlx_texture_t	**load_all_pngs_zorro(int i)
 	i = 0;
 	str = "./textures/zorro/zorro-";
 	animation = malloc(sizeof(mlx_texture_t *) * 18);
+	if (animation == NULL)
+		return (NULL);
 	while (i < 17)
 	{
 		nbr = ft_itoa(i);
 		tmp = ft_strjoin_free(nbr, ".png");
 		nbr = ft_strjoin(str, tmp);
 		animation[i] = mlx_load_png(nbr);
+		if (!animation[i])
+			return (free_prior_pngs(animation, i), free(animation), NULL);
 		free(nbr);
 		free(tmp);
 		i++;
@@ -76,7 +80,11 @@ t_zorro	*zorro_init(char **map)
 	t_zorro	*zorr;
 
 	zorr = malloc(sizeof(t_zorro));
+	if (zorr == NULL)
+		return (NULL);
 	zorr->animation = load_all_pngs_zorro(0);
+	if (zorr->animation == NULL)
+		return (free(zorr), NULL);
 	zorr->i = 0;
 	zorr->check = 0;
 	zorr->x = 0;
