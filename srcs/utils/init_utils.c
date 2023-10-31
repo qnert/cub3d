@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 16:39:01 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/31 14:31:08 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/31 14:46:54 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	ft_allocate_helper_structs(t_map *init)
 	init->game->n_of_coll = check_component('2', init->map);
 	init->game->n_of_water = check_component('3', init->map);
 	init->game->sp = malloc(sizeof(t_sprite));
+	init->game->begin = init->game->sp;
 	sprite_init(init->game->sp, init);
 	init->game->luffy = luffy_init(init->map);
 	if (init->game->luffy == NULL)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   luffy_set_values.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 15:19:23 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/31 11:59:14 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/31 14:34:24 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,34 +61,6 @@ void	ft_draw_luffy_tex(t_game *g, int x, int y, int scale)
 	g->luffy->check++;
 }
 
-bool	ft_check_walls_luffy(t_game *g)
-{
-	double	step_x;
-	double	step_y;
-	double	px;
-	double	py;
-	int		i;
-
-	i = -1;
-	step_x = (g->luffy->x - g->pl_x) / DIMENS;
-	step_y = (g->luffy->y - g->pl_y) / DIMENS;
-	px = g->pl_x;
-	py = g->pl_y;
-	while (++i < DIMENS)
-	{
-		g->caster->map_x = (int)(px / DIMENS);
-		g->caster->map_y = (int)(py / DIMENS);
-		if (g->caster->map_x >= 0 && g->caster->map_x < g->width
-			&& g->caster->map_y >= 0 && g->caster->map_y < g->height)
-			if (g->caster->map[g->caster->map_y][g->caster->map_x] == '1'
-				|| g->caster->map[g->caster->map_y][g->caster->map_x] == 'D')
-				return (true);
-		px += step_x;
-		py += step_y;
-	}
-	return (false);
-}
-
 void	ft_draw_luffy(t_game *g)
 {
 	int	x;
@@ -103,7 +75,8 @@ void	ft_draw_luffy(t_game *g)
 	if (scale < 0)
 		scale = 0;
 	g->ds->t_x = 0;
-	if (ft_check_walls_luffy(g) == false && x
+	if (ft_check_walls_sprite(g, (double)g->luffy->x,
+		(double)g->luffy->y) == false && x
 		+ g->luffy->animation[0]->width > 0 && g->ds->sy > g->dis_h / 2
 		&& x < g->dis_w && g->ds->sy < g->dis_h)
 		ft_draw_luffy_tex(g, x, y, scale * 1.5);
