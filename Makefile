@@ -1,5 +1,5 @@
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -Ofast
 USER = $(shell whoami)
 MLXFLAGS = -Iinclude -lglfw
 NAME = cub3D

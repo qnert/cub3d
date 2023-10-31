@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:19:00 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/30 20:40:53 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/10/31 14:43:33 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,6 +168,7 @@ typedef struct game
 	t_cast			*caster;
 	t_draw_line		*dl;
 	t_ray			*ray;
+	t_sprite		*begin;
 	t_sprite		*sp;
 	t_draw_sprite	*ds;
 	t_tex			*tex;
@@ -333,7 +334,7 @@ void			ft_draw_chest(t_game *g, int x, int y, int scale);
 void			ft_draw_sprites(t_game *g);
 
 //sprites.c
-bool			ft_check_walls_sprite(t_game *g);
+bool			ft_check_walls_sprite(t_game *g, double x, double y);
 void			increment_drunkness(t_game *g);
 void			decrement_drunkness(t_game *g);
 void			check_sprite_type_for_draw(t_game *g, int x, int y, int scale);

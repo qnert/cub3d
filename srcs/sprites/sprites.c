@@ -6,13 +6,13 @@
 /*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 16:52:24 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/30 20:56:09 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/10/31 14:44:39 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-bool	ft_check_walls_sprite(t_game *g)
+bool	ft_check_walls_sprite(t_game *g, double x, double y)
 {
 	double	step_x;
 	double	step_y;
@@ -21,8 +21,8 @@ bool	ft_check_walls_sprite(t_game *g)
 	int		i;
 
 	i = -1;
-	step_x = (g->sp->x - g->pl_x) / DIMENS;
-	step_y = (g->sp->y - g->pl_y) / DIMENS;
+	step_x = (x - g->pl_x) / DIMENS;
+	step_y = (y - g->pl_y) / DIMENS;
 	px = g->pl_x;
 	py = g->pl_y;
 	while (++i < DIMENS)
@@ -70,9 +70,7 @@ void	check_sprite_type_for_draw(t_game *g, int x, int y, int scale)
 
 void	ft_set_values_sprites(t_game *g)
 {
-	t_sprite	*begin;
-
-	begin = g->sp;
+	g->begin = g->sp;
 	while ((g->n_of_coll > 0 && g->sp) || (g->n_of_water > 0 && g->sp))
 	{
 		g->ds->sx = g->sp->x - g->pl_x;
@@ -88,5 +86,5 @@ void	ft_set_values_sprites(t_game *g)
 		ft_draw_sprites(g);
 		g->sp = g->sp->next;
 	}
-	g->sp = begin;
+	g->sp = g->begin;
 }
