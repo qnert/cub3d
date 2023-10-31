@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:19:00 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/30 16:33:48 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/10/31 12:13:29 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -324,8 +324,17 @@ void			check_horizontal_line(t_game *g);
 void			check_vertical_line(t_game *g);
 void			replace_img(t_game *g);
 
+//draw_sprites.c
+void			ft_draw_beer(t_game *g, int x, int y, int scale);
+void			ft_draw_water(t_game *g, int x, int y, int scale);
+void			ft_draw_chest(t_game *g, int x, int y, int scale);
+void			ft_draw_sprites(t_game *g);
+
 //sprites.c
 bool			ft_check_walls_sprite(t_game *g);
+void			increment_drunkness(t_game *g);
+void			decrement_drunkness(t_game *g);
+void			check_sprite_type_for_draw(t_game *g, int x, int y, int scale);
 void			ft_set_values_sprites(t_game *g);
 
 //sprite_utils.c
