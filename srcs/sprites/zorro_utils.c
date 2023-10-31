@@ -6,16 +6,11 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 15:25:31 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/31 16:56:35 by skunert          ###   ########.fr       */
+/*   Updated: 2023/10/31 17:02:55 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-
-double	distance(double x1, double y1, double x2, double y2)
-{
-	return (sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1)));
-}
 
 void	enemy_follow(t_game *game)
 {
@@ -25,8 +20,7 @@ void	enemy_follow(t_game *game)
 	double	distance_to_player;
 
 	speed = 1.4;
-	distance_to_player = distance(game->zorro->x, game->zorro->y,
-			game->pl_x, game->pl_y);
+	distance_to_player = ft_distance(game, game->zorro->x, game->zorro->y);
 	if (distance_to_player > 0)
 	{
 		dx = (game->pl_x - game->zorro->x) / distance_to_player;
