@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 16:39:01 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/30 20:42:09 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/10/31 14:31:08 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,11 @@ void	ft_allocate_helper_structs(t_map *init)
 	init->game->sp = malloc(sizeof(t_sprite));
 	sprite_init(init->game->sp, init);
 	init->game->luffy = luffy_init(init->map);
+	if (init->game->luffy == NULL)
+		return (init->error = 1, free(NULL));
 	init->game->zorro = zorro_init(init->map);
+	if (init->game->luffy == NULL)
+		return (init->error = 1, free(init->game->luffy));
 	ft_get_location(init->game, init->map, '2');
 	ft_get_location(init->game, init->map, '3');
 	ft_get_location(init->game, init->map, '4');

@@ -6,7 +6,7 @@
 /*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:19:00 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/30 20:40:53 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/10/31 14:15:29 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -260,6 +260,7 @@ bool			is_valid_border(char c);
 void			ft_error_msg(char *str);
 
 //luffy_utils.c
+void			free_prior_pngs(mlx_texture_t **animation, int n);
 t_luffy			*luffy_init(char **map);
 
 //luffy_set_values.c
