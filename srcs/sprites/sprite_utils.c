@@ -46,8 +46,8 @@ void	ft_get_location(t_game *game, char **map, char c)
 		{
 			if (map[i][j] == c && curr->x == 0 && curr->y == 0)
 			{
-				curr->x = j * DIMENS + 20;
-				curr->y = i * DIMENS + 20;
+				curr->x = j * DIMENS + (DIMENS / 2);
+				curr->y = i * DIMENS + (DIMENS / 2);
 				curr = curr->next;
 			}
 			j++;

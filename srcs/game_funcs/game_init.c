@@ -33,7 +33,7 @@ int	ft_game_begin(t_game *game, t_map *m)
 	game->mlx = mlx_init(game->dis_w, game->dis_h, "One Piece it in!", true);
 	get_images(game);
 	if (ft_fill_map(game, m) == 1)
-		return (mlx_terminate(game->mlx), 1);
+		return (mlx_terminate(game->mlx), 3);
 	game->pl_x = game->player->instances[0].x;
 	game->pl_y = game->player->instances[0].y;
 	mlx_set_cursor_mode(game->mlx, MLX_MOUSE_HIDDEN);

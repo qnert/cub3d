@@ -30,7 +30,7 @@ void	ft_free_luffy_zorro(t_map *map)
 
 void	ft_terminate_struct_helper(t_map *map)
 {
-	if (map->error == 0 || map->error == 1)
+	if (map->error == 0 || map->error == 3)
 		ft_free_luffy_zorro(map);
 	if (map->error == 0)
 	{
@@ -45,7 +45,8 @@ void	ft_terminate_struct_helper(t_map *map)
 		mlx_delete_texture(map->game->tex->chest_tex);
 		mlx_delete_texture(map->game->tex->water_tex);
 	}
-	free(map->game->tex);
+	if (map->error == 0 || map->error == 3)
+		free(map->game->tex);
 	if (map->map != NULL)
 		free(map->game);
 	free(map);
