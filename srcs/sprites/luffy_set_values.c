@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   luffy_set_values.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 15:19:23 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/31 14:34:24 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/10/31 16:56:00 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	ft_draw_luffy(t_game *g)
 		scale = 0;
 	g->ds->t_x = 0;
 	if (ft_check_walls_sprite(g, (double)g->luffy->x,
-		(double)g->luffy->y) == false && x
+			(double)g->luffy->y) == false && x
 		+ g->luffy->animation[0]->width > 0 && g->ds->sy > g->dis_h / 2
 		&& x < g->dis_w && g->ds->sy < g->dis_h)
 		ft_draw_luffy_tex(g, x, y, scale * 1.5);
