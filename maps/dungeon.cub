@@ -1,7 +1,7 @@
-EA ./textures/window.png
-NO ./textures/window.png
-SO ./textures/window.png
-WE ./textures/window.png
+EA ./textures/wooden_wall_no_window.png
+NO ./textures/wooden_wall.png
+SO ./textures/wooden_wall.png
+WE ./textures/wooden_wall_no_window.png
 
 C 225,30,0
 F 225,30,0
@@ -12,7 +12,7 @@ F 225,30,0
 1000000001              1001
 1000000001             10001
 1000000001111111111111110001
-1000000000000000000000000001
+1000000000000000000Z00000001
 11111111111111111111110000001
                       10000001
                        10000001
@@ -26,7 +26,7 @@ F 225,30,0
 1100111
 1100111
 1000001
-1000001
-1000001
+1004001
+100L001
 1000001
 1111111
