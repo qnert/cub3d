@@ -6,7 +6,7 @@
 /*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 13:22:45 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/30 20:39:10 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/11/02 13:35:45 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,6 @@ int	ft_game_begin(t_game *game, t_map *m)
 	get_images(game);
 	if (ft_fill_map(game, m) == 1)
 		return (mlx_terminate(game->mlx), 3);
-	game->pl_x = game->player->instances[0].x;
-	game->pl_y = game->player->instances[0].y;
 	mlx_set_cursor_mode(game->mlx, MLX_MOUSE_HIDDEN);
 	mlx_loop_hook(game->mlx, ft_hooks, game);
 	mlx_loop(game->mlx);

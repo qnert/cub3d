@@ -6,7 +6,7 @@
 /*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:19:00 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/31 14:43:33 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/11/02 13:38:11 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,6 @@ typedef struct textures
 typedef struct game
 {
 	mlx_t			*mlx;
-	mlx_image_t		*player;
 	mlx_image_t		*line;
 	mlx_image_t		*minimap;
 	mlx_image_t		*background;

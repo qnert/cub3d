@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 14:38:02 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/30 13:11:23 by skunert          ###   ########.fr       */
+/*   Updated: 2023/11/02 13:35:40 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ void	ft_fill_player(t_game *game, char **map)
 			if (map[i][j] == 'E' || map[i][j] == 'W'
 				|| map[i][j] == 'S' || map[i][j] == 'N')
 			{
-				mlx_image_to_window(game->mlx, game->player,
-					j * DIMENS + 20, i * DIMENS + 20);
+				game->pl_x = j * DIMENS + 20;
+				game->pl_y = i * DIMENS + 20;
 			}
 			j++;
 		}
