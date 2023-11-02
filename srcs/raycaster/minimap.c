@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 14:58:26 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/30 11:22:12 by skunert          ###   ########.fr       */
+/*   Updated: 2023/11/02 21:18:43 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,10 @@ int	check_free_char(char c)
 	return (0);
 }
 
-uint32_t	ft_check_color(t_game *g, float x, float y)
+uint32_t	ft_check_color(t_game *g, double x, double y)
 {
-	if (x >= 0 && y >= 0 && x <= g->width * DIMENS && y <= g->height * DIMENS
+	if (x >= 0 && y >= 0 && y <= g->height * DIMENS
+		&& x <= ft_strlen(g->caster->map[(int)y / DIMENS]) * DIMENS
 		&& (check_free_char(g->caster->map[(int)y / DIMENS][(int)x / DIMENS])))
 		return (0xEAEDEDFF);
 	return (0);
@@ -52,8 +53,8 @@ uint32_t	ft_check_color(t_game *g, float x, float y)
 
 void	ft_fill_minimap(t_game *g)
 {
-	float	x;
-	float	y;
+	double	x;
+	double	y;
 	int		c;
 	int		mini_x;
 	int		mini_y;
