@@ -6,7 +6,7 @@
 /*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 12:09:23 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/31 17:17:21 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/11/02 13:50:40 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,8 +123,7 @@ void	ft_draw_sprites(t_game *g)
 		decrement_drunkness(g);
 	}
 	if (ft_check_walls_sprite(g, (double)g->sp->x, (double)g->sp->y) == false
-		&& g->sp->state == 1
-		&& x + g->tex->chest_tex->width > 0 && g->ds->sy > g->dis_h / 2
-		&& x < g->dis_w)
+		&& g->sp->state == 1 && x + g->tex->chest_tex->width > 0
+		&& g->ds->sy > g->dis_h / 2 && x < g->dis_w)
 		check_sprite_type_for_draw(g, x, y, scale);
 }

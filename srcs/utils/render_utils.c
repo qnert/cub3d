@@ -6,7 +6,7 @@
 /*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 17:45:32 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/23 17:49:05 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/11/02 15:09:40 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ void	ft_set_values_and_render_funcs(t_game *g)
 	set_cosine_and_values(g);
 	ft_set_values_for_rendering(g);
 	ft_draw_walls(g);
-	ft_set_values_floor_ceiling(g);
+	if (FLOOR == 1)
+		ft_set_values_floor_ceiling(g);
 	g->ray->ray_a += DGREE / 8;
 	set_limit(g);
 }

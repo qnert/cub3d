@@ -12,7 +12,7 @@ SRCS = main.c ./srcs/parsing/file_type.c ./srcs/utils/init.c ./srcs/utils/parsin
 		./srcs/raycaster/minimap.c ./srcs/player_funcs/player_movement.c ./srcs/player_funcs/player_rotation.c ./srcs/utils/mini_map_utils.c \
 		./srcs/utils/draw_utils.c ./srcs/utils/math_utils.c ./srcs/sprites/sprites.c ./srcs/sprites/sprite_utils.c \
 		./srcs/sprites/luffy_utils.c ./srcs/sprites/luffy_set_values.c ./srcs/utils/rgb_utils.c ./srcs/sprites/zorro_utils.c \
-		./srcs/sprites/zorro_set_values.c ./srcs/sprites/draw_sprites.c
+		./srcs/sprites/zorro_set_values.c ./srcs/sprites/draw_sprites.c ./srcs/cleanup/del_tex.c ./srcs/cleanup/free.c
 
 OBJS = $(SRCS:.c=.o)
 

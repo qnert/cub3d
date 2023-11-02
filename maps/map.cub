@@ -4,8 +4,8 @@ NO ./textures/wooden_wall.png
 SO ./textures/wooden_wall.png
 WE ./textures/wooden_wall_no_window.png
 
-C 005,30,0
-F 005,30,0
+C 0,255,255
+F 1,30,255
 
         1111111111111111111111111
         1000000003110000000000001

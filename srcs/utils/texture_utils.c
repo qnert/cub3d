@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 13:07:50 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/31 12:00:49 by skunert          ###   ########.fr       */
+/*   Updated: 2023/11/02 12:59:10 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,12 +77,7 @@ void	set_pixels_img(mlx_image_t *img, int max_x, int max_y, u_int32_t c)
 		y = 0;
 		while (y < max_y)
 		{
-			if (x == 0 || x == max_x - 1)
-				mlx_put_pixel(img, x, y, 0x0000FF);
-			else if (y == 0 || y == max_y - 1)
-				mlx_put_pixel(img, x, y, 0x0000FF);
-			else
-				mlx_put_pixel(img, x, y, c);
+			mlx_put_pixel(img, x, y, c);
 			y++;
 		}
 		x++;

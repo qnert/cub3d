@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rgb_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 15:34:30 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/25 15:40:27 by skunert          ###   ########.fr       */
+/*   Updated: 2023/11/02 19:14:41 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,30 +54,38 @@ int	get_rgb(t_map *init, char *id, char **rgb)
 	return (0);
 }
 
-int	check_rgb(t_map *init, char *trmd_line)
+int	check_rgb_loop(char **rgb, char *trmd, int i, int j)
+{
+	while (rgb[i][++j])
+		if (ft_isdigit(rgb[i][j]) == 0 && rgb[i][j] != '\n')
+			return (free_arr(rgb), free(trmd),
+			printf("Error\nno valid rgb nbr\n"), 1);
+	if (ft_strlen(rgb[i]) > 3)
+	{
+		free_arr(rgb);
+		return (free(trmd), printf("Error\nwrong rgb size\n"), 1);
+	}
+	return (0);
+}
+
+int	check_rgb(t_map *init, char *line)
 {
 	char	**rgb;
+	char	*trmd;
 	int		i;
 	int		j;
 
 	i = -1;
-	rgb = ft_split(trmd_line + 2, ',');
+	trmd = ft_strtrim(line, "\n");
+	rgb = ft_split(trmd + 2, ',');
 	if (ft_matrixlen(rgb) != 3)
-		return (free_arr(rgb), printf("Error\nwrong rgb format\n"), 1);
+		return (free_arr(rgb), free(trmd), printf("Error\nrgb format\n"), 1);
 	while (rgb[++i])
 	{
 		j = -1;
-		while (rgb[i][++j])
-			if (ft_isdigit(rgb[i][j]) == 0 && rgb[i][j] != '\n')
-				return (free_arr(rgb), printf("Error\nno valid rgb nbr\n"), 1);
-		if (ft_strlen(rgb[i]) > 3)
-		{
-			free_arr(rgb);
-			return (printf("Error\nnot a valid rgb range\n"), 1);
-		}
+		check_rgb_loop(rgb, trmd, i, j);
 	}
-	if (get_rgb(init, trmd_line, rgb) == 1)
-		return (free_arr(rgb), 1);
-	free_arr(rgb);
-	return (0);
+	if (get_rgb(init, trmd, rgb) == 1)
+		return (free_arr(rgb), free(trmd), 1);
+	return (free_arr(rgb), free(trmd), 0);
 }

@@ -6,7 +6,7 @@
 /*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:19:00 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/31 14:43:33 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/11/02 20:05:00 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,15 @@
 
 # define DIMENS 128
 # define DGREE 0.0174533
+
+// If define is set to 1, texture will be used
+// If not defined, RGB in map will be used
+# ifndef SKY
+#  define SKY 0
+# endif
+# ifndef FLOOR
+#  define FLOOR 0
+# endif
 
 # include "../libft/libs.h"
 # include "../MLX42/include/MLX42/MLX42.h"
@@ -150,10 +159,11 @@ typedef struct textures
 typedef struct game
 {
 	mlx_t			*mlx;
-	mlx_image_t		*player;
 	mlx_image_t		*line;
 	mlx_image_t		*minimap;
 	mlx_image_t		*background;
+	mlx_image_t		*floor;
+	mlx_image_t		*ceiling;
 	int				height;
 	int				width;
 	int				dis_w;
@@ -199,11 +209,10 @@ int				ft_fill_map(t_game *game, t_map *m);
 
 //game_init.c
 int				get_longest_line(char **matrix);
-int				game_init(t_map *map);
+void			game_init(t_map *map);
 
 //get_texture.c
-void			get_player_img(t_game *game);
-void			get_images(t_game *game);
+void			get_images(t_game *game, t_map *m);
 
 //game_hooks.c
 void			ft_move(t_game *game);
@@ -286,7 +295,7 @@ void			ft_set_values_for_rendering(t_game *g);
 void			ft_set_values_and_render_funcs(t_game *g);
 
 //rgb_utils.c
-int				check_rgb(t_map *init, char *trmd_line);
+int				check_rgb(t_map *init, char *line);
 int				check_rgb_validity(t_map *init);
 int				get_rgb(t_map *init, char *id, char **rgb);
 
@@ -321,10 +330,10 @@ void			set_limit(t_game *g);
 double			ft_distance(t_game *g, double bx, double by);
 void			set_cosine_and_values(t_game *g);
 
-// horizontal.c
+//horizontal.c
 void			check_horizontal_line(t_game *g);
 
-// vertical.c
+//vertical.c
 void			check_vertical_line(t_game *g);
 void			replace_img(t_game *g);
 
@@ -345,5 +354,12 @@ void			ft_set_values_sprites(t_game *g);
 void			sprite_init(t_sprite *sp, t_map *m);
 void			ft_get_location(t_game *game, char **map, char c);
 void			free_lst_sprites(t_sprite *lst);
+
+//free.c
+void			ft_terminate_struct(t_map *map);
+
+//del_tex.c
+void			ft_clear_up_wall_tex(t_game *g, int i);
+void			ft_clear_up_other_tex(t_game *g, int i);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 17:08:51 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/30 21:12:07 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/11/02 14:55:44 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,8 @@ void	raycaster(t_game *g)
 	set_limit(g);
 	replace_img(g);
 	ft_fill_minimap(g);
-	draw_sky(g);
+	if (SKY == 1)
+		draw_sky(g);
 	while (++g->ray->rays < g->ray->n_of_rays)
 	{
 		check_horizontal_line(g);
