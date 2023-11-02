@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_map_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 15:36:51 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/19 15:40:22 by skunert          ###   ########.fr       */
+/*   Updated: 2023/11/02 21:25:07 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 uint32_t	ft_check_color_walls(t_game *g, float x, float y)
 {
-	if (x >= 0 && y >= 0 && x <= g->width
-		* DIMENS && y <= g->height * DIMENS
+	if (x >= 0 && y >= 0 && y <= g->height * DIMENS
+		&& x <= ft_strlen(g->caster->map[(int)y / DIMENS]) * DIMENS
 		&& g->caster->map[(int)y / DIMENS][(int)x / DIMENS] == 'D')
 		return (0x3498DBFF);
-	else if (x >= 0 && y >= 0 && x <= g->width
-		* DIMENS && y <= g->height * DIMENS
+	else if (x >= 0 && y >= 0 && y <= g->height * DIMENS
+		&& x <= ft_strlen(g->caster->map[(int)y / DIMENS]) * DIMENS
 		&& g->caster->map[(int)y / DIMENS][(int)x / DIMENS] == '1')
 		return (0x515A5AFF);
 	return (0);

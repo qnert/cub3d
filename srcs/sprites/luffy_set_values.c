@@ -6,7 +6,7 @@
 /*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 15:19:23 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/31 17:14:05 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/11/02 21:07:27 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ void	ft_draw_luffy_tex(t_game *g, int x, int y, int scale)
 			if (g->ds->t_y < 0)
 				g->ds->t_y = 0;
 		}
+		if (g->ds->sy - y > g->dis_h)
+			break ;
 		g->ds->t_x += (g->luffy->animation[g->luffy->i]->height
 				- 0.5) / (float)scale;
 		if (g->ds->t_x >= g->luffy->animation[g->luffy->i]->width)
