@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprites.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 16:52:24 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/31 14:44:39 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/11/03 17:05:13 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	check_sprite_type_for_draw(t_game *g, int x, int y, int scale)
 	if (g->sp->type == 3)
 		ft_draw_water(g, x, y, scale);
 	if (g->sp->type == 4)
-		ft_draw_chest(g, x, y, scale);
+		ft_draw_chest(g, x, y, scale * 1.5);
 }
 
 void	ft_set_values_sprites(t_game *g)
