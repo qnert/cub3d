@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rgb_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 15:34:30 by skunert           #+#    #+#             */
-/*   Updated: 2023/11/02 19:14:41 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/11/03 16:48:56 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,8 @@ int	check_rgb(t_map *init, char *line)
 	while (rgb[++i])
 	{
 		j = -1;
-		check_rgb_loop(rgb, trmd, i, j);
+		if (check_rgb_loop(rgb, trmd, i, j) == 1)
+			return (1);
 	}
 	if (get_rgb(init, trmd, rgb) == 1)
 		return (free_arr(rgb), free(trmd), 1);
