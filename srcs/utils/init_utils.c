@@ -6,7 +6,7 @@
 /*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 16:39:01 by skunert           #+#    #+#             */
-/*   Updated: 2023/11/02 20:26:03 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/11/03 17:59:56 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int	ft_get_floor_sky_texture(t_game *game)
 		if (game->tex->ceiling_tex == NULL)
 			return (ft_clear_up_other_tex(game, 1),
 				ft_error_msg("Ceiling texture couldn't be opened\n"),
-				ft_clear_up_tex(game, 4), 3);
+				ft_clear_up_wall_tex(game, 4), 3);
 	}
 	return (0);
 }

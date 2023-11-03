@@ -6,7 +6,7 @@
 /*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 13:07:50 by skunert           #+#    #+#             */
-/*   Updated: 2023/11/02 12:59:10 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/11/03 21:32:00 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,9 @@ void	scale_texture(t_game *g, int x, int y, int scale)
 		j = 0;
 		while (j < scale)
 		{
-			mlx_put_pixel(g->line, i + x * scale, j + y * scale, g->dl->color);
+			if (j + y * scale <= g->dis_h / 2)
+				mlx_put_pixel(g->line, i + x * scale,
+					j + y * scale, g->dl->color);
 			j++;
 		}
 		i++;

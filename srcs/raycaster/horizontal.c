@@ -6,7 +6,7 @@
 /*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 21:26:51 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/31 17:48:49 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/11/03 21:02:12 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	assign_variables_horizontal(t_game *g)
 
 void	check_horizontal_wall(t_game *g)
 {
-	while (g->ray->depoffield < 50)
+	while (g->ray->depoffield < g->height)
 	{
 		g->caster->map_x = (int)g->ray->ray_x / DIMENS;
 		g->caster->map_y = (int)g->ray->ray_y / DIMENS;
@@ -37,7 +37,7 @@ void	check_horizontal_wall(t_game *g)
 			g->ray->hor_x = g->ray->ray_x;
 			g->ray->hor_y = g->ray->ray_y;
 			g->ray->dist_h = ft_distance(g, g->ray->hor_x, g->ray->hor_y);
-			g->ray->depoffield = 50;
+			g->ray->depoffield = g->height;
 		}
 		else
 		{
@@ -73,7 +73,7 @@ void	check_horizontal_line(t_game *g)
 	{
 		g->ray->ray_x = g->pl_x;
 		g->ray->ray_y = g->pl_y;
-		g->ray->depoffield = 50;
+		g->ray->depoffield = g->height;
 	}
 	check_horizontal_wall(g);
 }
