@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprites.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 16:52:24 by njantsch          #+#    #+#             */
-/*   Updated: 2023/11/03 17:05:13 by skunert          ###   ########.fr       */
+/*   Updated: 2023/11/04 12:13:44 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	check_sprite_type_for_draw(t_game *g, int x, int y, int scale)
 void	ft_set_values_sprites(t_game *g)
 {
 	g->begin = g->sp;
-	while ((g->n_of_coll > 0 && g->sp) || (g->n_of_water > 0 && g->sp))
+	while (g->sp)
 	{
 		g->ds->sx = g->sp->x - g->pl_x;
 		g->ds->sy = g->sp->y - g->pl_y;

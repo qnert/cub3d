@@ -6,7 +6,7 @@
 /*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 15:24:52 by njantsch          #+#    #+#             */
-/*   Updated: 2023/11/02 19:06:28 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/11/03 22:43:25 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,83 +32,87 @@ t_map	*strct_init(char *file_path)
 	return (init);
 }
 
-int	get_input(t_map *init)
+t_ray	*ray_init(void)
 {
-	char	*line;
-	char	*tmp;
+	t_ray	*ray;
 
-	tmp = get_next_line(init->map_fd);
-	if (tmp == NULL)
-		return (printf("Error\ncouldn't read from file\n"), 1);
-	line = ft_strtrim(tmp, " ");
-	free(tmp);
-	while (line != NULL)
-	{
-		if (check_line(init, line) == 1)
-			return (free(line), 1);
-		free(line);
-		if (init->texture_path_ea && init->texture_path_no
-			&& init->texture_path_so && init->texture_path_we
-			&& check_rgb_validity(init) == 0)
-			break ;
-		tmp = get_next_line(init->map_fd);
-		if (tmp == NULL)
-			return (printf("Error\n file end reached in parsing\n"), 1);
-		line = ft_strtrim(tmp, " ");
-		free(tmp);
-	}
-	return (0);
+	ray = malloc(sizeof(t_ray));
+	ray->rays = 0;
+	ray->depoffield = 0;
+	ray->ray_a = 0;
+	ray->ray_x = 0;
+	ray->ray_y = 0;
+	ray->x_o = 0;
+	ray->y_o = 0;
+	ray->dist_h = 0;
+	ray->dist_v = 0;
+	ray->hor_x = 0;
+	ray->hor_y = 0;
+	ray->ver_x = 0;
+	ray->ver_y = 0;
+	ray->final_d = 0;
+	ray->n_of_rays = 480;
+	return (ray);
 }
 
-int	check_line(t_map *init, char *line)
+t_draw_line	*draw_line_init(void)
 {
-	int	nl_check;
+	t_draw_line	*dl;
 
-	nl_check = 0;
-	if (line[0] == '\n')
-		nl_check = 1;
-	if (nl_check == 0 && (ft_strncmp(line, "NO ", 3) == 0
-			|| ft_strncmp(line, "SO ", 3) == 0
-			|| ft_strncmp(line, "WE ", 3) == 0
-			|| ft_strncmp(line, "EA ", 3) == 0))
-	{
-		if (get_texture_path(init, line) == 1)
-			return (1);
-	}
-	else if (nl_check == 0 && (ft_strncmp(line, "F ", 2) == 0
-			|| ft_strncmp(line, "C ", 2) == 0))
-	{
-		if (check_rgb(init, line) == 1)
-			return (1);
-	}
-	else
-		if (nl_check == 0)
-			return (ft_printf("Error\nnot a valid identifier\n"), 1);
-	return (0);
+	dl = malloc(sizeof(t_draw_line));
+	dl->tx = 0;
+	dl->ty = 0;
+	dl->dy = 0;
+	dl->fix_ra = 0;
+	dl->pixel = 0;
+	dl->color = 0;
+	dl->begin_x = 0;
+	dl->begin_y = 0;
+	dl->end_x = 0;
+	dl->end_y = 0;
+	return (dl);
 }
 
-int	get_texture_path(t_map *init, char *trmd_line)
+t_draw_sprite	*draw_sprite_init(void)
 {
-	int	i;
-	int	j;
+	t_draw_sprite	*ds;
 
-	i = 0;
-	j = 0;
-	while (trmd_line[i] != ' ')
-		i++;
-	while (trmd_line[i] == ' ')
-		i++;
-	while (trmd_line[i + j])
-		j++;
-	if (ft_strncmp(trmd_line, "NO ", 3) == 0 && !init->texture_path_no)
-		init->texture_path_no = ft_substr(trmd_line, i, j - 1);
-	else if (ft_strncmp(trmd_line, "SO ", 3) == 0 && !init->texture_path_so)
-		init->texture_path_so = ft_substr(trmd_line, i, j - 1);
-	else if (ft_strncmp(trmd_line, "WE ", 3) == 0 && !init->texture_path_we)
-		init->texture_path_we = ft_substr(trmd_line, i, j - 1);
-	else if (ft_strncmp(trmd_line, "EA ", 3) == 0 && !init->texture_path_ea)
-		init->texture_path_ea = ft_substr(trmd_line, i, j - 1);
+	ds = malloc(sizeof(t_draw_sprite));
+	ds->sx = 0;
+	ds->sy = 0;
+	ds->sz = 0;
+	ds->cosine = 0;
+	ds->sine = 0;
+	ds->rot_a = 0;
+	ds->rot_b = 0;
+	return (ds);
+}
+
+t_cast	*caster_init(t_map *init)
+{
+	t_cast	*caster;
+
+	caster = malloc(sizeof(t_cast));
+	if (check_component('N', init->map))
+		caster->pa = 3 * M_PI_2;
+	else if (check_component('W', init->map))
+		caster->pa = 2 * M_PI_2;
+	else if (check_component('S', init->map))
+		caster->pa = M_PI_2;
 	else
-		return (printf("Error\nduplicate identifier\n"), 1);
-	return (0);
+		caster->pa = 0;
+	caster->map_x = 0;
+	caster->map_y = 0;
+	caster->pd_x = 0;
+	caster->pd_y = 0;
+	caster->pd_x_strafe = 0;
+	caster->pd_y_strafe = 0;
+	caster->line_hight = 0;
+	caster->line_offset = 0;
+	caster->x_off = 0;
+	caster->y_off = 0;
+	caster->x_off_strafe = 0;
+	caster->y_off_strafe = 0;
+	caster->map = init->map;
+	return (caster);
 }
