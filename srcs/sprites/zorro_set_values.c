@@ -6,7 +6,7 @@
 /*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 15:19:23 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/31 14:34:17 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/11/03 17:53:45 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,30 @@ void	ft_get_zorro_colors_and_draw(t_game *g, int x, int y)
 		mlx_put_pixel(g->line, x, g->ds->sy - y, g->dl->color);
 }
 
-void	ft_draw_zorro_tex(t_game *g, int x, int y, int scale)
+int	ft_draw_zorro_tex_loop(t_game *g, int x, int scale)
+{
+	int	y;
+
+	y = -1;
+	g->ds->t_y = g->zorro->animation[g->zorro->i]->height - 1;
+	while (++y < scale)
+	{
+		ft_get_zorro_colors_and_draw(g, x, y);
+		g->ds->t_y -= g->zorro->animation[g->zorro->i]->height
+			/ (float)scale;
+		if (g->ds->t_y < 0)
+			g->ds->t_y = 0;
+	}
+	if (g->ds->sy - y > g->dis_h)
+		return (1);
+	g->ds->t_x += (g->zorro->animation[g->zorro->i]->height
+			- 0.5) / (float)scale;
+	if (g->ds->t_x >= g->zorro->animation[g->zorro->i]->width)
+		g->ds->t_x = g->zorro->animation[0]->width - 1;
+	return (0);
+}
+
+void	ft_draw_zorro_tex(t_game *g, int x, int scale)
 {
 	if (g->zorro->i == 17)
 		g->zorro->i = 0;
@@ -40,22 +63,8 @@ void	ft_draw_zorro_tex(t_game *g, int x, int y, int scale)
 		g->zorro->check = 0;
 	while (x < g->ds->sx + scale / 2)
 	{
-		y = -1;
-		g->ds->t_y = g->zorro->animation[g->zorro->i]->height - 1;
-		while (++y < scale)
-		{
-			ft_get_zorro_colors_and_draw(g, x, y);
-			g->ds->t_y -= g->zorro->animation[g->zorro->i]->height
-				/ (float)scale;
-			if (g->ds->t_y < 0)
-				g->ds->t_y = 0;
-		}
-		if (g->ds->sy - y > g->dis_h)
+		if (ft_draw_zorro_tex_loop(g, x, scale) == 1)
 			break ;
-		g->ds->t_x += (g->zorro->animation[g->zorro->i]->height
-				- 0.5) / (float)scale;
-		if (g->ds->t_x >= g->zorro->animation[g->zorro->i]->width)
-			g->ds->t_x = g->zorro->animation[0]->width - 1;
 		x++;
 	}
 	if (g->zorro->i < 17 && g->zorro->check == 0)
@@ -66,12 +75,10 @@ void	ft_draw_zorro_tex(t_game *g, int x, int y, int scale)
 void	ft_draw_zorro(t_game *g)
 {
 	int	x;
-	int	y;
 	int	scale;
 
 	scale = 64 * g->dis_w / g->ds->rot_b;
 	x = g->ds->sx - scale / 2;
-	y = -1;
 	if (scale > 753)
 		scale = 753;
 	if (scale < 0)
@@ -80,7 +87,7 @@ void	ft_draw_zorro(t_game *g)
 	if (ft_check_walls_sprite(g, g->zorro->x, g->zorro->y) == false && x
 		+ g->zorro->animation[0]->width > 0 && g->ds->sy > g->dis_h / 2
 		&& x < g->dis_w)
-		ft_draw_zorro_tex(g, x, y, scale);
+		ft_draw_zorro_tex(g, x, scale);
 }
 
 void	ft_set_values_zorro(t_game *g)

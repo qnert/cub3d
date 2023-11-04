@@ -6,7 +6,7 @@
 /*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 15:19:23 by skunert           #+#    #+#             */
-/*   Updated: 2023/11/02 21:07:27 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/11/03 17:51:25 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,30 @@ void	ft_get_luffy_colors_and_draw(t_game *g, int x, int y)
 		mlx_put_pixel(g->line, x, g->ds->sy - y, g->dl->color);
 }
 
-void	ft_draw_luffy_tex(t_game *g, int x, int y, int scale)
+int	ft_draw_luffy_tex_loop(t_game *g, int x, int scale)
+{
+	int	y;
+
+	y = -1;
+	g->ds->t_y = g->luffy->animation[g->luffy->i]->height - 1;
+	while (++y < scale)
+	{
+		ft_get_luffy_colors_and_draw(g, x, y);
+		g->ds->t_y -= g->luffy->animation[g->luffy->i]->height
+			/ (float)scale;
+		if (g->ds->t_y < 0)
+			g->ds->t_y = 0;
+	}
+	if (g->ds->sy - y > g->dis_h)
+		return (1);
+	g->ds->t_x += (g->luffy->animation[g->luffy->i]->height
+			- 0.5) / (float)scale;
+	if (g->ds->t_x >= g->luffy->animation[g->luffy->i]->width)
+		g->ds->t_x = g->luffy->animation[0]->width - 1;
+	return (0);
+}
+
+void	ft_draw_luffy_tex(t_game *g, int x, int scale)
 {
 	if (g->luffy->i == 72)
 		g->luffy->i = 0;
@@ -40,22 +63,8 @@ void	ft_draw_luffy_tex(t_game *g, int x, int y, int scale)
 		g->luffy->check = 0;
 	while (x < g->ds->sx + scale / 2)
 	{
-		y = -1;
-		g->ds->t_y = g->luffy->animation[g->luffy->i]->height - 1;
-		while (++y < scale)
-		{
-			ft_get_luffy_colors_and_draw(g, x, y);
-			g->ds->t_y -= g->luffy->animation[g->luffy->i]->height
-				/ (float)scale;
-			if (g->ds->t_y < 0)
-				g->ds->t_y = 0;
-		}
-		if (g->ds->sy - y > g->dis_h)
+		if (ft_draw_luffy_tex_loop(g, x, scale) == 1)
 			break ;
-		g->ds->t_x += (g->luffy->animation[g->luffy->i]->height
-				- 0.5) / (float)scale;
-		if (g->ds->t_x >= g->luffy->animation[g->luffy->i]->width)
-			g->ds->t_x = g->luffy->animation[0]->width - 1;
 		x++;
 	}
 	if (g->luffy->i < 72 && g->luffy->check == 0)
@@ -66,12 +75,10 @@ void	ft_draw_luffy_tex(t_game *g, int x, int y, int scale)
 void	ft_draw_luffy(t_game *g)
 {
 	int	x;
-	int	y;
 	int	scale;
 
 	scale = 64 * g->dis_w / g->ds->rot_b;
 	x = g->ds->sx - scale / 2;
-	y = -1;
 	if (scale > 654)
 		scale = 654;
 	if (scale < 0)
@@ -81,7 +88,7 @@ void	ft_draw_luffy(t_game *g)
 			(double)g->luffy->y) == false && x
 		+ g->luffy->animation[0]->width > 0 && g->ds->sy > g->dis_h / 2
 		&& x < g->dis_w)
-		ft_draw_luffy_tex(g, x, y, scale * 1.5);
+		ft_draw_luffy_tex(g, x, scale * 1.5);
 }
 
 void	ft_set_values_luffy(t_game *g)

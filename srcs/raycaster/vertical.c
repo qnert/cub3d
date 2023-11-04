@@ -6,7 +6,7 @@
 /*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 21:27:23 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/31 17:48:57 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/11/03 21:02:26 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	assign_variables_vertical(t_game *g)
 
 void	check_vertical_wall(t_game *g)
 {
-	while (g->ray->depoffield < 50)
+	while (g->ray->depoffield < g->width)
 	{
 		g->caster->map_x = (int)g->ray->ray_x / DIMENS;
 		g->caster->map_y = (int)g->ray->ray_y / DIMENS;
@@ -37,7 +37,7 @@ void	check_vertical_wall(t_game *g)
 			g->ray->ver_x = g->ray->ray_x;
 			g->ray->ver_y = g->ray->ray_y;
 			g->ray->dist_v = ft_distance(g, g->ray->ver_x, g->ray->ver_y);
-			g->ray->depoffield = 50;
+			g->ray->depoffield = g->width;
 		}
 		else
 		{
@@ -73,7 +73,7 @@ void	check_vertical_line(t_game *g)
 	{
 		g->ray->ray_x = g->pl_x;
 		g->ray->ray_y = g->pl_y;
-		g->ray->depoffield = 50;
+		g->ray->depoffield = g->width;
 	}
 	check_vertical_wall(g);
 }
