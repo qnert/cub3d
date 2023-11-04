@@ -1,10 +1,21 @@
-EA ./textures/wooden_wall_no_window.png
-NO ./textures/wooden_wall.png
-SO ./textures/wooden_wall.png
-WE ./textures/wooden_wall_no_window.png
+			C	  255 	 	 , 	 	0 	 	 ,	 	 0
 
-C 255 	 	 , 	 	0 	 	 ,	 	 0
-F 0 	 	 , 	 	0 	 	 	 	 	,    		255
+EA          ./textures/wooden_wall_no_window.png
+
+
+
+
+
+NO              ./textures/wooden_wall.png
+
+
+
+
+                SO	      ./textures/wooden_wall.png
+           WE        ./textures/wooden_wall_no_window.png
+
+
+		F       0 	 	 , 	 	0 	 	 	 	 	,    		255
 
 11111111111111111
 10000000000000001

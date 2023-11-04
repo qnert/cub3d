@@ -6,7 +6,7 @@
 /*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 22:41:30 by njantsch          #+#    #+#             */
-/*   Updated: 2023/11/03 23:37:57 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/11/04 13:02:33 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,25 @@ int	get_input(t_map *init)
 	return (0);
 }
 
+bool	check_identifier(char *line, int check)
+{
+	if (check == 1 && (ft_strncmp(line, "NO ", 3) == 0
+			|| ft_strncmp(line, "NO	", 3) == 0
+			|| ft_strncmp(line, "SO ", 3) == 0
+			|| ft_strncmp(line, "SO	", 3) == 0
+			|| ft_strncmp(line, "WE ", 3) == 0
+			|| ft_strncmp(line, "WE	", 3) == 0
+			|| ft_strncmp(line, "EA ", 3) == 0
+			|| ft_strncmp(line, "EA	", 3) == 0))
+		return (true);
+	else if (check == 2 && (ft_strncmp(line, "F ", 2) == 0
+			|| ft_strncmp(line, "C ", 2) == 0
+			|| ft_strncmp(line, "F	", 2) == 0
+			|| ft_strncmp(line, "C	", 2) == 0))
+		return (true);
+	return (false);
+}
+
 int	check_line(t_map *init, char *line)
 {
 	int	nl_check;
@@ -47,16 +66,12 @@ int	check_line(t_map *init, char *line)
 	nl_check = 0;
 	if (line[0] == '\n')
 		nl_check = 1;
-	if (nl_check == 0 && (ft_strncmp(line, "NO ", 3) == 0
-			|| ft_strncmp(line, "SO ", 3) == 0
-			|| ft_strncmp(line, "WE ", 3) == 0
-			|| ft_strncmp(line, "EA ", 3) == 0))
+	if (nl_check == 0 && check_identifier(line, 1) == true)
 	{
 		if (get_texture_path(init, line) == 1)
 			return (1);
 	}
-	else if (nl_check == 0 && (ft_strncmp(line, "F ", 2) == 0
-			|| ft_strncmp(line, "C ", 2) == 0))
+	else if (nl_check == 0 && check_identifier(line, 2) == true)
 	{
 		if (check_rgb(init, line) == 1)
 			return (1);
@@ -80,13 +95,13 @@ int	get_texture_path(t_map *init, char *trmd_line)
 		i++;
 	while (trmd_line[i + j])
 		j++;
-	if (ft_strncmp(trmd_line, "NO ", 3) == 0 && !init->texture_path_no)
+	if (ft_strncmp(trmd_line, "NO", 2) == 0 && !init->texture_path_no)
 		init->texture_path_no = ft_substr(trmd_line, i, j - 1);
-	else if (ft_strncmp(trmd_line, "SO ", 3) == 0 && !init->texture_path_so)
+	else if (ft_strncmp(trmd_line, "SO", 2) == 0 && !init->texture_path_so)
 		init->texture_path_so = ft_substr(trmd_line, i, j - 1);
-	else if (ft_strncmp(trmd_line, "WE ", 3) == 0 && !init->texture_path_we)
+	else if (ft_strncmp(trmd_line, "WE", 2) == 0 && !init->texture_path_we)
 		init->texture_path_we = ft_substr(trmd_line, i, j - 1);
-	else if (ft_strncmp(trmd_line, "EA ", 3) == 0 && !init->texture_path_ea)
+	else if (ft_strncmp(trmd_line, "EA", 2) == 0 && !init->texture_path_ea)
 		init->texture_path_ea = ft_substr(trmd_line, i, j - 1);
 	else
 		return (printf("Error\nduplicate identifier\n"), 1);
