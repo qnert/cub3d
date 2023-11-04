@@ -6,7 +6,7 @@
 /*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 14:58:26 by skunert           #+#    #+#             */
-/*   Updated: 2023/11/02 21:18:43 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/11/04 20:08:37 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	ft_fill_miniplayer(t_game *g, int x, int y)
 	{
 		j = -1;
 		while (++j < 5)
-			mlx_put_pixel(g->minimap, x + j, y + i, 0xF1C40FFF);
+			mlx_put_pixel(g->minimap_rc, x + j, y + i, 0xF1C40FFF);
 	}
 }
 
@@ -45,9 +45,15 @@ int	check_free_char(char c)
 uint32_t	ft_check_color(t_game *g, double x, double y)
 {
 	if (x >= 0 && y >= 0 && y <= g->height * DIMENS
-		&& x <= ft_strlen(g->caster->map[(int)y / DIMENS]) * DIMENS
-		&& (check_free_char(g->caster->map[(int)y / DIMENS][(int)x / DIMENS])))
-		return (0xEAEDEDFF);
+		&& x <= ft_strlen(g->caster->map[(int)y / DIMENS]) * DIMENS)
+	{
+		if (check_free_char(g->caster->map[(int)y / DIMENS][(int)x / DIMENS]))
+			return (0xEAEDEDFF);
+		else if (g->caster->map[(int)y / DIMENS][(int)x / DIMENS] == 'D')
+			return (0x3498DBFF);
+		else if (g->caster->map[(int)y / DIMENS][(int)x / DIMENS] == '1')
+			return (0x515A5AFF);
+	}
 	return (0);
 }
 

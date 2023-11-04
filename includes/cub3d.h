@@ -6,7 +6,7 @@
 /*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:19:00 by skunert           #+#    #+#             */
-/*   Updated: 2023/11/02 20:05:00 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/11/04 20:08:03 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,16 @@
 # define DGREE 0.0174533
 
 // If define is set to 1, texture will be used
+// and/or the bonus part
 // If not defined, RGB in map will be used
 # ifndef SKY
 #  define SKY 0
 # endif
 # ifndef FLOOR
 #  define FLOOR 0
+# endif
+# ifndef BONUS
+#  define BONUS 0
 # endif
 
 # include "../libft/libs.h"
@@ -164,6 +168,7 @@ typedef struct game
 	mlx_image_t		*background;
 	mlx_image_t		*floor;
 	mlx_image_t		*ceiling;
+	mlx_image_t		*minimap_rc;
 	int				height;
 	int				width;
 	int				dis_w;
@@ -204,7 +209,6 @@ typedef struct map
 //game_funcs
 
 //fill_map.c
-void			ft_clear_up_tex(t_game *g, int i);
 int				ft_fill_map(t_game *game, t_map *m);
 
 //game_init.c
@@ -258,9 +262,6 @@ int				ft_get_other_tex(t_game *game);
 void			ft_fill_minimap(t_game *g);
 void			draw_minimap(t_game *g);
 void			ft_fill_miniplayer(t_game *g, int x, int y);
-
-//mini_map_utils.c
-void			ft_fill_minimap_walls(t_game *g);
 
 //parsing_utils.c
 bool			is_whitespace(char c);
