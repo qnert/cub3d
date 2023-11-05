@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:17:12 by skunert           #+#    #+#             */
-/*   Updated: 2023/11/04 20:38:44 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/11/05 14:36:35 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,5 @@ int	main(int argc, char **argv)
 		}
 		ft_terminate_struct(map);
 	}
-	// system("leaks cub3D");
 	return (0);
 }

@@ -3,7 +3,6 @@ CFLAGS = -Wall -Wextra -Werror -Ofast
 USER = $(shell whoami)
 MLXFLAGS = -Iinclude -lglfw
 NAME = cub3D
-BONUS_NAME = cub3D_bonus
 
 SRCS = main.c ./srcs/parsing/file_type.c ./srcs/utils/init.c ./srcs/utils/parsing_utils.c ./srcs/parsing/check_components.c \
 		./srcs/parsing/map_parser.c ./srcs/parsing/map_parser_helper.c ./srcs/game_funcs/game_init.c ./srcs/game_funcs/game_hooks.c \
@@ -38,8 +37,8 @@ fclean: clean
 
 re: fclean all
 
+rebonus: fclean bonus
+
 bonus: CFLAGS += -D SKY=1 -D FLOOR=1 -D BONUS=1
-bonus: MLX42 $(BONUS_NAME)
-$(BONUS_NAME): $(OBJS)
-	@cd libft && make
-	@$(CC) $(CFLAGS) -o $(BONUS_NAME) $(OBJS) ./libft/libs.a ./MLX42/build/libmlx42.a $(MLXFLAGS)
+bonus: MLX42 $(NAME)
+
