@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:19:00 by skunert           #+#    #+#             */
-/*   Updated: 2023/11/05 15:08:53 by skunert          ###   ########.fr       */
+/*   Updated: 2023/11/05 15:30:24 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -282,6 +282,7 @@ int				ft_check_file_type(char *str);
 char			**get_and_check_map(int fd);
 bool			check_end_walls_curr(char **map);
 bool			check_end_walls_next(char **map);
+char			*check_map_nl(char *line, int map_fd);
 
 //map_parser.c
 bool			check_side_line(char **map, int index);

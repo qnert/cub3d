@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 19:26:28 by skunert           #+#    #+#             */
-/*   Updated: 2023/05/04 19:05:22 by skunert          ###   ########.fr       */
+/*   Updated: 2023/11/05 15:24:08 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

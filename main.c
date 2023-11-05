@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:17:12 by skunert           #+#    #+#             */
-/*   Updated: 2023/11/05 14:36:35 by skunert          ###   ########.fr       */
+/*   Updated: 2023/11/05 15:35:28 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ int	main(int argc, char **argv)
 	{
 		map = strct_init(argv[1]);
 		if (map->error > 0)
-			return (ft_terminate_struct(map), 1);
+			return (ft_terminate_struct(map), system("leaks cub3D"), 1);
 		game_init(map);
 		if (map->error > 0)
-			return (ft_terminate_struct(map), 1);
+			return (ft_terminate_struct(map), system("leaks cub3D"), 1);
 		if (map->game->game_over != 3)
 		{
 			ft_terminate_struct(map);
@@ -37,5 +37,6 @@ int	main(int argc, char **argv)
 		}
 		ft_terminate_struct(map);
 	}
+	// system("leaks cub3D");
 	return (0);
 }
