@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 19:19:00 by skunert           #+#    #+#             */
-/*   Updated: 2023/11/04 20:08:03 by njantsch         ###   ########.fr       */
+/*   Updated: 2023/11/05 15:08:53 by skunert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,33 +206,75 @@ typedef struct map
 	t_game	*game;
 }	t_map;
 
-//game_funcs
+// directory cleanup
+//del_tex.c
+void			ft_clear_up_wall_tex(t_game *g, int i);
+void			ft_clear_up_other_tex(t_game *g, int i);
+
+//free.c
+void			ft_free_luffy_zorro(t_map *map);
+void			ft_terminate_struct_helper(t_map *map);
+void			ft_terminate_struct(t_map *map);
+
+// directory game_funcs
 
 //fill_map.c
+void			ft_fill_player(t_game *game, char **map);
+void			change_wall_tex_size(t_game *game, int tex);
+bool			check_wall_tex_size(t_game *game);
 int				ft_fill_map(t_game *game, t_map *m);
+
+//game_hooks.c
+void			check_game_exit(t_game *game);
+void			ft_wall_offset_set(t_game *g);
+void			check_game_over(t_game *game);
+void			ft_hooks(void *param);
 
 //game_init.c
 int				get_longest_line(char **matrix);
+void			ft_game_begin(t_game *game, t_map *m);
 void			game_init(t_map *map);
 
+// directory graphics
 //get_texture.c
+int				ft_get_chest_water_texture(t_game *game);
+int				ft_get_floor_sky_texture(t_game *game);
+int				ft_get_other_tex(t_game *game);
+
+//set_sky_floor_color.c
+uint32_t		get_rgb_in_hex(int r, int g, int b);
+void			draw_sky_with_color(t_game *game, t_map *m);
+void			draw_floor_with_color(t_game *game, t_map *m);
 void			get_images(t_game *game, t_map *m);
 
-//game_hooks.c
-void			ft_move(t_game *game);
-void			ft_hooks(void *param);
-void			raycaster(t_game *game);
-void			ft_rotate_left(t_game *game, int diff);
-void			ft_rotate_right(t_game *game, int diff);
-void			ft_wall_offset_set(t_game *g);
+//texture_utils.c
+uint32_t		get_right_north_south_color(t_game *g);
+uint32_t		get_right_west_east_color(t_game *g);
+uint32_t		get_right_wall_color(t_game *g);
+void			set_pixels_img(mlx_image_t *img, int max_x,
+					int max_y, u_int32_t c);
+void			scale_texture(t_game *g, int x, int y, int scale);
 
-//parsing
+// directory minimap
+//draw_line.c
+void			ft_dl_assign_values(t_game *game);
+void			ft_draw_line(t_game *game, int i);
 
-//check_components.c
+//minimap.c
+void			draw_minimap(t_game *g);
+void			ft_fill_miniplayer(t_game *g, int x, int y);
+int				check_free_char(char c);
+uint32_t		ft_check_color(t_game *g, double x, double y);
+void			ft_fill_minimap(t_game *g);
+
+// directory parsing
+// check_components.c
 int				check_component(char c, char **map);
+char			check_player_pos(char **map);
+bool			check_invalid_component(char **map);
 bool			complete_component_check(char **map);
 
-//check_file_type.c
+//file_type.c
 void			free_arr(char **arr);
 int				ft_check_file_type(char *str);
 
@@ -242,107 +284,84 @@ bool			check_end_walls_curr(char **map);
 bool			check_end_walls_next(char **map);
 
 //map_parser.c
-char			**get_map(int map_fd);
+bool			check_side_line(char **map, int index);
+bool			check_middle_lines(char **map);
+bool			check_whitespace_border(char **map);
 bool			check_map(char **map);
+char			**get_map(int map_fd);
 
-//utils
-//init.c
-int				get_texture_path(t_map *init, char *trmd_line);
-int				check_line(t_map *init, char *line);
+//rgb_parsing.c
+int				check_rgb_validity(t_map *init);
+int				get_rgb(t_map *init, char *id, char **rgb);
+int				check_rgb_loop(char **rgb, char *trmd, int i, int j);
+char			*trim_spaces(char *line);
+int				check_rgb(t_map *init, char *line);
+
+//texture_path_parsing.c
 int				get_input(t_map *init);
-t_map			*strct_init(char *file_path);
+bool			check_identifier(char *line, int check);
+int				check_line(t_map *init, char *line);
+int				get_texture_path(t_map *init, char *trmd_line);
 
-//init_utils.c
-void			initialize_vars_to_null(t_map *init);
-void			ft_allocate_helper_structs(t_map *init);
-void			ft_clear_up_other_tex(t_game *g, int i);
-int				ft_get_other_tex(t_game *game);
+// directory player_funcs
+//player_movement.c
+void			ft_move_up_down(t_game *g);
+void			ft_move_left_right(t_game *g);
+void			ft_move(t_game *game);
 
-//minimap.c
-void			ft_fill_minimap(t_game *g);
-void			draw_minimap(t_game *g);
-void			ft_fill_miniplayer(t_game *g, int x, int y);
+//player_rotation.c
+void			ft_rotate_left(t_game *game, int diff);
+void			ft_rotate_right(t_game *game, int diff);
 
-//parsing_utils.c
-bool			is_whitespace(char c);
-int				ft_matrixlen(char **matrix);
-bool			is_component(char c);
-bool			is_valid_border(char c);
-void			ft_error_msg(char *str);
+// directory raycaster
+//caster.c
+void			replace_img(t_game *g);
+void			set_limit(t_game *g);
+double			ft_distance(t_game *g, double bx, double by);
+void			set_cosine_and_values(t_game *g);
+void			raycaster(t_game *g);
 
-//luffy_utils.c
-void			free_prior_pngs(mlx_texture_t **animation, int n);
-t_luffy			*luffy_init(char **map);
-
-//luffy_set_values.c
-void			ft_set_values_luffy(t_game *g);
-
-//zorro_utils.c
-t_zorro			*zorro_init(char **map);
-void			enemy_follow(t_game *g);
-
-//zorro_set_values.c
-void			ft_set_values_zorro(t_game *g);
-
-//draw_utils.c
-void			ft_draw_sprites(t_game *g);
-void			ft_draw_walls(t_game *g);
-void			ft_draw_floor_ceiling(t_game *g, int i);
-void			draw_sky(t_game *g);
+//horizontal.c
+void			assign_variables_horizontal(t_game *g);
+void			check_horizontal_wall(t_game *g);
+void			check_horizontal_line(t_game *g);
 
 //render_utils.c
 void			ft_set_values_floor_ceiling(t_game *g);
 void			ft_set_values_for_rendering(t_game *g);
 void			ft_set_values_and_render_funcs(t_game *g);
 
-//rgb_utils.c
-int				check_rgb(t_map *init, char *line);
-int				check_rgb_validity(t_map *init);
-int				get_rgb(t_map *init, char *id, char **rgb);
-
-//texture_utils.c
-uint32_t		get_right_wall_color(t_game *g);
-void			set_pixels_img(mlx_image_t *img, int max_x,
-					int max_y, u_int32_t c);
-void			scale_texture(t_game *g, int x, int y, int scale);
-
-//math_utils.c
-void			ft_check_right_distance(t_game *g);
-int				ft_abs(int num);
-int				rad_to_degree(double rad);
-
-//casting_utils.c
-t_cast			*caster_init(t_map *init);
-t_draw_line		*draw_line_init(void);
-t_ray			*ray_init(void);
-t_draw_sprite	*draw_sprite_init(void);
-
-//hook_utils.c
-void			ft_move_up_down(t_game *g);
-void			ft_move_left_right(t_game *g);
-void			ft_check_door(t_game *g);
-bool			ft_check_collision(char c);
-
-//draw_line.c
-void			ft_draw_line(t_game *game, int i);
-
-//caster.c
-void			set_limit(t_game *g);
-double			ft_distance(t_game *g, double bx, double by);
-void			set_cosine_and_values(t_game *g);
-
-//horizontal.c
-void			check_horizontal_line(t_game *g);
-
 //vertical.c
+void			assign_variables_vertical(t_game *g);
+void			check_vertical_wall(t_game *g);
 void			check_vertical_line(t_game *g);
-void			replace_img(t_game *g);
 
+// directory sprites
 //draw_sprites.c
 void			ft_draw_beer(t_game *g, int x, int y, int scale);
 void			ft_draw_water(t_game *g, int x, int y, int scale);
 void			ft_draw_chest(t_game *g, int x, int y, int scale);
 void			ft_draw_sprites(t_game *g);
+
+//luffy_set_values.c
+void			ft_get_luffy_colors_and_draw(t_game *g, int x, int y);
+int				ft_draw_luffy_tex_loop(t_game *g, int x, int scale);
+void			ft_draw_luffy_tex(t_game *g, int x, int scale);
+void			ft_draw_luffy(t_game *g);
+void			ft_set_values_luffy(t_game *g);
+
+//luffy_utils.c
+void			free_prior_pngs(mlx_texture_t **animation, int n);
+mlx_texture_t	**load_all_pngs(int i);
+void			ft_get_location_luffy(char **map, t_luffy *luf);
+t_luffy			*luffy_init(char **map);
+
+//sprite_utils.c
+void			free_lst_sprites(t_sprite *lst);
+void			ft_get_location(t_game *game, char **map, char c);
+t_sprite		*new_lst_node_sprite(t_sprite *curr,
+					t_sprite *new_node, int type);
+void			sprite_init(t_sprite *start, t_map *m);
 
 //sprites.c
 bool			ft_check_walls_sprite(t_game *g, double x, double y);
@@ -351,16 +370,51 @@ void			decrement_drunkness(t_game *g);
 void			check_sprite_type_for_draw(t_game *g, int x, int y, int scale);
 void			ft_set_values_sprites(t_game *g);
 
-//sprite_utils.c
-void			sprite_init(t_sprite *sp, t_map *m);
-void			ft_get_location(t_game *game, char **map, char c);
-void			free_lst_sprites(t_sprite *lst);
+//zorro_set_values.c
+void			ft_get_zorro_colors_and_draw(t_game *g, int x, int y);
+int				ft_draw_zorro_tex_loop(t_game *g, int x, int scale);
+void			ft_draw_zorro_tex(t_game *g, int x, int scale);
+void			ft_draw_zorro(t_game *g);
+void			ft_set_values_zorro(t_game *g);
 
-//free.c
-void			ft_terminate_struct(t_map *map);
+//zorro_utils.c
+void			enemy_follow(t_game *game);
+// static mlx_texture_t	**load_all_pngs_zorro(int i);
+void			ft_get_location_zorro(char **map, t_zorro *zorr);
+t_zorro			*zorro_init(char **map);
 
-//del_tex.c
-void			ft_clear_up_wall_tex(t_game *g, int i);
-void			ft_clear_up_other_tex(t_game *g, int i);
+// directory utils
+//draw_utils.c
+void			ft_draw_walls(t_game *g);
+void			ft_draw_floor_ceiling(t_game *g, int i);
+void			draw_sky(t_game *g);
+
+//hook_utils.c
+bool			ft_check_collision(char c);
+void			ft_close_doors(t_game *g);
+void			ft_check_door(t_game *g);
+
+//init_utils.c
+void			ft_allocate_helper_structs(t_map *init);
+void			initialize_vars_to_null(t_map *init);
+
+//init.c
+t_map			*strct_init(char *file_path);
+t_ray			*ray_init(void);
+t_draw_line		*draw_line_init(void);
+t_draw_sprite	*draw_sprite_init(void);
+t_cast			*caster_init(t_map *init);
+
+//math_utils.c
+void			ft_check_right_distance(t_game *g);
+int				rad_to_degree(double rad);
+int				ft_abs(int num);
+
+//parsing_utils.c
+bool			is_whitespace(char c);
+int				ft_matrixlen(char **matrix);
+bool			is_component(char c);
+bool			is_valid_border(char c);
+void			ft_error_msg(char *str);
 
 #endif
