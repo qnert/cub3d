@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parser_helper.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 15:44:05 by skunert           #+#    #+#             */
-/*   Updated: 2023/10/21 14:12:23 by skunert          ###   ########.fr       */
+/*   Updated: 2023/11/05 15:29:42 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,14 @@ bool	check_end_walls_next(char **map)
 		i++;
 	}
 	return (true);
+}
+
+char	*check_map_nl(char *line, int map_fd)
+{
+	while (line && line[0] == '\n')
+	{
+		free(line);
+		line = get_next_line(map_fd);
+	}
+	return (line);
 }

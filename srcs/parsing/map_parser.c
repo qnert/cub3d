@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parser.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skunert <skunert@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: njantsch <njantsch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 15:18:20 by njantsch          #+#    #+#             */
-/*   Updated: 2023/10/06 15:16:38 by skunert          ###   ########.fr       */
+/*   Updated: 2023/11/05 15:30:14 by njantsch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,23 +98,23 @@ char	**get_map(int map_fd)
 	char	*line;
 	char	*buff;
 	char	**map;
+	int		error;
 
+	error = 0;
 	buff = ft_strdup("");
 	line = get_next_line(map_fd);
-	while (line && line[0] == '\n')
-	{
-		free(line);
-		line = get_next_line(map_fd);
-	}
+	line = check_map_nl(line, map_fd);
 	while (line != NULL)
 	{
-		buff = ft_strjoin_free(buff, line);
-		if (buff == NULL
-			|| line[0] == '\n')
-			return (ft_error_msg("New line inside the map\n"), NULL);
+		if (error == 0)
+			buff = ft_strjoin_free(buff, line);
+		if (buff == NULL || line[0] == '\n')
+			error = 1;
 		free(line);
 		line = get_next_line(map_fd);
 	}
+	if (error == 1)
+		return (free(buff), ft_error_msg("New line inside the map\n"), NULL);
 	map = ft_split(buff, '\n');
 	if (map == NULL)
 		return (free(buff), NULL);
