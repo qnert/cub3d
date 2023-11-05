@@ -3,7 +3,7 @@ CFLAGS = -Wall -Wextra -Werror -Ofast
 USER = $(shell whoami)
 MLXFLAGS = -Iinclude -lglfw
 NAME = cub3D
-BONUS_NAME = cub3d
+BONUS_NAME = cub3D_bonus
 
 SRCS = main.c ./srcs/parsing/file_type.c ./srcs/utils/init.c ./srcs/utils/parsing_utils.c ./srcs/parsing/check_components.c \
 		./srcs/parsing/map_parser.c ./srcs/parsing/map_parser_helper.c ./srcs/game_funcs/game_init.c ./srcs/game_funcs/game_hooks.c \
@@ -34,6 +34,7 @@ clean:
 
 fclean: clean
 	@rm -f $(NAME)
+	@rm -f $(BONUS_NAME)
 
 re: fclean all
 
