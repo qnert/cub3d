@@ -29,7 +29,7 @@ To compile the program, use the provided Makefile with the following commands:
 
 ```bash
 make                       # Compile the program
-  make clean               # Remove object files
+make clean                 # Remove object files
 make fclean                # Remove object files and executable
 make re                    # Recompile the program
 make bonus                 # Compile the program with bonus features
