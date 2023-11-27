@@ -34,8 +34,12 @@ make fclean                # Remove object files and executable
 make re                    # Recompile the program
 make bonus                 # Compile the program with bonus features
 ./cub3d ./path_to_map_file # Run the programm
+```
 
 ## Example of a valid map file
+
+- Scene description file (.cub) specifying maze configuration.
+- The file must have the ending .cub
 
 ```plaintext
 NO ./path_to_the_north_texture
@@ -49,3 +53,4 @@ C 225,30,0
 100000000001
 1000000N0001
 111111111111
+```
