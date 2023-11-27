@@ -54,3 +54,12 @@ C 225,30,0
 1000000N0001
 111111111111
 ```
+
+## Bonus Features
+
+- Some bonus features are already implemented in the mandatory part of the program
+- Wall collisions
+- Minimap system
+- Doors that can open and close
+- Animated sprite
+- Rotate the point of view with the mouse
