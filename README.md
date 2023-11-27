@@ -1,6 +1,6 @@
 # cub3D - 3D Ray-Caster
 
-<img width="1436" alt="Screenshot 2023-11-27 at 10 26 25" src="https://github.com/qnert/cub3d/assets/127817637/c8863951-19de-41c0-b78f-e70a70e2ff6a">
+https://github.com/qnert/cub3d/assets/127817637/d3d43e6d-1d2e-49b0-b95d-e2e893f1b23d
 
 ## Overview
 
