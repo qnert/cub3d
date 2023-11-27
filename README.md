@@ -34,3 +34,18 @@ make fclean                # Remove object files and executable
 make re                    # Recompile the program
 make bonus                 # Compile the program with bonus features
 ./cub3d ./path_to_map_file # Run the programm
+
+## Example of a valid map file
+
+```plaintext
+NO ./path_to_the_north_texture
+SO ./path_to_the_south_texture
+WE ./path_to_the_west_texture
+EA ./path_to_the_east_texture
+F 220,100,0
+C 225,30,0
+111111111111
+100000000001
+100000000001
+1000000N0001
+111111111111
