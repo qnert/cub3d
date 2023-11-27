@@ -28,11 +28,9 @@
 To compile the program, use the provided Makefile with the following commands:
 
 ```bash
-make          # Compile the program
-make clean    # Remove object files
-make fclean   # Remove object files and executable
-make re       # Recompile the program
-make bonus    # Compile the program with bonus features
-
-```plaintext
+make                       # Compile the program
+  make clean               # Remove object files
+make fclean                # Remove object files and executable
+make re                    # Recompile the program
+make bonus                 # Compile the program with bonus features
 ./cub3d ./path_to_map_file # Run the programm
