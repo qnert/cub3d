@@ -1,5 +1,7 @@
 # cub3D - 3D Ray-Caster
 
+<img width="1436" alt="Screenshot 2023-11-27 at 10 26 25" src="https://github.com/qnert/cub3d/assets/127817637/c8863951-19de-41c0-b78f-e70a70e2ff6a">
+
 ## Overview
 
 **cub3D** is a project that involves creating a realistic 3D graphical representation of the inside of a maze from a first-person perspective. The program uses Ray-Casting principles to render the maze in a window.
