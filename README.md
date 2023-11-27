@@ -36,6 +36,8 @@ make bonus                 # Compile the program with bonus features
 ./cub3d ./path_to_map_file # Run the programm
 ```
 
+https://github.com/qnert/cub3d/assets/127817637/2fbb4509-ceca-4a21-be41-297c5e4886f6
+
 ## Example of a valid map file
 
 - Scene description file (.cub) specifying maze configuration.
