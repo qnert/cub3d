@@ -60,6 +60,6 @@ C 225,30,0
 - Some bonus features are already implemented in the mandatory part of the program
 - Wall collisions
 - Minimap system
-- Doors that can open and close
+- Doors that can open and close (open with the key **E** and close with the key **Q**
 - Animated sprite
 - Rotate the point of view with the mouse
