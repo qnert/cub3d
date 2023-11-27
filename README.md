@@ -1,4 +1,4 @@
-# cub3D - 3D Maze Renderer
+# cub3D - 3D Ray-Caster
 
 ## Overview
 
@@ -33,3 +33,5 @@ make clean    # Remove object files
 make fclean   # Remove object files and executable
 make re       # Recompile the program
 
+```bash
+./cub3d ./path_to_map_file # Run the programm
