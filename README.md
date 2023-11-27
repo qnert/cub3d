@@ -34,4 +34,5 @@ make fclean   # Remove object files and executable
 make re       # Recompile the program
 make bonus    # Compile the program with bonus features
 
+\```plaintext
 ./cub3d ./path_to_map_file # Run the programm
